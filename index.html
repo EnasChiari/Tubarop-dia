@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TubaroPédia — A enciclopédia dos tubarões</title>
+<style>
+  :root{
+    --navy-950:#0a0f1e;
+    --navy-900:#0d1424;
+    --navy-800:#121b32;
+    --navy-700:#1a2540;
+    --blue-accent:#3f5dd9;
+    --blue-accent-light:#5b7ae8;
+    --pink-accent:#e85d9c;
+    --ink:#0d1424;
+    --paper:#f4f6fa;
+    --line:#e3e7ef;
+    --muted:#5b6478;
+    --white:#ffffff;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  body{
+    font-family:'Georgia', 'Iowan Old Style', serif;
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .sans{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;}
+
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+
+  /* ===== LAYOUT SHELL ===== */
+  .shell{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+  }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar{
+    background:var(--navy-950);
+    color:#c7cfe0;
+    padding:28px 22px 24px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:30px;
+  }
+  .brand-mark{
+    width:46px;height:46px;
+    border:2px solid #7d8bb5;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .brand-mark svg{width:26px;height:26px;fill:#e8ebf3;}
+  .brand h1{
+    font-family:Georgia,serif;
+    font-size:1.32rem;
+    color:#fff;
+    letter-spacing:0.2px;
+    line-height:1.1;
+  }
+  .brand p{
+    font-size:0.68rem;
+    color:#8a93ad;
+    margin-top:3px;
+  }
+
+  .nav-group{margin-bottom:22px;}
+  .nav-label{
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.09em;
+    color:#5f6784;
+    padding:0 10px 8px;
+  }
+  .nav-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:9px 10px;
+    border-radius:8px;
+    font-size:0.88rem;
+    color:#b7bfd6;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  .nav-item:hover{background:#141d33;color:#fff;}
+  .nav-item.active{
+    background:var(--blue-accent);
+    color:#fff;
+    font-weight:600;
+  }
+  .nav-item .ic{
+    width:17px;height:17px;
+    flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .nav-item .ic svg{width:100%;height:100%;fill:currentColor;}
+
+  .featured-card{
+    background:linear-gradient(160deg,#152140,#0e1830);
+    border:1px solid #1f2c4d;
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:18px;
+  }
+  .featured-card .img{
+    height:110px;
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.10), transparent 60%),
+      linear-gradient(135deg,#2b3d6b,#0c1428);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .featured-card .img svg{width:52px;height:52px;fill:#8fa3d6;opacity:.85;}
+  .featured-card .body{padding:12px 14px 14px;}
+  .featured-card h4{color:#fff;font-family:Georgia,serif;font-size:0.95rem;margin-bottom:2px;}
+  .featured-card em{display:block;color:#8a93ad;font-size:0.76rem;font-style:italic;margin-bottom:8px;}
+  .featured-card .link{font-size:0.78rem;color:var(--blue-accent-light);font-weight:600;}
+
+  .social-row{display:flex;gap:14px;padding:4px 6px;}
+  .social-row .ic{width:18px;height:18px;color:#8a93ad;}
+  .social-row .ic svg{width:100%;height:100%;fill:currentColor;}
+
+  /* ===== TOP HEADER ===== */
+  .topbar{
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    padding:16px 36px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  .topbar .title h2{font-family:Georgia,serif;font-size:1.4rem;color:var(--ink);}
+  .topbar .title p{font-size:0.76rem;color:var(--muted);}
+  .search-box{
+    flex:1;
+    max-width:440px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px 16px;
+    color:var(--muted);
+    font-size:0.86rem;
+  }
+  .search-box svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;flex-shrink:0;}
+  .topbar-actions{display:flex;align-items:center;gap:22px;font-size:0.86rem;color:var(--ink);}
+  .topbar-actions .item{display:flex;align-items:center;gap:6px;cursor:pointer;}
+  .topbar-actions .item svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:1.8;}
+  .topbar-actions .menu-ic svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.8;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(ellipse at 75% 30%, rgba(63,93,217,0.35), transparent 55%),
+      linear-gradient(180deg,#0c1730 0%, #071022 100%);
+    color:#fff;
+    padding:64px 44px 72px;
+    overflow:hidden;
+    min-height:360px;
+    display:flex;
+    align-items:center;
+  }
+  .hero-shark{
+    position:absolute;
+    right:-40px;
+    top:50%;
+    transform:translateY(-50%);
+    width:620px;
+    opacity:0.9;
+  }
+  .hero-shark svg{width:100%;height:auto;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5));}
+  .hero-content{max-width:520px;position:relative;z-index:2;}
+  .hero-content h2{
+    font-family:Georgia,serif;
+    font-size:2.6rem;
+    line-height:1.12;
+    margin-bottom:18px;
+    font-weight:400;
+  }
+  .hero-content p{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    font-size:0.98rem;
+    line-height:1.6;
+    color:#c3cbe0;
+    margin-bottom:28px;
+  }
+  .btn-primary{
+    display:inline-block;
+    background:var(--blue-accent);
+    color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    font-weight:600;
+    font-size:0.9rem;
+    padding:13px 26px;
+    border-radius:8px;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .btn-primary:hover{background:#2f4bc4;transform:translateY(-1px);}
+
+  /* ===== MAIN CONTENT ===== */
+  .content{padding:0 36px 60px;}
+
+  .stat-cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    margin:-34px 0 34px;
+    position:relative;
+    z-index:3;
+    box-shadow:0 12px 30px rgba(15,23,42,0.08);
+    overflow:hidden;
+  }
+  .stat-card{
+    display:flex;
+    gap:16px;
+    padding:26px 28px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  .stat-card + .stat-card{border-left:1px solid var(--line);}
+  .stat-icon{
+    width:48px;height:48px;
+    border-radius:50%;
+    flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .stat-icon.blue{background:var(--navy-800);}
+  .stat-icon.teal{background:#eef1f8;}
+  .stat-icon.globe{background:#eef1f8;}
+  .stat-icon svg{width:22px;height:22px;}
+  .stat-icon.blue svg{fill:#fff;}
+  .stat-icon.teal svg{fill:var(--blue-accent);}
+  .stat-icon.globe svg{fill:var(--blue-accent);}
+  .stat-card h3{font-family:Georgia,serif;font-size:1.02rem;margin-bottom:6px;}
+  .stat-card p{font-size:0.83rem;color:var(--muted);line-height:1.5;margin-bottom:8px;}
+  .stat-card .link{font-size:0.82rem;font-weight:600;color:var(--blue-accent);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;}
+
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr 340px;
+    gap:26px;
+    margin-bottom:36px;
+  }
+
+  .panel{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px 28px;
+  }
+  .panel-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  .panel-head h3{font-family:Georgia,serif;font-size:1.2rem;}
+  .panel-head .link{font-size:0.82rem;font-weight:600;color:var(--blue-accent);}
+
+  /* families table */
+  .fam-table{width:100%;border-collapse:collapse;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;}
+  .fam-table thead th{
+    text-align:left;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.07em;
+    color:var(--muted);
+    padding-bottom:10px;
+    border-bottom:1px solid var(--line);
+  }
+  .fam-table tbody td{
+    padding:14px 8px;
+    border-bottom:1px solid var(--line);
+    vertical-align:middle;
+    font-size:0.86rem;
+  }
+  .fam-table tbody tr:last-child td{border-bottom:none;}
+  .fam-table td.name{font-family:Georgia,serif;font-weight:700;font-size:0.94rem;color:var(--ink);white-space:nowrap;}
+  .fam-table td.desc{color:var(--muted);line-height:1.4;}
+  .fam-thumb{
+    width:64px;height:40px;
+    border-radius:6px;
+    background:linear-gradient(135deg,#274373,#0d1830);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .fam-thumb svg{width:28px;height:28px;fill:#9db3e6;}
+  .see-all{display:inline-block;margin-top:16px;font-size:0.84rem;font-weight:600;color:var(--blue-accent);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;}
+
+  /* taxonomy list */
+  .tax-list li{
+    display:flex;
+    gap:14px;
+    padding:12px 0;
+    border-bottom:1px solid var(--line);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  .tax-list li:last-child{border-bottom:none;padding-bottom:0;}
+  .tax-icon{
+    width:30px;height:30px;
+    border-radius:50%;
+    background:#eef1f8;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .tax-icon svg{width:15px;height:15px;fill:var(--blue-accent);}
+  .tax-list .k{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+  .tax-list .v{font-family:Georgia,serif;font-weight:700;font-size:0.92rem;}
+  .tax-list .v a{color:var(--blue-accent);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-weight:600;font-size:0.84rem;}
+
+  .quick-nav-panel{margin-top:26px;}
+  .quick-nav li{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:11px 2px;
+    border-bottom:1px solid var(--line);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    font-size:0.87rem;
+    font-weight:600;
+    color:var(--blue-accent);
+  }
+  .quick-nav li:last-child{border-bottom:none;}
+  .quick-nav svg{width:14px;height:14px;stroke:var(--blue-accent);fill:none;stroke-width:2.2;}
+
+  .fact-box{
+    background:var(--navy-950);
+    color:#fff;
+    border-radius:14px;
+    padding:24px 26px;
+    margin-top:26px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  .fact-box h4{font-family:Georgia,serif;font-size:1.05rem;margin-bottom:10px;}
+  .fact-box p{font-size:0.85rem;color:#b7bfd6;line-height:1.55;}
+
+  /* articles grid */
+  .articles-panel{margin-bottom:44px;}
+  .articles-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+  }
+  .article-card{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;}
+  .article-thumb{
+    height:150px;
+    border-radius:10px;
+    margin-bottom:14px;
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .article-thumb svg{width:56px;height:56px;opacity:.9;}
+  .article-card h4{font-family:Georgia,serif;font-size:1rem;margin-bottom:2px;}
+  .article-card em{display:block;font-size:0.8rem;font-style:italic;color:var(--muted);margin-bottom:8px;}
+  .article-card p{font-size:0.83rem;color:var(--muted);line-height:1.5;margin-bottom:10px;}
+  .article-card .link{font-size:0.82rem;font-weight:600;color:var(--blue-accent);}
+
+  .thumb-1{background:linear-gradient(135deg,#2a5f8f,#0b2038);}
+  .thumb-2{background:linear-gradient(135deg,#1c3f70,#081226);}
+  .thumb-3{background:linear-gradient(135deg,#324a7a,#0a1120);}
+  .thumb-4{background:linear-gradient(135deg,#3c342c,#181410);}
+
+  /* footer */
+  .footer{
+    background:var(--navy-950);
+    color:#9aa3bd;
+    padding:48px 36px 30px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.6fr 1fr 1fr 1fr;
+    gap:30px;
+    padding-bottom:30px;
+    border-bottom:1px solid #1c2540;
+  }
+  .footer-brand{display:flex;gap:14px;}
+  .footer-brand .mark{
+    width:46px;height:46px;border-radius:50%;border:2px solid #4a5478;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .footer-brand .mark svg{width:24px;height:24px;fill:#c7cfe0;}
+  .footer-brand h5{color:#fff;font-family:Georgia,serif;font-size:1.05rem;margin-bottom:6px;}
+  .footer-brand p{font-size:0.8rem;line-height:1.5;color:#7d86a3;}
+  .footer h6{color:#fff;font-size:0.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;}
+  .footer ul li{margin-bottom:10px;font-size:0.85rem;}
+  .footer ul li a:hover{color:#fff;}
+  .footer-bottom{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:22px;
+    font-size:0.78rem;
+    color:#7d86a3;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .footer-bottom .socials{display:flex;gap:10px;}
+  .footer-bottom .socials span{
+    width:28px;height:28px;border-radius:50%;background:#151d34;
+    display:flex;align-items:center;justify-content:center;font-size:0.7rem;
+  }
+
+  @media (max-width:1080px){
+    .shell{grid-template-columns:1fr;}
+    .sidebar{position:relative;height:auto;}
+    .two-col{grid-template-columns:1fr;}
+    .articles-grid{grid-template-columns:repeat(2,1fr);}
+    .stat-cards{grid-template-columns:1fr;margin-top:20px;}
+    .stat-card + .stat-card{border-left:none;border-top:1px solid var(--line);}
+    .hero-shark{display:none;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:640px){
+    .topbar{flex-wrap:wrap;padding:14px 18px;}
+    .content{padding:0 18px 40px;}
+    .hero{padding:40px 24px;}
+    .hero-content h2{font-size:2rem;}
+    .articles-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+
+  /* ===== TOAST ===== */
+  #toast{
+    position:fixed;
+    left:50%;
+    bottom:28px;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--navy-950);
+    color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    font-size:0.86rem;
+    padding:13px 22px;
+    border-radius:10px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.3);
+    z-index:999;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  /* ===== MODAL ===== */
+  .modal-overlay{
+    position:fixed;inset:0;
+    background:rgba(10,15,30,0.6);
+    display:none;
+    align-items:center;justify-content:center;
+    z-index:1000;
+    padding:20px;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal-box{
+    background:#fff;
+    border-radius:16px;
+    max-width:420px;
+    width:100%;
+    padding:30px 30px 26px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    position:relative;
+    box-shadow:0 30px 60px rgba(0,0,0,0.35);
+  }
+  .modal-box h3{font-family:Georgia,serif;font-size:1.25rem;margin-bottom:6px;color:var(--ink);}
+  .modal-box .modal-sub{font-size:0.82rem;color:var(--muted);margin-bottom:18px;line-height:1.5;}
+  .modal-box .modal-close{
+    position:absolute;top:16px;right:16px;
+    width:28px;height:28px;border-radius:50%;
+    background:var(--paper);border:none;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;color:var(--muted);font-size:1rem;
+  }
+  .modal-box .modal-close:hover{background:var(--line);}
+  .modal-box label{display:block;font-size:0.78rem;font-weight:600;color:var(--ink);margin:14px 0 6px;}
+  .modal-box input, .modal-box textarea{
+    width:100%;border:1px solid var(--line);border-radius:8px;
+    padding:10px 12px;font-size:0.86rem;font-family:inherit;color:var(--ink);
+    outline:none;
+  }
+  .modal-box input:focus, .modal-box textarea:focus{border-color:var(--blue-accent);}
+  .modal-box .modal-submit{
+    margin-top:18px;width:100%;border:none;
+    background:var(--blue-accent);color:#fff;font-weight:600;
+    padding:12px;border-radius:8px;cursor:pointer;font-size:0.9rem;
+    font-family:inherit;transition:background .15s ease;
+  }
+  .modal-box .modal-submit:hover{background:#2f4bc4;}
+  .modal-box .article-body{font-size:0.88rem;color:var(--muted);line-height:1.6;}
+  .modal-box .article-em{display:block;font-style:italic;color:var(--muted);font-size:0.82rem;margin-bottom:12px;}
+
+  @media (max-width:1080px){
+    .sidebar{
+      position:fixed;top:0;left:0;bottom:0;
+      transform:translateX(-100%);
+      transition:transform .2s ease;
+      z-index:500;
+      box-shadow:0 0 40px rgba(0,0,0,0.4);
+    }
+    .sidebar.open{transform:translateX(0);}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg>
+      </div>
+      <div>
+        <h1>TubaroPédia</h1>
+        <p>A enciclopédia dos tubarões</p>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-item active" data-action="scroll-top"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/></svg></span>Página principal</div>
+      <div class="nav-item" data-action="scroll-especies"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 10h16v4H4zM4 16h16v4H4z"/></svg></span>Todas as espécies</div>
+      <div class="nav-item" data-action="scroll-especies"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l4 4-4 4-4-4zM4 12l4-4 4 4-4 4zM16 12l4-4 4 4-4 4zM12 22l-4-4 4-4 4 4z"/></svg></span>Famílias</div>
+      <div class="nav-item" data-action="toast:Seção de Gêneros em construção."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="3"/><circle cx="6" cy="16" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>Gêneros</div>
+      <div class="nav-item" data-action="toast:Seção de Anatomia em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/></svg></span>Anatomia</div>
+      <div class="nav-item" data-action="toast:Seção de Habitat em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L3 9l9 13 9-13z"/></svg></span>Habitat</div>
+      <div class="nav-item" data-action="toast:Seção de Comportamento em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 12c2-6 6-9 8-9s6 3 8 9c-2 6-6 9-8 9s-6-3-8-9z"/><circle cx="12" cy="12" r="2"/></svg></span>Comportamento</div>
+      <div class="nav-item" data-action="toast:Seção de Conservação em construção."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18M3 12h18" stroke="#0a0f1e" stroke-width="1"/></svg></span>Conservação</div>
+      <div class="nav-item" data-action="toast:Seção de Fósseis em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/></svg></span>Fósseis</div>
+      <div class="nav-item" data-action="toast:Seção de Notícias em construção."><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/></svg></span>Notícias</div>
+      <div class="nav-item" data-action="toast:Seção de Bibliografia em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/></svg></span>Bibliografia</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Ferramentas</div>
+      <div class="nav-item" data-action="random-article"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg></span>Páginas aleatórias</div>
+      <div class="nav-item" data-action="toast:Nenhuma mudança recente registrada ainda."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span>Mudanças recentes</div>
+      <div class="nav-item" data-action="toast:Página de testes em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg></span>Página de testes</div>
+      <div class="nav-item" data-action="toast:Central de ajuda em construção."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span>Ajuda</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Em destaque</div>
+      <div class="featured-card">
+        <div class="img">
+          <svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg>
+        </div>
+        <div class="body">
+          <h4>Grande Tubarão Branco</h4>
+          <em>Carcharodon carcharias</em>
+          <div class="link" data-action="open-article:0" style="cursor:pointer;">Ver artigo →</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="social-row">
+      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/></svg></span>
+      <span class="ic"><svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4z"/><circle cx="12" cy="12" r="9"/></svg></span>
+      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6l9 7 9-7"/></svg></span>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <div>
+    <header class="topbar">
+      <div class="title">
+        <h2>TubaroPédia</h2>
+        <p>A enciclopédia dos tubarões</p>
+      </div>
+      <form class="search-box" id="searchForm">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input id="searchInput" type="text" placeholder="Pesquisar na TubaroPédia" autocomplete="off" style="border:none;background:transparent;outline:none;font-family:inherit;font-size:0.86rem;color:var(--ink);flex:1;">
+      </form>
+      <div class="topbar-actions">
+        <span class="item" data-action="open-modal:contribuir"><svg viewBox="0 0 24 24"><path d="M3 21l3-9 12-8 3 3-8 12z"/></svg>Contribuir</span>
+        <span class="item" data-action="open-modal:entrar"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Entrar</span>
+        <span class="menu-ic" id="sidebarToggle" style="cursor:pointer;"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Explore o mundo<br>dos tubarões</h2>
+        <p>Informações completas e confiáveis sobre todas as espécies de tubarões, sua biologia, ecologia, evolução e conservação.</p>
+        <a href="#especies" class="btn-primary">Explorar espécies</a>
+      </div>
+      <div class="hero-shark">
+        <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#5b7ae8" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/>
+          <path fill="#3f5dd9" d="M60 60 C 70 68, 85 72, 100 72 C 92 78, 78 80, 66 76 Z"/>
+          <circle cx="145" cy="45" r="2.2" fill="#0a0f1e"/>
+        </svg>
+      </div>
+    </section>
+
+    <div class="content">
+      <!-- STAT CARDS -->
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-icon blue"><svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6z"/></svg></div>
+          <div>
+            <h3>Espécies</h3>
+            <p>Mais de 500 espécies catalogadas com fotos, descrições e distribuição.</p>
+            <div class="link" data-action="scroll-especies" style="cursor:pointer;">Ver todas as espécies →</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon teal"><svg viewBox="0 0 24 24"><path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/></svg></div>
+          <div>
+            <h3>Anatomia</h3>
+            <p>Conheça a incrível biologia dos tubarões: esqueletos, dentes, sentidos e mais.</p>
+            <div class="link" data-action="toast:Seção de Anatomia em construção." style="cursor:pointer;">Explorar anatomia →</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon globe"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <div>
+            <h3>Conservação</h3>
+            <p>Ameaças, status de conservação e projetos que ajudam a proteger os tubarões.</p>
+            <div class="link" data-action="toast:Seção de Conservação em construção." style="cursor:pointer;">Saber mais →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAMILIES + TAXONOMY -->
+      <div class="two-col" id="especies">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Famílias de tubarões</h3>
+            <span class="link" data-action="toast:Em breve, mais famílias catalogadas." style="cursor:pointer;">Ver todas →</span>
+          </div>
+          <table class="fam-table">
+            <thead>
+              <tr><th>Família</th><th>Descrição</th><th>Exemplos</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="name">Carcharhinidae</td>
+                <td class="desc">A maior família de tubarões, inclui espécies costeiras e oceânicas.</td>
+                <td><div class="fam-thumb"><svg viewBox="0 0 24 24"><path d="M2 12c4-5 9-7 14-6 1-3 4-5 6-4-1 2-2 4-1 6 3 2 5 4 3 6-2 1-5 1-8 0-5 1-10-1-14-2z"/></svg></div></td>
+              </tr>
+              <tr>
+                <td class="name">Sphyrnidae</td>
+                <td class="desc">Os tubarões-martelo, conhecidos pelo formato único da cabeça.</td>
+                <td><div class="fam-thumb"><svg viewBox="0 0 24 24"><path d="M2 10h6l2-4h4l2 4h6v3h-4l-2 4h-6l-2-4H2z"/></svg></div></td>
+              </tr>
+              <tr>
+                <td class="name">Lamnidae</td>
+                <td class="desc">Tubarões de grande porte, migratórios e de águas frias.</td>
+                <td><div class="fam-thumb"><svg viewBox="0 0 24 24"><path d="M2 12c4-5 9-7 15-6 2-2 4-3 5-2-1 1-2 3-1 5 2 2 2 4 0 5-2 1-4 0-5-1-6 2-11 1-14-1z"/></svg></div></td>
+              </tr>
+              <tr>
+                <td class="name">Orectolobidae</td>
+                <td class="desc">Tubarões-lixa, geralmente de hábitos bentônicos e dóceis.</td>
+                <td><div class="fam-thumb"><svg viewBox="0 0 24 24"><path d="M2 13c5-4 10-5 16-3 2-1 4-1 5 0-1 1-2 2-2 3s1 2 2 3c-1 1-3 1-5 0-6 2-11 1-16-3z"/></svg></div></td>
+              </tr>
+              <tr>
+                <td class="name">Scyliorhinidae</td>
+                <td class="desc">Inclui os cações e tubarões de pequeno porte.</td>
+                <td><div class="fam-thumb"><svg viewBox="0 0 24 24"><path d="M3 13c4-4 8-5 13-4 1-2 3-3 4-2-1 1-1 2-1 3s0 2 1 3c-1 1-3 0-4-2-5 1-9 0-13-4z"/></svg></div></td>
+              </tr>
+            </tbody>
+          </table>
+          <a href="#" class="see-all" data-action="toast:Em breve, mais famílias catalogadas.">Ver todas as famílias →</a>
+        </div>
+
+        <div>
+          <div class="panel">
+            <div class="panel-head"><h3 style="font-size:1.05rem;">Classificação taxonômica</h3></div>
+            <ul class="tax-list">
+              <li>
+                <span class="tax-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span>
+                <div><div class="k">Reino</div><div class="v">Animalia</div></div>
+              </li>
+              <li>
+                <span class="tax-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M4 8l8-6 8 6M4 16l8 6 8-6"/></svg></span>
+                <div><div class="k">Filo</div><div class="v">Chordata</div></div>
+              </li>
+              <li>
+                <span class="tax-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2 7h7l-6 5 2 7-6-4-6 4 2-7-6-5h7z"/></svg></span>
+                <div><div class="k">Classe</div><div class="v">Chondrichthyes</div></div>
+              </li>
+              <li>
+                <span class="tax-icon"><svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6z"/></svg></span>
+                <div><div class="k">Ordem</div><div class="v">Selachimorpha</div></div>
+              </li>
+              <li>
+                <span class="tax-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg></span>
+                <div><div class="k">Superordem</div><div class="v">Galeomorphii</div></div>
+              </li>
+              <li>
+                <span class="tax-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></span>
+                <div><div class="k">Informação</div><div class="v"><a href="#" data-action="toast:Artigo sobre classificação em construção.">Saiba mais sobre a classificação</a></div></div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="panel quick-nav-panel">
+            <div class="panel-head"><h3 style="font-size:1.05rem;">Navegação rápida</h3></div>
+            <ul class="quick-nav">
+              <li data-action="toast:Página de espécies por habitat em construção.">Espécies por habitat <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
+              <li data-action="toast:Página de tubarões de água doce em construção.">Tubarões de água doce <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
+              <li data-action="toast:Página de tubarões ameaçados em construção.">Tubarões ameaçados <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
+              <li data-action="toast:Página sobre dentes de tubarão em construção.">Dentes de tubarão <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
+              <li data-action="toast:Vídeos e documentários em construção.">Vídeos e documentários <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
+              <li data-action="toast:FAQ em construção.">Perguntas frequentes (FAQ) <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
+            </ul>
+          </div>
+
+          <div class="fact-box">
+            <h4>Você sabia?</h4>
+            <p>Tubarões existem há mais de 400 milhões de anos, muito antes dos dinossauros!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURED ARTICLES -->
+      <div class="panel articles-panel">
+        <div class="panel-head">
+          <h3>Artigos em destaque</h3>
+          <span class="link" data-action="toast:Em breve, mais artigos." style="cursor:pointer;">Ver todos →</span>
+        </div>
+        <div class="articles-grid">
+          <div class="article-card">
+            <div class="article-thumb thumb-1"><svg viewBox="0 0 24 24" fill="#fff"><path d="M2 12c4-5 9-7 14-6 1-3 4-5 6-4-1 2-2 4-1 6 3 2 5 4 3 6-2 1-5 1-8 0-5 1-10-1-14-2z"/></svg></div>
+            <h4>Tubarão-baleia</h4>
+            <em>Rhincodon typus</em>
+            <p>O maior peixe do mundo. Alimentação, habitat e curiosidades.</p>
+            <div class="link" data-action="open-article:1" style="cursor:pointer;">Ler artigo →</div>
+          </div>
+          <div class="article-card">
+            <div class="article-thumb thumb-2"><svg viewBox="0 0 24 24" fill="#fff"><path d="M2 10h6l2-4h4l2 4h6v3h-4l-2 4h-6l-2-4H2z"/></svg></div>
+            <h4>Tubarão-martelo-comum</h4>
+            <em>Sphyrna lewini</em>
+            <p>Características, comportamento e distribuição geográfica.</p>
+            <div class="link" data-action="open-article:2" style="cursor:pointer;">Ler artigo →</div>
+          </div>
+          <div class="article-card">
+            <div class="article-thumb thumb-3"><svg viewBox="0 0 24 24" fill="#fff"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6z"/></svg></div>
+            <h4>Tubarões de águas profundas</h4>
+            <em></em>
+            <p>Espécies que vivem nas profundezas oceânicas e suas adaptações.</p>
+            <div class="link" data-action="open-article:3" style="cursor:pointer;">Ler artigo →</div>
+          </div>
+          <div class="article-card">
+            <div class="article-thumb thumb-4"><svg viewBox="0 0 24 24" fill="#d9c9a8"><path d="M12 2l3 9h9l-7 6 3 9-8-5-8 5 3-9-7-6h9z"/></svg></div>
+            <h4>Fósseis de tubarão</h4>
+            <em></em>
+            <p>História evolutiva e os registros fósseis mais importantes.</p>
+            <div class="link" data-action="open-article:4" style="cursor:pointer;">Ler artigo →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="mark"><svg viewBox="0 0 24 24" fill="#c7cfe0"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6z"/></svg></div>
+          <div>
+            <h5>TubaroPédia</h5>
+            <p>A enciclopédia livre sobre tubarões. Conteúdo colaborativo para educação, pesquisa e conservação.</p>
+          </div>
+        </div>
+        <div>
+          <h6>Navegação</h6>
+          <ul>
+            <li><a href="#">Página principal</a></li>
+            <li><a href="#">Todas as espécies</a></li>
+            <li><a href="#">Famílias</a></li>
+            <li><a href="#">Artigos aleatórios</a></li>
+          </ul>
+        </div>
+        <div>
+          <h6>Comunidade</h6>
+          <ul>
+            <li><a href="#">Contribuir</a></li>
+            <li><a href="#">Portal da comunidade</a></li>
+            <li><a href="#">Ajuda</a></li>
+            <li><a href="#">Mudanças recentes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h6>Recursos</h6>
+          <ul>
+            <li><a href="#">Bibliografia</a></li>
+            <li><a href="#">Links externos</a></li>
+            <li><a href="#">Política de privacidade</a></li>
+            <li><a href="#">Sobre o projeto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 TubaroPédia · Conteúdo disponível sob licença Creative Commons CC BY-SA 4.0</span>
+        <div class="socials">
+          <span>©</span><span>ⓟ</span><span>ⓐ</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
+<script>
+(function(){
+  const ARTICLES = [
+    { title:"Grande Tubarão Branco", em:"Carcharodon carcharias",
+      body:"O maior predador marinho do planeta, encontrado em águas costeiras e oceânicas de quase todo o mundo. Pode ultrapassar 6 metros de comprimento e é reconhecido por seus saltos espetaculares ao caçar." },
+    { title:"Tubarão-baleia", em:"Rhincodon typus",
+      body:"O maior peixe do mundo, podendo chegar a mais de 12 metros. Apesar do tamanho, é um filtrador pacífico que se alimenta de plâncton e pequenos peixes." },
+    { title:"Tubarão-martelo-comum", em:"Sphyrna lewini",
+      body:"Reconhecido pela cabeça em forma de martelo, que melhora seu campo de visão e sua capacidade de detectar presas enterradas na areia." },
+    { title:"Tubarões de águas profundas", em:"",
+      body:"Espécies adaptadas à escuridão e à alta pressão das profundezas oceânicas, muitas vezes com bioluminescência e metabolismo lento." },
+    { title:"Fósseis de tubarão", em:"",
+      body:"Os tubarões existem há mais de 400 milhões de anos. Como seu esqueleto é cartilaginoso, os dentes são o registro fóssil mais comum e valioso para os pesquisadores." }
+  ];
+
+  const toastEl = document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=>toastEl.classList.remove('show'), 2600);
+  }
+
+  const overlay = document.getElementById('modalOverlay');
+  const modalBox = document.getElementById('modalBox');
+  function closeModal(){
+    overlay.classList.remove('show');
+    modalBox.innerHTML = '';
+  }
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) closeModal();
+  });
+
+  function openArticleModal(idx){
+    const a = ARTICLES[idx];
+    if(!a) return;
+    modalBox.innerHTML =
+      '<button class="modal-close" data-close>✕</button>' +
+      '<h3>'+a.title+'</h3>' +
+      (a.em ? '<em class="article-em">'+a.em+'</em>' : '') +
+      '<p class="article-body">'+a.body+'</p>';
+    overlay.classList.add('show');
+  }
+
+  function openFormModal(kind){
+    const isContribute = kind === 'contribuir';
+    modalBox.innerHTML =
+      '<button class="modal-close" data-close>✕</button>' +
+      '<h3>'+(isContribute ? 'Contribuir com a TubaroPédia' : 'Entrar')+'</h3>' +
+      '<p class="modal-sub">'+(isContribute ? 'Envie uma sugestão de edição ou novo conteúdo. Nossa equipe revisa antes da publicação.' : 'Acesse sua conta para editar e acompanhar páginas.')+'</p>' +
+      '<form id="modalForm">' +
+        (isContribute
+          ? '<label>Seu nome</label><input type="text" required>' +
+            '<label>E-mail</label><input type="email" required>' +
+            '<label>Sugestão</label><textarea rows="3" required></textarea>'
+          : '<label>E-mail</label><input type="email" required>' +
+            '<label>Senha</label><input type="password" required>'
+        ) +
+        '<button type="submit" class="modal-submit">'+(isContribute ? 'Enviar sugestão' : 'Entrar')+'</button>' +
+      '</form>';
+    overlay.classList.add('show');
+    document.getElementById('modalForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      closeModal();
+      showToast(isContribute ? 'Obrigado! Sua sugestão foi enviada para revisão.' : 'Login em construção — em breve disponível.');
+    });
+  }
+
+  document.addEventListener('click', function(e){
+    const closeBtn = e.target.closest('[data-close]');
+    if(closeBtn){ closeModal(); return; }
+
+    const el = e.target.closest('[data-action]');
+    if(!el) return;
+    const action = el.getAttribute('data-action');
+
+    if(action === 'scroll-top'){
+      window.scrollTo({top:0, behavior:'smooth'});
+      setActiveNav(el);
+    } else if(action === 'scroll-especies'){
+      const target = document.getElementById('especies');
+      if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+      setActiveNav(el);
+    } else if(action === 'random-article'){
+      const idx = Math.floor(Math.random()*ARTICLES.length);
+      openArticleModal(idx);
+    } else if(action.startsWith('open-article:')){
+      openArticleModal(parseInt(action.split(':')[1], 10));
+    } else if(action.startsWith('open-modal:')){
+      openFormModal(action.split(':')[1]);
+    } else if(action.startsWith('toast:')){
+      showToast(action.slice(6));
+      if(el.classList.contains('nav-item')) setActiveNav(el);
+    }
+  });
+
+  function setActiveNav(el){
+    if(!el.classList.contains('nav-item')) return;
+    document.querySelectorAll('.nav-item.active').forEach(n=>n.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Sidebar toggle (mobile)
+  const sidebar = document.querySelector('.sidebar');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  sidebarToggle.addEventListener('click', function(){
+    sidebar.classList.toggle('open');
+  });
+
+  // Search
+  const searchForm = document.getElementById('searchForm');
+  const searchInput = document.getElementById('searchInput');
+  searchForm.addEventListener('submit', function(e){ e.preventDefault(); });
+
+  function normalize(s){
+    return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  }
+
+  searchInput.addEventListener('input', function(){
+    const q = normalize(searchInput.value.trim());
+
+    document.querySelectorAll('.fam-table tbody tr').forEach(row=>{
+      const text = normalize(row.textContent);
+      row.style.display = (!q || text.includes(q)) ? '' : 'none';
+    });
+
+    document.querySelectorAll('.article-card').forEach(card=>{
+      const text = normalize(card.textContent);
+      card.style.display = (!q || text.includes(q)) ? '' : 'none';
+    });
+
+    document.querySelectorAll('.quick-nav li').forEach(li=>{
+      const text = normalize(li.textContent);
+      li.style.display = (!q || text.includes(q)) ? '' : 'none';
+    });
+  });
+
+  // Close modal with Escape
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeModal();
+  });
+})();
+</script>
+</body>
+</html>
