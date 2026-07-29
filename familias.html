@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Famílias de tubarões — Tubaropédia</title>
+<style>
+  :root{
+    --navy-950:#0a0f1e;
+    --navy-900:#0d1424;
+    --navy-800:#121b32;
+    --blue-accent:#3f5dd9;
+    --blue-accent-light:#5b7ae8;
+    --ink:#0d1424;
+    --paper:#f4f6fa;
+    --line:#e3e7ef;
+    --muted:#5b6478;
+    --amber:#e8a23f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);}
+  .serif{font-family:Georgia,'Iowan Old Style',serif;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font:inherit;cursor:pointer;}
+
+  .shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{
+    background:var(--navy-950);color:#c7cfe0;padding:24px 20px;
+    position:sticky;top:0;height:100vh;overflow-y:auto;
+  }
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:26px;}
+  .brand-mark{width:40px;height:40px;border:2px solid #7d8bb5;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .brand-mark svg{width:22px;height:22px;fill:#e8ebf3;}
+  .brand h1{font-family:Georgia,serif;font-size:1.15rem;color:#fff;}
+  .brand p{font-size:0.64rem;color:#8a93ad;margin-top:2px;}
+  .nav-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.09em;color:#5f6784;padding:0 8px 8px;}
+  .nav-item{display:flex;align-items:center;gap:11px;padding:8px 8px;border-radius:8px;font-size:0.85rem;color:#b7bfd6;}
+  .nav-item:hover{background:#141d33;color:#fff;}
+  .nav-item.active{background:var(--blue-accent);color:#fff;font-weight:600;}
+  .nav-item .ic{width:16px;height:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .nav-item .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-group{margin-bottom:18px;}
+  .feature-box{background:var(--navy-900);border-radius:12px;overflow:hidden;margin-top:6px;}
+  .feature-box .thumb{height:76px;position:relative;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);}
+  .feature-box .thumb svg{position:absolute;right:-6px;bottom:-6px;width:70%;opacity:.9;}
+  .feature-box .txt{padding:10px 12px 12px;}
+  .feature-box .txt strong{display:block;font-size:0.8rem;color:#fff;}
+  .feature-box .txt em{display:block;font-size:0.7rem;color:#8a93ad;margin:2px 0 6px;}
+  .feature-box .txt a{font-size:0.72rem;color:#8fb0ff;font-weight:600;}
+  .social-row{display:flex;gap:12px;padding:16px 6px 0;}
+  .social-row .ic{width:16px;height:16px;color:#8a93ad;}
+  .social-row .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;}
+
+  /* ---------- TOPBAR ---------- */
+  .topbar{
+    background:#fff;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:20px;padding:16px 36px;
+  }
+  .search-box{flex:1;max-width:420px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 16px;color:var(--muted);font-size:0.86rem;}
+  .search-box svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;flex-shrink:0;}
+  .search-box input{border:none;background:none;outline:none;font:inherit;color:var(--ink);width:100%;}
+  .topbar-actions{margin-left:auto;display:flex;align-items:center;gap:22px;}
+  .topbar-link{display:flex;align-items:center;gap:7px;font-size:0.85rem;font-weight:600;color:var(--ink);}
+  .topbar-link svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;}
+  .icon-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;color:var(--muted);}
+  .icon-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;overflow:hidden;padding:44px 40px;min-height:200px;
+    background:
+      radial-gradient(ellipse at 75% 25%, rgba(90,130,210,.4), transparent 55%),
+      linear-gradient(120deg,#0d2247 0%,#081222 75%);
+    display:flex;align-items:center;
+  }
+  .hero .school{position:absolute;inset:0;opacity:.5;}
+  .hero .school svg{position:absolute;filter:drop-shadow(0 8px 16px rgba(0,0,0,.4));}
+  .hero-content{position:relative;max-width:560px;}
+  .hero h1{font-family:Georgia,serif;color:#fff;font-size:2.4rem;margin-bottom:10px;}
+  .hero p{color:#c4cde4;font-size:0.95rem;line-height:1.6;}
+
+  /* ---------- BREADCRUMB ---------- */
+  .breadcrumb{padding:16px 40px 0;font-size:0.82rem;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .breadcrumb a{color:var(--blue-accent);font-weight:600;}
+  .breadcrumb .cur{color:var(--ink);font-weight:600;}
+
+  /* ---------- LAYOUT ---------- */
+  .layout{display:grid;grid-template-columns:1fr 300px;gap:28px;padding:22px 40px 50px;align-items:start;}
+
+  .list-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px;}
+  .list-head h2{font-family:Georgia,serif;font-size:1.35rem;flex:1 0 auto;}
+  .field{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:0.84rem;color:var(--muted);}
+  .field svg{width:15px;height:15px;fill:none;stroke:var(--muted);stroke-width:2;flex-shrink:0;}
+  .field input{border:none;outline:none;background:none;font:inherit;color:var(--ink);width:150px;}
+  select.field-select{border:none;outline:none;background:none;font:inherit;color:var(--ink);cursor:pointer;}
+  .view-toggle{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  .view-toggle button{display:flex;align-items:center;gap:6px;padding:9px 16px;background:#fff;color:var(--muted);font-size:0.84rem;font-weight:600;border:none;}
+  .view-toggle button svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;}
+  .view-toggle button.active{background:var(--blue-accent);color:#fff;}
+
+  .card-list{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .fam-row{display:flex;align-items:center;gap:18px;padding:18px 20px;border-bottom:1px solid var(--line);}
+  .fam-row:last-child{border-bottom:none;}
+  .fam-row:hover{background:#f8faff;}
+  .fam-thumb{width:96px;height:68px;border-radius:10px;overflow:hidden;position:relative;flex-shrink:0;
+    background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);}
+  .fam-thumb svg.silhouette{position:absolute;right:-8px;bottom:-6px;width:80%;opacity:.9;}
+  .fam-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+  .fam-info{flex:1;min-width:0;}
+  .fam-info h3{font-family:Georgia,serif;font-size:1.05rem;margin-bottom:3px;}
+  .fam-info p{font-size:0.83rem;color:var(--muted);line-height:1.5;margin-bottom:5px;}
+  .fam-info .link{font-size:0.78rem;font-weight:700;color:var(--blue-accent);}
+  .fam-count{text-align:right;flex-shrink:0;display:flex;align-items:center;gap:10px;}
+  .fam-count .num{font-family:Georgia,serif;font-size:1.15rem;font-weight:700;}
+  .fam-count .lbl{font-size:0.7rem;color:var(--muted);}
+  .fam-count svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;}
+
+  /* grid ("grade") view */
+  .card-list.grade{background:none;border:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+  .card-list.grade .fam-row{flex-direction:column;align-items:stretch;background:#fff;border:1px solid var(--line);border-radius:14px;padding:0;}
+  .card-list.grade .fam-thumb{width:100%;height:110px;border-radius:14px 14px 0 0;}
+  .card-list.grade .fam-info{padding:14px 16px 6px;}
+  .card-list.grade .fam-count{padding:0 16px 14px;justify-content:space-between;width:100%;}
+
+  .note{display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--muted);margin-top:16px;}
+  .note svg{width:15px;height:15px;fill:none;stroke:var(--muted);stroke-width:2;flex-shrink:0;}
+
+  .pagination{display:flex;gap:8px;margin-top:22px;flex-wrap:wrap;}
+  .pagination button{padding:9px 15px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:0.84rem;font-weight:600;color:var(--muted);}
+  .pagination button.active{background:var(--blue-accent);color:#fff;border-color:var(--blue-accent);}
+  .pagination button:disabled{opacity:.45;}
+
+  /* ---------- SIDEBAR WIDGETS (right) ---------- */
+  .side-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:20px;}
+  .side-card h3{font-family:Georgia,serif;font-size:1.02rem;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .side-card h3 .ic{width:20px;height:20px;border-radius:50%;background:var(--blue-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .side-card h3 .ic svg{width:11px;height:11px;fill:#fff;}
+  .side-card p{font-size:0.83rem;color:var(--muted);line-height:1.6;margin-bottom:14px;}
+  .btn-primary{display:inline-block;background:var(--blue-accent);color:#fff;font-size:0.83rem;font-weight:700;padding:10px 16px;border-radius:9px;border:none;}
+
+  .stat-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:0.85rem;}
+  .stat-row:last-of-type{border-bottom:none;}
+  .stat-row .num{font-weight:700;font-family:Georgia,serif;}
+  .side-link{display:inline-block;margin-top:10px;font-size:0.8rem;font-weight:700;color:var(--blue-accent);}
+
+  .rank-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:0.85rem;}
+  .rank-row:last-of-type{border-bottom:none;}
+  .rank-num{width:20px;height:20px;border-radius:50%;background:var(--navy-950);color:#fff;font-size:0.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .rank-row .fam-name{flex:1;font-weight:600;}
+  .rank-row .fam-n{color:var(--muted);font-size:0.78rem;}
+
+  .article-card{display:flex;gap:12px;align-items:flex-start;}
+  .article-card .thumb{width:56px;height:56px;border-radius:10px;flex-shrink:0;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);}
+  .article-card strong{display:block;font-size:0.87rem;margin-bottom:4px;}
+  .article-card p{font-size:0.78rem;margin-bottom:6px;}
+  .article-card a{font-size:0.78rem;font-weight:700;color:var(--blue-accent);}
+
+  /* ---------- FOOTER ---------- */
+  .footer{background:var(--navy-950);color:#9aa3bd;padding:40px 40px 24px;font-size:0.83rem;}
+  .footer a{color:#9aa3bd;}
+  .footer a:hover{color:#fff;}
+  .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px;max-width:1200px;margin:0 auto 30px;}
+  .footer-brand{display:flex;gap:12px;}
+  .footer-brand .brand-mark{width:34px;height:34px;border:2px solid #4a5578;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .footer-brand .brand-mark svg{width:18px;height:18px;fill:#c7cfe0;}
+  .footer-brand h4{color:#fff;font-family:Georgia,serif;font-size:1rem;margin-bottom:4px;}
+  .footer-brand p{font-size:0.78rem;line-height:1.5;color:#7d87a3;}
+  .footer h5{color:#fff;font-size:0.8rem;margin-bottom:12px;}
+  .footer li{margin-bottom:8px;font-size:0.8rem;}
+  .footer-bottom{max-width:1200px;margin:0 auto;padding-top:20px;border-top:1px solid #1c2540;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:0.76rem;color:#7d87a3;}
+  .footer-bottom .ic-row{display:flex;gap:10px;}
+  .footer-bottom .ic-row svg{width:16px;height:16px;fill:none;stroke:#7d87a3;stroke-width:1.8;}
+
+  @media (max-width:1080px){
+    .shell{grid-template-columns:1fr;}
+    .sidebar{position:relative;height:auto;}
+    .layout{grid-template-columns:1fr;padding:22px 20px 40px;}
+    .breadcrumb,.hero{padding-left:20px;padding-right:20px;}
+    .topbar{flex-wrap:wrap;padding:16px 20px;}
+    .footer{padding:32px 20px 20px;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:600px){
+    .fam-row{flex-wrap:wrap;}
+    .fam-count{margin-left:114px;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg></div>
+      <div><h1>Tubaropédia</h1><p>A enciclopédia dos tubarões</p></div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Navegação</div>
+      <a class="nav-item" href="index.html"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v9h14v-9"/></svg></span>Página principal</a>
+      <a class="nav-item" href="especie.html"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 15c1.5-4 6.5-4 8 0"/></svg></span>Todas as espécies</a>
+      <a class="nav-item active" href="familias.html"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l3 5-3 5-3-5zM4 12l3 5-3 5-3-5zM20 12l3 5-3 5-3-5z" transform="translate(0,0)"/><path d="M12 3l3.5 5.8-3.5 5.8-3.5-5.8z"/></svg></span>Famílias</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 21c0-4 3-6 5-6s5 2 5 6M12 21c0-4 3-6 5-6s5 2 5 6"/></svg></span>Gêneros</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/></svg></span>Anatomia</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L3 9l9 13 9-13z"/></svg></span>Habitat</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>Comportamento</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.5 8.5-9 10-5.5-1.5-9-5-9-10V6z"/></svg></span>Conservação</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v5l3 3M5 12a7 7 0 1014 0 7 7 0 00-14 0z"/></svg></span>Fósseis</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg></span>Notícias</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg></span>Bibliografia</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Ferramentas</div>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M17 3l4 4-11 11H6v-4z"/></svg></span>Páginas aleatórias</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1015-6.7M3 5v6h6"/></svg></span>Mudanças recentes</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg></span>Página de testes</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.5-2.5 1.5-2.5 3.5M12 17h.01"/></svg></span>Ajuda</a>
+    </div>
+
+    <div class="nav-label">Em destaque</div>
+    <div class="feature-box">
+      <div class="thumb">
+        <svg viewBox="0 0 200 100"><path fill="#8fa3d6" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
+      </div>
+      <div class="txt">
+        <strong>Tubarão-baleia</strong>
+        <em>Rhincodon typus</em>
+        <a href="especie.html?especie=tubarao-baleia">Ver artigo →</a>
+      </div>
+    </div>
+
+    <div class="social-row">
+      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></span>
+      <span class="ic"><svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4z"/><circle cx="12" cy="12" r="9"/></svg></span>
+      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6l9 7 9-7"/></svg></span>
+    </div>
+  </aside>
+
+  <div>
+    <header class="topbar">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input type="text" placeholder="Pesquisar na Tubaropédia...">
+      </div>
+      <div class="topbar-actions">
+        <a class="topbar-link" href="#"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Contribuir</a>
+        <a class="topbar-link" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Entrar</a>
+        <button class="icon-btn" id="btnTema" title="Alternar tema" aria-label="Alternar tema claro/escuro">
+          <svg viewBox="0 0 24 24"><path d="M21 12.5A9 9 0 1111.5 3 7 7 0 0021 12.5z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="school">
+        <svg viewBox="0 0 200 100" style="top:20px;left:60%;width:280px;opacity:.55;"><path fill="#4d6bad" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
+        <svg viewBox="0 0 200 100" style="top:56px;left:78%;width:150px;opacity:.4;"><path fill="#37538f" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
+      </div>
+      <div class="hero-content">
+        <h1>Famílias de tubarões</h1>
+        <p id="heroSub">Conheça as famílias que agrupam as mais de 500 espécies de tubarões existentes no mundo.</p>
+      </div>
+    </section>
+
+    <nav class="breadcrumb">
+      <a href="index.html">Página principal</a><span>›</span><span class="cur">Famílias</span>
+    </nav>
+
+    <div class="layout">
+      <!-- ===== COLUNA PRINCIPAL ===== -->
+      <div>
+        <div class="list-head">
+          <h2 id="contagemTitulo">22 famílias reconhecidas</h2>
+        </div>
+        <div class="list-head">
+          <div class="field">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input type="text" id="busca" placeholder="Buscar família...">
+          </div>
+          <div class="field">
+            <svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+            <select class="field-select" id="ordenar">
+              <option value="az">Ordenar por: Nome (A-Z)</option>
+              <option value="za">Ordenar por: Nome (Z-A)</option>
+              <option value="mais">Ordenar por: Mais espécies</option>
+              <option value="menos">Ordenar por: Menos espécies</option>
+            </select>
+          </div>
+          <div class="view-toggle">
+            <button id="btnLista" class="active"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>Lista</button>
+            <button id="btnGrade"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>Grade</button>
+          </div>
+        </div>
+
+        <div class="card-list" id="listaFamilias"></div>
+
+        <div class="pagination" id="paginacao"></div>
+
+        <div class="note">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+          Algumas classificações podem variar entre diferentes fontes científicas.
+        </div>
+      </div>
+
+      <!-- ===== COLUNA LATERAL ===== -->
+      <div>
+        <div class="side-card">
+          <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.5 8.5-9 10-5.5-1.5-9-5-9-10V6z"/></svg></span>Sobre as famílias</h3>
+          <p>As famílias reúnem espécies que compartilham características anatômicas e evolutivas em comum. A classificação dos tubarões é baseada principalmente em estudos morfológicos e genéticos.</p>
+          <button class="btn-primary">Saiba mais sobre classificação</button>
+        </div>
+
+        <div class="side-card">
+          <h3>Estatísticas</h3>
+          <div id="statsList"></div>
+          <a class="side-link" href="#">Ver mais estatísticas →</a>
+        </div>
+
+        <div class="side-card">
+          <h3>Famílias mais diversas</h3>
+          <div id="rankList"></div>
+          <a class="side-link" href="familias.html">Ver todas as famílias →</a>
+        </div>
+
+        <div class="side-card">
+          <h3>Artigo relacionado</h3>
+          <div class="article-card">
+            <div class="thumb"></div>
+            <div>
+              <strong>Como os tubarões são classificados?</strong>
+              <p>Entenda os critérios utilizados pelos cientistas para classificar os tubarões.</p>
+              <a href="#">Ler artigo →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg></div>
+          <div>
+            <h4>Tubaropédia</h4>
+            <p>A enciclopédia livre sobre tubarões. Conteúdo colaborativo para educação, pesquisa e conservação.</p>
+          </div>
+        </div>
+        <div>
+          <h5>Navegação</h5>
+          <ul>
+            <li><a href="index.html">Página principal</a></li>
+            <li><a href="especie.html">Todas as espécies</a></li>
+            <li><a href="familias.html">Famílias</a></li>
+            <li><a href="#">Artigos aleatórios</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Comunidade</h5>
+          <ul>
+            <li><a href="#">Contribuir</a></li>
+            <li><a href="#">Portal da comunidade</a></li>
+            <li><a href="#">Ajuda</a></li>
+            <li><a href="#">Mudanças recentes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Recursos</h5>
+          <ul>
+            <li><a href="#">Bibliografia</a></li>
+            <li><a href="#">Links externos</a></li>
+            <li><a href="#">Política de privacidade</a></li>
+            <li><a href="#">Sobre o projeto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Tubaropédia · Conteúdo disponível sob licença <a href="#">Creative Commons CC BY-SA 4.0</a></span>
+        <span class="ic-row">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="familias-data.js"></script>
+<script>
+/* Todo o conteúdo das famílias vem de familias-data.js — edite só lá. */
+
+const POR_PAGINA = 8;
+let paginaAtual = 1;
+let modoGrade = false;
+
+const silhuetaSVG = `<svg class="silhouette" viewBox="0 0 200 100"><path fill="#8fa3d6" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>`;
+
+function especiesLabel(n){ return n === 1 ? "espécie" : "espécies"; }
+
+function familiasFiltradas(){
+  const termo = document.getElementById("busca").value.trim().toLowerCase();
+  let lista = FAMILIAS.filter(f => f.nome.toLowerCase().includes(termo));
+  const ordem = document.getElementById("ordenar").value;
+  if (ordem === "az") lista.sort((a,b) => a.nome.localeCompare(b.nome));
+  if (ordem === "za") lista.sort((a,b) => b.nome.localeCompare(a.nome));
+  if (ordem === "mais") lista.sort((a,b) => b.especies - a.especies);
+  if (ordem === "menos") lista.sort((a,b) => a.especies - b.especies);
+  return lista;
+}
+
+function renderCard(f){
+  return `
+    <div class="fam-row">
+      <div class="fam-thumb">
+        ${silhuetaSVG}
+        <img src="imagens/familias/${f.imagem}" alt="${f.nome}"
+             onload="this.style.display='block';this.previousElementSibling.style.display='none';"
+             onerror="this.style.display='none';">
+      </div>
+      <div class="fam-info">
+        <h3>${f.nome}</h3>
+        <p>${f.descricao}</p>
+        <a class="link" href="familia.html?familia=${f.slug}">Ver detalhes →</a>
+      </div>
+      <div class="fam-count">
+        <div><div class="num">${f.especies}${f.especies>=40?"+":""}</div><div class="lbl">${especiesLabel(f.especies)}</div></div>
+        <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+      </div>
+    </div>`;
+}
+
+function render(){
+  const todas = familiasFiltradas();
+  const totalPaginas = Math.max(1, Math.ceil(todas.length / POR_PAGINA));
+  if (paginaAtual > totalPaginas) paginaAtual = totalPaginas;
+  const inicio = (paginaAtual - 1) * POR_PAGINA;
+  const pagina = todas.slice(inicio, inicio + POR_PAGINA);
+
+  document.getElementById("contagemTitulo").textContent =
+    `${todas.length} família${todas.length === 1 ? "" : "s"} reconhecida${todas.length === 1 ? "" : "s"}`;
+
+  const container = document.getElementById("listaFamilias");
+  container.className = "card-list" + (modoGrade ? " grade" : "");
+  container.innerHTML = pagina.length
+    ? pagina.map(renderCard).join("")
+    : `<div class="fam-row" style="color:var(--muted);">Nenhuma família encontrada com esse termo.</div>`;
+
+  renderPaginacao(totalPaginas);
+}
+
+function renderPaginacao(totalPaginas){
+  const el = document.getElementById("paginacao");
+  let html = `<button ${paginaAtual===1?"disabled":""} data-pg="${paginaAtual-1}">« Anterior</button>`;
+  for (let p = 1; p <= totalPaginas; p++){
+    html += `<button class="${p===paginaAtual?"active":""}" data-pg="${p}">${p}</button>`;
+  }
+  html += `<button ${paginaAtual===totalPaginas?"disabled":""} data-pg="${paginaAtual+1}">Próxima »</button>`;
+  el.innerHTML = html;
+  el.querySelectorAll("button[data-pg]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      paginaAtual = Number(btn.dataset.pg);
+      render();
+      window.scrollTo({top: document.querySelector(".list-head").offsetTop - 20, behavior:"smooth"});
+    });
+  });
+}
+
+function renderStats(){
+  const s = ESTATISTICAS_FAMILIAS;
+  document.getElementById("statsList").innerHTML = `
+    <div class="stat-row"><span>Total de famílias</span><span class="num">${s.totalFamilias}</span></div>
+    <div class="stat-row"><span>Total de gêneros</span><span class="num">${s.totalGeneros}</span></div>
+    <div class="stat-row"><span>Total de espécies</span><span class="num">${s.totalEspecies}</span></div>
+    <div class="stat-row"><span>Espécies ameaçadas</span><span class="num">${s.especiesAmeacadas}</span></div>`;
+}
+
+function renderRanking(){
+  document.getElementById("rankList").innerHTML = FAMILIAS_MAIS_DIVERSAS.map((f,i) => `
+    <div class="rank-row">
+      <span class="rank-num">${i+1}</span>
+      <span class="fam-name">${f.nome}</span>
+      <span class="fam-n">${f.texto}</span>
+    </div>`).join("");
+}
+
+document.getElementById("busca").addEventListener("input", () => { paginaAtual = 1; render(); });
+document.getElementById("ordenar").addEventListener("change", () => { paginaAtual = 1; render(); });
+document.getElementById("btnLista").addEventListener("click", () => {
+  modoGrade = false;
+  document.getElementById("btnLista").classList.add("active");
+  document.getElementById("btnGrade").classList.remove("active");
+  render();
+});
+document.getElementById("btnGrade").addEventListener("click", () => {
+  modoGrade = true;
+  document.getElementById("btnGrade").classList.add("active");
+  document.getElementById("btnLista").classList.remove("active");
+  render();
+});
+
+renderStats();
+renderRanking();
+render();
+</script>
+</body>
+</html>
