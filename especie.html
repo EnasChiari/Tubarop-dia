@@ -172,8 +172,8 @@
     </div>
     <div class="nav-group">
       <div class="nav-label">Navegação</div>
-      <div class="nav-item"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/></svg></span>Página principal</div>
-      <div class="nav-item active"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 10h16v4H4zM4 16h16v4H4z"/></svg></span>Todas as espécies</div>
+      <div class="nav-item"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/></svg><a href="index.html"></span>Página principal</div></a>
+      <div class="nav-item active"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 10h16v4H4zM4 16h16v4H4z"/></svg><a href="catalogo.html"></span>Todas as espécies</div></a>
       <div class="nav-item"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l4 4-4 4-4-4zM4 12l4-4 4 4-4 4zM16 12l4-4 4 4-4 4zM12 22l-4-4 4-4 4 4z"/></svg></span>Famílias</div>
       <div class="nav-item"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/></svg></span>Anatomia</div>
       <div class="nav-item"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L3 9l9 13 9-13z"/></svg></span>Habitat</div>
@@ -296,22 +296,17 @@
   </div>
 </div>
 
+<script src="especies-data.js"></script>
 <script>
 /*
- * A página não guarda mais os dados das espécies aqui. Eles são buscados
- * diretamente do banco de dados Java (BancoDadosTubaroes), que expõe um
- * servidor HTTP com o endpoint /api/tubaroes/fichas.
- *
- * Para funcionar:
- *   1) javac BancoDadosTubaroes.java
- *   2) java BancoDadosTubaroes
- *   3) Acesse http://localhost:8080/especie.html
- *
- * `todasFichas` é preenchido em tempo de execução, indexado por "slug"
- * (mesmo slug que o Java devolve em cada ficha).
+ * Os dados das espécies ficam no arquivo especies-data.js (igual ao
+ * produtos-data.js do Lunéa) — não precisa de nenhum servidor rodando.
+ * Para editar/adicionar uma espécie, mexa só no especies-data.js.
+ * Para trocar uma foto: salve a imagem numa pasta "imagens" ao lado
+ * deste arquivo e escreva o nome dela no campo "imagens" da espécie.
  */
-const API_URL = "/api/tubaroes/fichas";
 let todasFichas = {};
+ESPECIES.forEach(ficha => { todasFichas[ficha.slug] = ficha; });
 
 
 const IUCN_ORDEM = ["EX","EW","CR","EN","VU","NT","LC"];
@@ -364,11 +359,12 @@ function render(d){
 
   const foto = document.getElementById("fotoEspecie");
   const placeholder = document.getElementById("fotoPlaceholder");
-  if (d.imagemUrl) {
+  const imagemPrincipal = d.imagens && d.imagens.length ? "imagens/" + d.imagens[0] : null;
+  if (imagemPrincipal) {
     foto.onload = () => { foto.style.display = "block"; placeholder.style.display = "none"; };
     foto.onerror = () => { foto.style.display = "none"; placeholder.style.display = "block"; };
     foto.alt = d.nomePopular;
-    foto.src = d.imagemUrl;
+    foto.src = imagemPrincipal;
   } else {
     foto.removeAttribute("src");
     foto.style.display = "none";
@@ -451,34 +447,13 @@ document.querySelectorAll(".tab").forEach(tab => {
   });
 });
 
-// Inicialização: busca as fichas no banco de dados (BancoDadosTubaroes),
-// depois lê ?especie=slug da URL, ou usa o tubarão-branco como padrão
-async function carregarFichasDoBanco(){
-  const resp = await fetch(API_URL);
-  if (!resp.ok) throw new Error("Falha ao buscar dados do servidor: " + resp.status);
-  const lista = await resp.json();
-  todasFichas = {};
-  lista.forEach(ficha => { todasFichas[ficha.slug] = ficha; });
-}
-
-async function iniciar(){
-  try {
-    await carregarFichasDoBanco();
-    popularSeletor();
-    const slugInicial = new URLSearchParams(window.location.search).get("especie");
-    const slugPadrao = todasFichas[slugInicial]
-      ? slugInicial
-      : (todasFichas["tubarao-branco"] ? "tubarao-branco" : Object.keys(todasFichas)[0]);
-    if (slugPadrao) selecionarEspecie(slugPadrao);
-  } catch (erro) {
-    console.error(erro);
-    document.getElementById("titulo").textContent = "Não foi possível carregar os dados";
-    document.getElementById("descricao").textContent =
-      "Verifique se o banco de dados está rodando: compile e execute BancoDadosTubaroes.java (java BancoDadosTubaroes) e acesse a página pelo endereço http://localhost:8080/especie.html.";
-  }
-}
-
-iniciar();
+// Inicialização: lê ?especie=slug da URL, ou usa o tubarão-branco como padrão
+popularSeletor();
+const slugInicial = new URLSearchParams(window.location.search).get("especie");
+const slugPadrao = todasFichas[slugInicial]
+  ? slugInicial
+  : (todasFichas["tubarao-branco"] ? "tubarao-branco" : Object.keys(todasFichas)[0]);
+if (slugPadrao) selecionarEspecie(slugPadrao);
 </script>
 </body>
 </html>
