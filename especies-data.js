@@ -1,13 +1,3 @@
-/* ═══════════════════════════════════════════════
-   TUBAROPÉDIA — BASE DE DADOS DAS ESPÉCIES
-   Edite apenas este arquivo para gerenciar as espécies.
-   A página especie.html lê daqui automaticamente.
-
-   Para colocar uma foto: salve a imagem numa pasta "imagens"
-   ao lado do especie.html e escreva o nome do arquivo aqui
-   embaixo, no campo "imagens" de cada espécie (pode colocar
-   mais de uma, a primeira é a foto principal).
-   ═══════════════════════════════════════════════ */
 
 const ESPECIES = [
   {
