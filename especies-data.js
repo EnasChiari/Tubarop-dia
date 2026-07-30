@@ -264,35 +264,81 @@ const ESPECIES = [
   ],
 },
   {
-    slug: "tubarao-mako",
-    nomePopular: "Tubarão-mako", nomeCientifico: "Isurus oxyrinchus", nomeIngles: "Shortfin Mako",
-    familia: "Lamnidae", ordem: "Lamniformes", classe: "Chondrichthyes",
-    descricao: "Considerado o tubarão mais rápido do oceano, capaz de atingir grandes velocidades em curtas distâncias.",
-    comprimento: "2,5 – 3,2 m (podendo ultrapassar 4 m)", peso: "60 – 135 kg",
-    profundidade: "0 – 700 m", expectativaVida: "cerca de 28 a 32 anos", denticao: "dentes longos, finos e curvados",
-    caracteristicasTexto: "Corpo hidrodinâmico e musculoso, coloração azul-metálica no dorso e ventre branco. Nadadeira caudal em formato de meia-lua.",
-    distribuicao: "Distribuído em águas oceânicas temperadas e tropicais de todo o mundo, raramente próximo à costa.",
-    habitat: "Espécie pelágica, prefere águas abertas e profundas, migrando por longas distâncias.",
-    alimentacao: "Peixes rápidos como atuns e espadartes, além de outros tubarões e cefalópodes.",
-    presas: ["Atuns", "Espadartes", "Lulas", "Outros tubarões"],
-    reproducao: "Vivíparo placentário. Gestação de 15 a 18 meses, com 4 a 25 filhotes por ninhada.",
-    comportamento: "Nadador extremamente veloz, capaz de saltos espetaculares fora d'água.",
-    tracosComportamento: ["Nadador muito veloz", "Regula parcialmente a temperatura", "Salta fora d'água"],
-    relacaoHumanos: "Muito visado pela pesca esportiva e comercial; interações com humanos são raras.",
-    tracosRelacaoHumanos: ["Alvo de pesca esportiva", "Carne comercialmente valorizada", "Raro em águas rasas"],
-    statusIUCN: "EN", statusTexto: "Classificado como Em Perigo (EN) pela IUCN, com forte declínio por sobrepesca global.",
-    curiosidades: [
-      "Pode atingir velocidades de até 74 km/h em curtas distâncias.",
-      "É parente próximo do tubarão-branco.",
-      "Consegue manter parte do corpo mais aquecido que a água ao redor.",
-      "É conhecido por saltar vários metros fora da água quando fisgado."
-    ],
-    especiesRelacionadas: [
-      { slug: "tubarao-branco", nomePopular: "Tubarão-branco", nomeCientifico: "Carcharodon carcharias" }
-    ],
-    imagens: [
-      "tubarao-mako.jpg",
-    ],
-  },
+  slug: "tubarao-cinzento-dos-recifes",
+  nomePopular: "Tubarão-cinzento-dos-recifes",
+  nomeCientifico: "Carcharhinus amblyrhynchos",
+  nomeIngles: "Grey Reef Shark",
 
+  familia: "Carcharhinidae",
+  ordem: "Carcharhiniformes",
+  classe: "Chondrichthyes",
+
+  descricao: "Predador ágil e comum em recifes de coral do Indo-Pacífico. É uma das espécies mais características dos recifes tropicais e desempenha importante papel no equilíbrio desses ecossistemas.",
+
+  comprimento: "1,5 – 2 m (máximo cerca de 2,6 m)",
+  peso: "20 – 35 kg",
+  profundidade: "0 – 280 m",
+  expectativaVida: "cerca de 25 anos",
+  denticao: "Dentes superiores triangulares e serrilhados; dentes inferiores mais estreitos e pontiagudos, próprios para capturar peixes e cefalópodes.",
+
+  caracteristicasTexto: "Corpo esguio e cinza, ventre branco e margens escuras na nadadeira caudal. A extremidade posterior da cauda apresenta uma mancha preta bem evidente, característica da espécie.",
+
+  distribuicao: "Encontrado em recifes tropicais do Oceano Índico e do Oceano Pacífico, desde o Mar Vermelho até a Polinésia Francesa.",
+
+  habitat: "Habita recifes de coral, encostas recifais, lagoas e canais, geralmente em águas claras e próximas de ilhas oceânicas.",
+
+  alimentacao: "Preda principalmente peixes ósseos, lulas, polvos, crustáceos e pequenos tubarões.",
+
+  presas: [
+    "Peixes ósseos",
+    "Lulas",
+    "Polvos",
+    "Crustáceos"
+  ],
+
+  reproducao: "Vivíparo. Os embriões são alimentados por uma placenta vitelínica. As ninhadas geralmente possuem de 1 a 6 filhotes após cerca de um ano de gestação.",
+
+  comportamento: "Espécie ativa durante o dia e a noite. Pode formar grupos, mas também é frequentemente observada sozinha. Demonstra comportamento territorial e realiza a famosa 'postura de ameaça' quando se sente acuada.",
+
+  tracosComportamento: [
+    "Territorial",
+    "Predador ativo",
+    "Postura de ameaça característica"
+  ],
+
+  relacaoHumanos: "Normalmente evita mergulhadores, mas pode aproximar-se quando há alimento. Ataques são raros e geralmente associados à pesca ou provocação.",
+
+  tracosRelacaoHumanos: [
+    "Popular no mergulho",
+    "Ataques raros",
+    "Sensível à pesca excessiva"
+  ],
+
+  statusIUCN: "EN",
+  statusTexto: "Classificado como Em Perigo (EN) pela IUCN devido à sobrepesca, captura incidental e degradação dos recifes de coral.",
+
+  curiosidades: [
+    "É uma das espécies de tubarão mais comuns em recifes do Indo-Pacífico.",
+    "Sua postura de ameaça inclui arquear o corpo, abaixar as nadadeiras peitorais e nadar em movimentos exagerados.",
+    "Pode retornar repetidamente ao mesmo território durante anos.",
+    "É considerado um dos principais predadores dos recifes de coral."
+  ],
+
+  especiesRelacionadas: [
+    {
+      slug: "tubarao-de-pontas-prateadas",
+      nomePopular: "Tubarão-de-pontas-prateadas",
+      nomeCientifico: "Carcharhinus albimarginatus"
+    },
+    {
+      slug: "tubarao-de-pontas-negras-dos-recifes",
+      nomePopular: "Tubarão-de-pontas-negras-dos-recifes",
+      nomeCientifico: "Carcharhinus melanopterus"
+    }
+  ],
+
+  imagens: [
+    "tubarao-cinzento-dos-recifes.jpg"
+  ],
+  },
 ];
