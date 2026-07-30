@@ -117,37 +117,84 @@ const ESPECIES = [
         "tubarao-de-pontas-prateadas.jpg"
       ],
     },
-  {
-    slug: "tubarao-martelo",
-    nomePopular: "Tubarão-martelo-comum", nomeCientifico: "Sphyrna lewini", nomeIngles: "Scalloped Hammerhead",
-    familia: "Sphyrnidae", ordem: "Carcharhiniformes", classe: "Chondrichthyes",
-    descricao: "Reconhecido pelo formato único da cabeça em forma de martelo, que amplia seu campo de visão e sensibilidade elétrica.",
-    comprimento: "2,5 – 3,5 m (podendo ultrapassar 4 m)", peso: "80 – 150 kg",
-    profundidade: "0 – 500 m", expectativaVida: "cerca de 30 a 35 anos", denticao: "dentes triangulares e serrilhados",
-    caracteristicasTexto: "Cabeça alargada e achatada (cefalofólio), corpo esguio e coloração acinzentada com ventre claro.",
-    distribuicao: "Presente em águas costeiras e oceânicas tropicais e subtropicais de todo o mundo.",
-    habitat: "Frequenta plataformas continentais, ilhas oceânicas e recifes, formando cardumes perto de montes submarinos.",
-    alimentacao: "Peixes, polvos, lulas e outros tubarões e raias, imobilizados com o auxílio da cabeça em formato de martelo.",
-    presas: ["Peixes", "Lulas", "Polvos", "Raias"],
-    reproducao: "Vivíparo placentário. Gestação de 9 a 10 meses, com 15 a 30 filhotes por ninhada.",
-    comportamento: "Forma grandes cardumes durante o dia, dispersando-se à noite para caçar sozinho.",
-    tracosComportamento: ["Forma cardumes", "Caça noturna solitária", "Alta sensibilidade elétrica"],
-    relacaoHumanos: "Não é considerado perigoso para humanos. Muito visado pelo comércio de barbatanas.",
-    tracosRelacaoHumanos: ["Baixo risco a humanos", "Alvo do comércio de barbatanas", "Atração para mergulho"],
-    statusIUCN: "CR", statusTexto: "Classificado como Criticamente em Perigo (CR) pela IUCN, com forte declínio por sobrepesca.",
-    curiosidades: [
-      "O formato da cabeça é chamado de \"cefalofólio\".",
-      "Amplia o campo de visão para quase 360 graus.",
-      "Forma cardumes de até centenas de indivíduos.",
-      "É uma das espécies de martelo mais ameaçadas do mundo."
-    ],
-    especiesRelacionadas: [
-      { slug: "tubarao-touro", nomePopular: "Tubarão-touro", nomeCientifico: "Carcharhinus leucas" }
-    ],
-    imagens: [
-      "tubarao-martelo.jpg",
-    ],
-  },
+{
+  slug: "tubarao-de-nariz-grande",
+  nomePopular: "Tubarão-de-nariz-grande",
+  nomeCientifico: "Carcharhinus altimus",
+  nomeIngles: "Bignose Shark",
+
+  familia: "Carcharhinidae",
+  ordem: "Carcharhiniformes",
+  classe: "Chondrichthyes",
+
+  descricao: "Grande tubarão de águas profundas e plataforma continental, identificado pelo focinho longo e arredondado. É um predador de peixes ósseos e cefalópodes, amplamente distribuído em mares tropicais e temperados quentes.",
+
+  comprimento: "2,3 – 2,8 m (máximo cerca de 3 m)",
+  peso: "100 – 170 kg",
+  profundidade: "90 – 430 m",
+  expectativaVida: "cerca de 20 a 30 anos",
+  denticao: "Dentes superiores largos e serrilhados; dentes inferiores estreitos e pontiagudos, ideais para capturar peixes e lulas.",
+
+  caracteristicasTexto: "Corpo robusto, coloração cinza a bronzeada no dorso e branca no ventre. Possui focinho longo e largo, olhos relativamente grandes e primeira nadadeira dorsal alta.",
+
+  distribuicao: "Encontrado em oceanos Atlântico, Índico e Pacífico, em regiões tropicais e temperadas quentes.",
+
+  habitat: "Habita a plataforma continental externa e o talude continental, geralmente próximo ao fundo em águas relativamente profundas.",
+
+  alimentacao: "Alimenta-se principalmente de peixes ósseos, tubarões menores, raias, lulas, polvos e crustáceos.",
+
+  presas: [
+    "Peixes ósseos",
+    "Lulas",
+    "Polvos",
+    "Pequenos tubarões"
+  ],
+
+  reproducao: "Vivíparo. Os embriões desenvolvem-se ligados à mãe por uma placenta vitelínica. As ninhadas costumam ter entre 3 e 15 filhotes.",
+
+  comportamento: "Espécie geralmente solitária e discreta. Passa grande parte do tempo em águas profundas, realizando deslocamentos ao longo da plataforma continental em busca de alimento.",
+
+  tracosComportamento: [
+    "Solitário",
+    "Predador de águas profundas",
+    "Movimentos ao longo da plataforma continental"
+  ],
+
+  relacaoHumanos: "Raramente entra em contato com pessoas devido ao habitat profundo. Não há registros confirmados de ataques, mas é capturado frequentemente pela pesca comercial.",
+
+  tracosRelacaoHumanos: [
+    "Sem ataques confirmados",
+    "Capturado pela pesca comercial",
+    "Baixo contato com mergulhadores"
+  ],
+
+  statusIUCN: "DD",
+  statusTexto: "Classificado como Dados Insuficientes (DD) pela IUCN, embora populações possam estar em declínio devido à pesca excessiva.",
+
+  curiosidades: [
+    "Seu focinho proporcionalmente grande originou seu nome comum.",
+    "É uma espécie pouco observada por viver em águas profundas.",
+    "Pode realizar migrações verticais em busca de alimento.",
+    "É frequentemente confundido com outros tubarões do gênero Carcharhinus."
+  ],
+
+  especiesRelacionadas: [
+    {
+      slug: "tubarao-de-pontas-prateadas",
+      nomePopular: "Tubarão-de-pontas-prateadas",
+      nomeCientifico: "Carcharhinus albimarginatus"
+    },
+    {
+      slug: "tubarao-de-nariz-preto",
+      nomePopular: "Tubarão-de-nariz-preto",
+      nomeCientifico: "Carcharhinus acronotus"
+    }
+  ],
+
+  imagens: [
+    "tubarao-de-nariz-grande.jpg"
+  ],
+},
   {
     slug: "tubarao-touro",
     nomePopular: "Tubarão-touro", nomeCientifico: "Carcharhinus leucas", nomeIngles: "Bull Shark",
