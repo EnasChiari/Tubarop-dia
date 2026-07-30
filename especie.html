@@ -54,7 +54,7 @@
   .search-box{flex:1;max-width:400px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 16px;color:var(--muted);font-size:0.86rem;}
   .search-box svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;flex-shrink:0;}
 
-
+  /* seletor de espécie — é o que faz a página "alternável" */
   .species-picker{
     display:flex;align-items:center;gap:10px;
     background:var(--navy-950);color:#fff;border-radius:10px;padding:9px 14px;
@@ -298,7 +298,13 @@
 
 <script src="especies-data.js"></script>
 <script>
-
+/*
+ * Os dados das espécies ficam no arquivo especies-data.js (igual ao
+ * produtos-data.js do Lunéa) — não precisa de nenhum servidor rodando.
+ * Para editar/adicionar uma espécie, mexa só no especies-data.js.
+ * Para trocar uma foto: salve a imagem numa pasta "imagens" ao lado
+ * deste arquivo e escreva o nome dela no campo "imagens" da espécie.
+ */
 let todasFichas = {};
 ESPECIES.forEach(ficha => { todasFichas[ficha.slug] = ficha; });
 
@@ -416,7 +422,7 @@ function render(d){
   });
 }
 
-
+// ===== Seletor de espécie: é o que torna a página reutilizável para vários tubarões =====
 function popularSeletor(){
   const select = document.getElementById("seletorEspecie");
   select.innerHTML = Object.keys(todasFichas).map(slug =>
@@ -441,6 +447,7 @@ document.querySelectorAll(".tab").forEach(tab => {
   });
 });
 
+// Inicialização: lê ?especie=slug da URL, ou usa o tubarão-branco como padrão
 popularSeletor();
 const slugInicial = new URLSearchParams(window.location.search).get("especie");
 const slugPadrao = todasFichas[slugInicial]

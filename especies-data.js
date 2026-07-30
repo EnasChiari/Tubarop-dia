@@ -1,7 +1,7 @@
 
 const ESPECIES = [
   {
-    slug: "tubarão-de-nariz-preto",
+    slug: "tubarao-de-nariz-preto",
     nomePopular: "Tubarão-de-nariz-preto", nomeCientifico: "Carcharhinus acronotus", nomeIngles: "Blacknose",
     familia: "Carcharhinidae", ordem: "Carcharhiniformes", classe: "Chondrichthyes",
     descricao: "O Carcharhinus acronotus, conhecido em português como tubarão-de-nariz-preto, é uma espécie de tubarão da família Carcharhinidae. Carcharhinus acronotus É um tubarão de pequeno porte, comum em águas costeiras quentes do Oceano Atlântico.",
@@ -31,7 +31,7 @@ const ESPECIES = [
     ],
   },
   {
-      slug: "tubarão-de-pontas-prateadas",
+      slug: "tubarao-de-pontas-prateadas",
       nomePopular: "Tubarão-de-pontas-prateadas",
       nomeCientifico: "Carcharhinus albimarginatus",
       nomeIngles: "Silvertip Shark",
