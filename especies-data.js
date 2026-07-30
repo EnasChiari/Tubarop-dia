@@ -419,4 +419,82 @@ const ESPECIES = [
     "tubarao-de-borneu.jpg"
   ],
   },
+  {
+  slug: "tubarao-cobre",
+  nomePopular: "Tubarão-cobre",
+  nomeCientifico: "Carcharhinus brachyurus",
+  nomeIngles: "Copper Shark",
+
+  familia: "Carcharhinidae",
+  ordem: "Carcharhiniformes",
+  classe: "Chondrichthyes",
+
+  descricao: "Grande tubarão costeiro conhecido pela coloração bronzeada do corpo. É um predador rápido que habita águas temperadas e subtropicais, alimentando-se principalmente de peixes e cefalópodes.",
+
+  comprimento: "2,4 – 3 m (máximo cerca de 3,3 m)",
+  peso: "150 – 300 kg",
+  profundidade: "0 – 350 m",
+  expectativaVida: "cerca de 25 a 30 anos",
+  denticao: "Dentes superiores largos e serrilhados e dentes inferiores mais estreitos, adaptados para capturar peixes e mamíferos marinhos de pequeno porte.",
+
+  caracteristicasTexto: "Corpo esguio e hidrodinâmico, coloração bronzeada ou cobre no dorso e ventre branco. Possui focinho longo e estreito, olhos relativamente grandes e nadadeiras sem marcas evidentes.",
+
+  distribuicao: "Distribuído de forma descontínua em águas temperadas e subtropicais do Atlântico, Índico e Pacífico, incluindo África do Sul, Austrália, Nova Zelândia, Japão, Argentina e sul do Brasil.",
+
+  habitat: "Habita águas costeiras, baías, plataformas continentais e estuários, podendo aproximar-se de praias e recifes.",
+
+  alimentacao: "Predador ativo que caça peixes ósseos, raias, lulas, polvos, pequenos tubarões e ocasionalmente mamíferos marinhos.",
+
+  presas: [
+    "Peixes ósseos",
+    "Raias",
+    "Lulas",
+    "Pequenos tubarões"
+  ],
+
+  reproducao: "Vivíparo. Os embriões desenvolvem-se ligados à mãe por uma placenta vitelínica. A gestação dura cerca de 12 meses e as ninhadas variam entre 7 e 24 filhotes.",
+
+  comportamento: "Espécie geralmente solitária ou encontrada em pequenos grupos. É um nadador rápido e pode formar grandes agregações sazonais durante migrações e reprodução.",
+
+  tracosComportamento: [
+    "Nadador rápido",
+    "Migrações sazonais",
+    "Forma agregações temporárias"
+  ],
+
+  relacaoHumanos: "Normalmente evita seres humanos, mas devido ao seu tamanho é considerado potencialmente perigoso. Ataques são raros. É muito visado pela pesca esportiva e comercial.",
+
+  tracosRelacaoHumanos: [
+    "Ataques raros",
+    "Pesca esportiva",
+    "Potencialmente perigoso"
+  ],
+
+  statusIUCN: "VU",
+  statusTexto: "Classificado como Vulnerável (VU) pela IUCN devido à sobrepesca, captura incidental e ao crescimento lento da espécie.",
+
+  curiosidades: [
+    "Recebe esse nome pela coloração bronzeada característica do corpo.",
+    "Realiza longas migrações entre áreas de alimentação e reprodução.",
+    "É uma das poucas espécies de Carcharhinus comuns em águas temperadas.",
+    "Jovens frequentemente utilizam baías e estuários como áreas de crescimento."
+  ],
+
+  especiesRelacionadas: [
+    {
+      slug: "tubarao-touro",
+      nomePopular: "Tubarão-touro",
+      nomeCientifico: "Carcharhinus leucas"
+    },
+    {
+      slug: "tubarao-de-pontas-prateadas",
+      nomePopular: "Tubarão-de-pontas-prateadas",
+      nomeCientifico: "Carcharhinus albimarginatus"
+    }
+  ],
+
+  imagens: [
+    "tubarao-cobre.jpg"
+  ],
+  },
 ];
