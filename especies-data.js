@@ -497,4 +497,82 @@ const ESPECIES = [
     "tubarao-cobre.jpg"
   ],
   },
+  {
+  slug: "tubarao-galha-preta",
+  nomePopular: "Tubarão-galha-preta",
+  nomeCientifico: "Carcharhinus limbatus",
+  nomeIngles: "Blacktip Shark",
+
+  familia: "Carcharhinidae",
+  ordem: "Carcharhiniformes",
+  classe: "Chondrichthyes",
+
+  descricao: "Tubarão costeiro ágil e amplamente distribuído em mares tropicais e subtropicais. É facilmente reconhecido pelas pontas pretas das nadadeiras e pelos saltos espetaculares durante a caça.",
+
+  comprimento: "1,5 – 2,2 m (máximo cerca de 2,8 m)",
+  peso: "30 – 120 kg",
+  profundidade: "0 – 150 m",
+  expectativaVida: "cerca de 12 a 20 anos",
+  denticao: "Dentes triangulares, afiados e serrilhados na mandíbula superior, adaptados para capturar peixes rápidos.",
+
+  caracteristicasTexto: "Corpo esguio e hidrodinâmico, dorso cinza-azulado e ventre branco. As pontas da primeira nadadeira dorsal, peitorais, pélvicas e lobo inferior da cauda apresentam manchas pretas características.",
+
+  distribuicao: "Distribuído em águas tropicais e subtropicais dos oceanos Atlântico, Índico e Pacífico, incluindo a costa brasileira.",
+
+  habitat: "Habita águas costeiras, praias, estuários, baías, recifes e plataformas continentais rasas.",
+
+  alimentacao: "Alimenta-se principalmente de peixes ósseos, lulas, polvos, camarões e outros crustáceos.",
+
+  presas: [
+    "Peixes ósseos",
+    "Lulas",
+    "Polvos",
+    "Camarões"
+  ],
+
+  reproducao: "Vivíparo. Os embriões desenvolvem-se ligados à mãe por uma placenta vitelínica. A gestação dura cerca de 10 a 12 meses e as ninhadas possuem entre 1 e 10 filhotes.",
+
+  comportamento: "Espécie ativa e veloz, frequentemente formando pequenos grupos. Durante a caça pode saltar completamente para fora da água enquanto captura cardumes.",
+
+  tracosComportamento: [
+    "Nadador muito rápido",
+    "Realiza saltos durante a caça",
+    "Forma pequenos grupos"
+  ],
+
+  relacaoHumanos: "Geralmente evita pessoas. Ataques são raros e normalmente relacionados à confusão durante a alimentação ou à pesca. É bastante capturado pela pesca comercial e esportiva.",
+
+  tracosRelacaoHumanos: [
+    "Ataques raros",
+    "Importante para a pesca esportiva",
+    "Frequente na pesca comercial"
+  ],
+
+  statusIUCN: "VU",
+  statusTexto: "Classificado como Vulnerável (VU) pela IUCN devido à sobrepesca, captura incidental e degradação de habitats costeiros.",
+
+  curiosidades: [
+    "É famoso pelos impressionantes saltos para fora da água durante a caça.",
+    "As pontas pretas das nadadeiras facilitam sua identificação.",
+    "Jovens utilizam estuários e baías como áreas de crescimento.",
+    "É uma das espécies de tubarão costeiro mais comuns em águas tropicais."
+  ],
+
+  especiesRelacionadas: [
+    {
+      slug: "tubarao-de-pontas-negras-dos-recifes",
+      nomePopular: "Tubarão-de-pontas-negras-dos-recifes",
+      nomeCientifico: "Carcharhinus melanopterus"
+    },
+    {
+      slug: "tubarao-de-nariz-preto",
+      nomePopular: "Tubarão-de-nariz-preto",
+      nomeCientifico: "Carcharhinus acronotus"
+    }
+  ],
+
+  imagens: [
+    "tubarao-galha-preta.jpg"
+  ],
+  },
 ];
