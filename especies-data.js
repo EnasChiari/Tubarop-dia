@@ -186,81 +186,81 @@ const ESPECIES = [
   ],
 },
 {
-  slug: "tubarao-olho-de-porco",
-  nomePopular: "Tubarão-olho-de-porco",
-  nomeCientifico: "Carcharhinus amboinensis",
-  nomeIngles: "Pigeye Shark",
+  slug: "tubarao-gracioso",
+  nomePopular: "Tubarão-gracioso",
+  nomeCientifico: "Carcharhinus amblyrhynchoides",
+  nomeIngles: "Graceful Shark",
 
   familia: "Carcharhinidae",
   ordem: "Carcharhiniformes",
   classe: "Chondrichthyes",
 
-  descricao: "Grande tubarão costeiro de regiões tropicais e subtropicais, semelhante ao tubarão-touro. É um predador oportunista que habita estuários, baías e águas costeiras.",
+  descricao: "Tubarão costeiro de porte médio encontrado nas águas tropicais do Indo-Pacífico. Recebe esse nome pelo corpo esguio e pelos movimentos elegantes durante a natação.",
 
-  comprimento: "2,1 – 2,5 m (máximo cerca de 2,8 m)",
-  peso: "120 – 170 kg",
-  profundidade: "0 – 150 m",
-  expectativaVida: "cerca de 25 a 30 anos",
-  denticao: "Dentes superiores largos e serrilhados e dentes inferiores estreitos e pontiagudos, adaptados para capturar e cortar presas.",
+  comprimento: "1,5 – 1,8 m (máximo cerca de 2 m)",
+  peso: "20 – 40 kg",
+  profundidade: "20 – 150 m",
+  expectativaVida: "cerca de 20 anos",
+  denticao: "Dentes superiores triangulares e serrilhados e dentes inferiores estreitos e pontiagudos, adaptados para capturar peixes e cefalópodes.",
 
-  caracteristicasTexto: "Corpo robusto e musculoso, focinho curto e arredondado, olhos relativamente pequenos e coloração cinza uniforme com ventre branco. É muito semelhante ao tubarão-touro.",
+  caracteristicasTexto: "Corpo fino e hidrodinâmico, focinho longo e arredondado, dorso cinza-azulado e ventre branco. As pontas das nadadeiras apresentam discretas marcas escuras, principalmente em indivíduos jovens.",
 
-  distribuicao: "Distribuído em águas tropicais do Atlântico oriental, Índico e Pacífico ocidental, incluindo África, sul da Ásia, Austrália e ilhas do Pacífico.",
+  distribuicao: "Distribuído pelo Indo-Pacífico, do Golfo Pérsico e costa leste da África até o Sudeste Asiático, Papua-Nova Guiné e norte da Austrália.",
 
-  habitat: "Habita águas costeiras, baías, estuários, plataformas continentais e ocasionalmente áreas próximas à foz de rios.",
+  habitat: "Habita águas costeiras, plataformas continentais, recifes e áreas de fundo arenoso ou lodoso.",
 
-  alimentacao: "Alimenta-se de peixes ósseos, raias, pequenos tubarões, cefalópodes e crustáceos.",
+  alimentacao: "Alimenta-se principalmente de peixes ósseos, lulas, polvos, camarões e outros crustáceos.",
 
   presas: [
     "Peixes ósseos",
-    "Raias",
-    "Pequenos tubarões",
-    "Lulas"
+    "Lulas",
+    "Polvos",
+    "Crustáceos"
   ],
 
-  reproducao: "Vivíparo. Os embriões desenvolvem-se ligados à mãe por uma placenta vitelínica. As ninhadas geralmente possuem entre 3 e 13 filhotes.",
+  reproducao: "Vivíparo. Os embriões desenvolvem-se ligados à mãe por uma placenta vitelínica. As ninhadas normalmente possuem entre 3 e 9 filhotes.",
 
-  comportamento: "Espécie geralmente solitária, ativa principalmente próximo ao fundo. É um predador oportunista e pode demonstrar comportamento agressivo quando provocado.",
+  comportamento: "Espécie ativa, geralmente solitária ou encontrada em pequenos grupos. Nada continuamente em busca de alimento e realiza deslocamentos ao longo da costa.",
 
   tracosComportamento: [
-    "Predador oportunista",
-    "Solitário",
-    "Habita áreas costeiras"
+    "Nadador ágil",
+    "Solitário ou em pequenos grupos",
+    "Predador costeiro"
   ],
 
-  relacaoHumanos: "Raramente entra em contato com pessoas, mas devido ao seu porte é considerado potencialmente perigoso. Ataques confirmados são extremamente raros.",
+  relacaoHumanos: "É tímido e normalmente evita mergulhadores. Não há registros confirmados de ataques fatais, mas pode ser capturado pela pesca comercial e artesanal.",
 
   tracosRelacaoHumanos: [
-    "Potencialmente perigoso",
-    "Ataques muito raros",
-    "Capturado pela pesca comercial"
+    "Inofensivo na maioria dos encontros",
+    "Capturado pela pesca comercial",
+    "Baixo risco de ataques"
   ],
 
-  statusIUCN: "VU",
-  statusTexto: "Classificado como Vulnerável (VU) pela IUCN devido à sobrepesca, captura incidental e baixa taxa reprodutiva.",
+  statusIUCN: "NT",
+  statusTexto: "Classificado como Quase Ameaçado (NT) pela IUCN devido à pressão da pesca em parte de sua distribuição.",
 
   curiosidades: [
-    "Recebe esse nome por possuir olhos relativamente pequenos.",
-    "É frequentemente confundido com o tubarão-touro (Carcharhinus leucas).",
-    "Pode viver tanto em águas costeiras rasas quanto em áreas mais profundas da plataforma continental.",
-    "É uma espécie pouco estudada em comparação com outros tubarões costeiros."
+    "Recebeu o nome comum 'gracioso' por seu corpo delgado e nado elegante.",
+    "É frequentemente confundido com o tubarão-cinzento-dos-recifes.",
+    "Passa a maior parte do tempo em águas costeiras tropicais.",
+    "É uma espécie relativamente pouco estudada em comparação com outros Carcharhinus."
   ],
 
   especiesRelacionadas: [
     {
-      slug: "tubarao-touro",
-      nomePopular: "Tubarão-touro",
-      nomeCientifico: "Carcharhinus leucas"
+      slug: "tubarao-cinzento-dos-recifes",
+      nomePopular: "Tubarão-cinzento-dos-recifes",
+      nomeCientifico: "Carcharhinus amblyrhynchos"
     },
     {
-      slug: "tubarao-de-pontas-prateadas",
-      nomePopular: "Tubarão-de-pontas-prateadas",
-      nomeCientifico: "Carcharhinus albimarginatus"
+      slug: "tubarao-galha-preta",
+      nomePopular: "Tubarão-galha-preta",
+      nomeCientifico: "Carcharhinus limbatus"
     }
   ],
 
   imagens: [
-    "tubarao-olho-de-porco.jpg"
+    "tubarao-gracioso.jpg"
   ],
 },
   {
