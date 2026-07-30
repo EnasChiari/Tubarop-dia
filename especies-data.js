@@ -341,4 +341,82 @@ const ESPECIES = [
     "tubarao-cinzento-dos-recifes.jpg"
   ],
   },
+  {
+  slug: "tubarao-de-borneu",
+  nomePopular: "Tubarão-de-Bornéu",
+  nomeCientifico: "Carcharhinus borneensis",
+  nomeIngles: "Borneo Shark",
+
+  familia: "Carcharhinidae",
+  ordem: "Carcharhiniformes",
+  classe: "Chondrichthyes",
+
+  descricao: "Pequeno tubarão costeiro extremamente raro e pouco conhecido, endêmico da ilha de Bornéu. É uma das espécies de tubarão mais misteriosas do mundo, com poucos registros científicos.",
+
+  comprimento: "60 – 70 cm (máximo cerca de 78 cm)",
+  peso: "2 – 4 kg",
+  profundidade: "10 – 100 m",
+  expectativaVida: "desconhecida (estimada em 15 a 20 anos)",
+  denticao: "Dentes pequenos, estreitos e levemente serrilhados, adaptados para capturar pequenos peixes e invertebrados.",
+
+  caracteristicasTexto: "Corpo pequeno e esguio, coloração cinza-acastanhada no dorso e branca no ventre. Possui focinho relativamente curto e olhos grandes em relação ao tamanho do corpo.",
+
+  distribuicao: "Restrito às águas costeiras do norte de Bornéu, especialmente na região de Sabah (Malásia) e possivelmente Brunei.",
+
+  habitat: "Habita plataformas continentais rasas, estuários e áreas costeiras de fundo lodoso ou arenoso.",
+
+  alimentacao: "Alimenta-se principalmente de pequenos peixes, camarões, lulas, caranguejos e outros invertebrados marinhos.",
+
+  presas: [
+    "Pequenos peixes",
+    "Camarões",
+    "Caranguejos",
+    "Lulas"
+  ],
+
+  reproducao: "Vivíparo, com desenvolvimento dos embriões por placenta vitelínica. Pouco se sabe sobre seu ciclo reprodutivo devido à escassez de registros.",
+
+  comportamento: "Provavelmente solitário e discreto, vivendo próximo ao fundo. Seus hábitos permanecem pouco conhecidos por causa da raridade da espécie.",
+
+  tracosComportamento: [
+    "Muito raro",
+    "Solitário",
+    "Hábitos pouco conhecidos"
+  ],
+
+  relacaoHumanos: "É completamente inofensivo para seres humanos. Pode ser capturado incidentalmente em redes de pesca artesanal.",
+
+  tracosRelacaoHumanos: [
+    "Inofensivo",
+    "Captura incidental",
+    "Extremamente raro"
+  ],
+
+  statusIUCN: "EN",
+  statusTexto: "Classificado como Em Perigo (EN) pela IUCN devido à distribuição extremamente restrita, degradação do habitat e pressão da pesca costeira.",
+
+  curiosidades: [
+    "É uma das espécies de tubarão mais raramente observadas no mundo.",
+    "Durante décadas foi conhecido por pouquíssimos exemplares em coleções científicas.",
+    "É endêmico da ilha de Bornéu.",
+    "Grande parte de sua biologia ainda permanece desconhecida."
+  ],
+
+  especiesRelacionadas: [
+    {
+      slug: "tubarao-de-nariz-preto",
+      nomePopular: "Tubarão-de-nariz-preto",
+      nomeCientifico: "Carcharhinus acronotus"
+    },
+    {
+      slug: "tubarao-de-recife",
+      nomePopular: "Tubarão-cinzento-dos-recifes",
+      nomeCientifico: "Carcharhinus amblyrhynchos"
+    }
+  ],
+
+  imagens: [
+    "tubarao-de-borneu.jpg"
+  ],
+  },
 ];
