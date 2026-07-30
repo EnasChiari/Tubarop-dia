@@ -258,6 +258,43 @@
   .thumb-3{background:linear-gradient(135deg,#324a7a,#0a1120);}
   .thumb-4{background:linear-gradient(135deg,#3c342c,#181410);}
 
+  /* ===== IMAGE PLACEHOLDERS ===== */
+  .img-placeholder{
+    border:2px dashed rgba(148,163,201,0.6);
+    background:rgba(255,255,255,0.03);
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    font-size:0.72rem;
+    color:#8f9ab8;
+    line-height:1.4;
+    padding:6px;
+  }
+  .hero-shark.img-placeholder{
+    width:420px;height:280px;
+    border-radius:14px;
+    font-size:0.85rem;
+  }
+  .fam-thumb.img-placeholder span, .article-thumb.img-placeholder span, .featured-card .img.img-placeholder span{
+    pointer-events:none;
+  }
+  .ic.img-placeholder, .tax-icon.img-placeholder, .stat-icon.img-placeholder,
+  .brand-mark.img-placeholder, .mark.img-placeholder{
+    border-width:1.5px;
+    background:rgba(148,163,201,0.12);
+  }
+  .icon-placeholder{
+    display:inline-block;
+    width:14px;height:14px;
+    border:1.5px dashed rgba(148,163,201,0.7);
+    border-radius:3px;
+    background:rgba(148,163,201,0.12);
+    vertical-align:middle;
+    flex-shrink:0;
+  }
+  .menu-ic .icon-placeholder{width:18px;height:18px;}
+  .search-box .icon-placeholder{width:14px;height:14px;}
+
   /* footer */
   .footer{
     background:var(--navy-950);
@@ -402,7 +439,7 @@
   <aside class="sidebar">
     <div class="brand">
       <div class="brand-mark">
-        <svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg>
+        
       </div>
       <div>
         <h1>TubaroPédia</h1>
@@ -412,32 +449,32 @@
 
 
     <div class="nav-group">
-      <div class="nav-item active" data-action="scroll-top"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/></svg></span>Página principal</div>
-      <div class="nav-item" ><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 10h16v4H4zM4 16h16v4H4z"/></svg><a href="catalogo.html"></span>Todas as espécies</a></div>
-      <div class="nav-item" ><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l4 4-4 4-4-4zM4 12l4-4 4 4-4 4zM16 12l4-4 4 4-4 4zM12 22l-4-4 4-4 4 4z"/></svg><a href="familias.html"></span>Famílias</a></div>
-      <div class="nav-item" data-action="toast:Seção de Gêneros em construção."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="3"/><circle cx="6" cy="16" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>Gêneros</div>
-      <div class="nav-item" data-action="toast:Seção de Anatomia em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/></svg></span>Anatomia</div>
-      <div class="nav-item" data-action="toast:Seção de Habitat em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L3 9l9 13 9-13z"/></svg></span>Habitat</div>
-      <div class="nav-item" data-action="toast:Seção de Comportamento em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 12c2-6 6-9 8-9s6 3 8 9c-2 6-6 9-8 9s-6-3-8-9z"/><circle cx="12" cy="12" r="2"/></svg></span>Comportamento</div>
-      <div class="nav-item" data-action="toast:Seção de Conservação em construção."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18M3 12h18" stroke="#0a0f1e" stroke-width="1"/></svg></span>Conservação</div>
-      <div class="nav-item" data-action="toast:Seção de Fósseis em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/></svg></span>Fósseis</div>
-      <div class="nav-item" data-action="toast:Seção de Notícias em construção."><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/></svg></span>Notícias</div>
-      <div class="nav-item" data-action="toast:Seção de Bibliografia em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/></svg></span>Bibliografia</div>
+      <div class="nav-item active" data-action="scroll-top"><span class="ic img-placeholder"></span>Página principal</div>
+      <div class="nav-item" ><span class="ic img-placeholder"><a href="catalogo.html"></span>Todas as espécies</a></div>
+      <div class="nav-item" ><span class="ic img-placeholder"><a href="familias.html"></span>Famílias</a></div>
+      <div class="nav-item" data-action="toast:Seção de Gêneros em construção."><span class="ic img-placeholder"></span>Gêneros</div>
+      <div class="nav-item" data-action="toast:Seção de Anatomia em construção."><span class="ic img-placeholder"></span>Anatomia</div>
+      <div class="nav-item" data-action="toast:Seção de Habitat em construção."><span class="ic img-placeholder"></span>Habitat</div>
+      <div class="nav-item" data-action="toast:Seção de Comportamento em construção."><span class="ic img-placeholder"></span>Comportamento</div>
+      <div class="nav-item" data-action="toast:Seção de Conservação em construção."><span class="ic img-placeholder"></span>Conservação</div>
+      <div class="nav-item" data-action="toast:Seção de Fósseis em construção."><span class="ic img-placeholder"></span>Fósseis</div>
+      <div class="nav-item" data-action="toast:Seção de Notícias em construção."><span class="ic img-placeholder"></span>Notícias</div>
+      <div class="nav-item" data-action="toast:Seção de Bibliografia em construção."><span class="ic img-placeholder"></span>Bibliografia</div>
     </div>
 
     <div class="nav-group">
       <div class="nav-label">Ferramentas</div>
-      <div class="nav-item" data-action="random-article"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg></span>Páginas aleatórias</div>
-      <div class="nav-item" data-action="toast:Nenhuma mudança recente registrada ainda."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span>Mudanças recentes</div>
-      <div class="nav-item" data-action="toast:Página de testes em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg></span>Página de testes</div>
-      <div class="nav-item" data-action="toast:Central de ajuda em construção."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span>Ajuda</div>
+      <div class="nav-item" data-action="random-article"><span class="ic img-placeholder"></span>Páginas aleatórias</div>
+      <div class="nav-item" data-action="toast:Nenhuma mudança recente registrada ainda."><span class="ic img-placeholder"></span>Mudanças recentes</div>
+      <div class="nav-item" data-action="toast:Página de testes em construção."><span class="ic img-placeholder"></span>Página de testes</div>
+      <div class="nav-item" data-action="toast:Central de ajuda em construção."><span class="ic img-placeholder"></span>Ajuda</div>
     </div>
 
     <div class="nav-group">
       <div class="nav-label">Em destaque</div>
       <div class="featured-card">
-        <div class="img">
-          <svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg>
+        <div class="img img-placeholder">
+          <span>Imagem</span>
         </div>
         <div class="body">
           <h4>Grande Tubarão Branco</h4>
@@ -448,9 +485,9 @@
     </div>
 
     <div class="social-row">
-      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/></svg></span>
-      <span class="ic"><svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4z"/><circle cx="12" cy="12" r="9"/></svg></span>
-      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6l9 7 9-7"/></svg></span>
+      <span class="ic img-placeholder"></span>
+      <span class="ic img-placeholder"></span>
+      <span class="ic img-placeholder"></span>
     </div>
   </aside>
 
@@ -462,13 +499,13 @@
         <p>A enciclopédia dos tubarões</p>
       </div>
       <form class="search-box" id="searchForm">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <span class="icon-placeholder"></span>
         <input id="searchInput" type="text" placeholder="Pesquisar na TubaroPédia" autocomplete="off" style="border:none;background:transparent;outline:none;font-family:inherit;font-size:0.86rem;color:var(--ink);flex:1;">
       </form>
       <div class="topbar-actions">
-        <span class="item" data-action="open-modal:contribuir"><svg viewBox="0 0 24 24"><path d="M3 21l3-9 12-8 3 3-8 12z"/></svg>Contribuir</span>
-        <span class="item" data-action="open-modal:entrar"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Entrar</span>
-        <span class="menu-ic" id="sidebarToggle" style="cursor:pointer;"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+        <span class="item" data-action="open-modal:contribuir"><span class="icon-placeholder"></span>Contribuir</span>
+        <span class="item" data-action="open-modal:entrar"><span class="icon-placeholder"></span>Entrar</span>
+        <span class="menu-ic" id="sidebarToggle" style="cursor:pointer;"><span class="icon-placeholder"></span></span>
       </div>
     </header>
 
@@ -478,12 +515,8 @@
         <p>Informações completas e confiáveis sobre todas as espécies de tubarões, sua biologia, ecologia, evolução e conservação.</p>
         <a href="catalogo.html" class="btn-primary">Explorar espécies</a>
       </div>
-      <div class="hero-shark">
-        <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#5b7ae8" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/>
-          <path fill="#3f5dd9" d="M60 60 C 70 68, 85 72, 100 72 C 92 78, 78 80, 66 76 Z"/>
-          <circle cx="145" cy="45" r="2.2" fill="#0a0f1e"/>
-        </svg>
+      <div class="hero-shark img-placeholder">
+        <span>Espaço para imagem<br>(tubarão — hero)</span>
       </div>
     </section>
 
@@ -491,7 +524,7 @@
       <!-- STAT CARDS -->
       <div class="stat-cards">
         <div class="stat-card">
-          <div class="stat-icon blue"><svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6z"/></svg></div>
+          <div class="stat-icon blue img-placeholder"></div>
           <div>
             <h3>Espécies</h3>
             <p>Mais de 500 espécies catalogadas com fotos, descrições e distribuição.</p>
@@ -499,7 +532,7 @@
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon teal"><svg viewBox="0 0 24 24"><path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/></svg></div>
+          <div class="stat-icon teal img-placeholder"></div>
           <div>
             <h3>Anatomia</h3>
             <p>Conheça a incrível biologia dos tubarões: esqueletos, dentes, sentidos e mais.</p>
@@ -507,7 +540,7 @@
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon globe"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <div class="stat-icon globe img-placeholder"></div>
           <div>
             <h3>Conservação</h3>
             <p>Ameaças, status de conservação e projetos que ajudam a proteger os tubarões.</p>
@@ -531,27 +564,27 @@
               <tr>
                 <td class="name">Carcharhinidae</td>
                 <td class="desc">A maior família de tubarões, inclui espécies costeiras e oceânicas.</td>
-                <td><div class="fam-thumb"><svg viewBox="0 0 24 24"><path d="M2 12c4-5 9-7 14-6 1-3 4-5 6-4-1 2-2 4-1 6 3 2 5 4 3 6-2 1-5 1-8 0-5 1-10-1-14-2z"/></svg></div></td>
+                <td><div class="fam-thumb img-placeholder"><span>Imagem</span></div></td>
               </tr>
               <tr>
                 <td class="name">Sphyrnidae</td>
                 <td class="desc">Os tubarões-martelo, conhecidos pelo formato único da cabeça.</td>
-                <td><div class="fam-thumb"><svg viewBox="0 0 24 24"><path d="M2 10h6l2-4h4l2 4h6v3h-4l-2 4h-6l-2-4H2z"/></svg></div></td>
+                <td><div class="fam-thumb img-placeholder"><span>Imagem</span></div></td>
               </tr>
               <tr>
                 <td class="name">Lamnidae</td>
                 <td class="desc">Tubarões de grande porte, migratórios e de águas frias.</td>
-                <td><div class="fam-thumb"><svg viewBox="0 0 24 24"><path d="M2 12c4-5 9-7 15-6 2-2 4-3 5-2-1 1-2 3-1 5 2 2 2 4 0 5-2 1-4 0-5-1-6 2-11 1-14-1z"/></svg></div></td>
+                <td><div class="fam-thumb img-placeholder"><span>Imagem</span></div></td>
               </tr>
               <tr>
                 <td class="name">Orectolobidae</td>
                 <td class="desc">Tubarões-lixa, geralmente de hábitos bentônicos e dóceis.</td>
-                <td><div class="fam-thumb"><svg viewBox="0 0 24 24"><path d="M2 13c5-4 10-5 16-3 2-1 4-1 5 0-1 1-2 2-2 3s1 2 2 3c-1 1-3 1-5 0-6 2-11 1-16-3z"/></svg></div></td>
+                <td><div class="fam-thumb img-placeholder"><span>Imagem</span></div></td>
               </tr>
               <tr>
                 <td class="name">Scyliorhinidae</td>
                 <td class="desc">Inclui os cações e tubarões de pequeno porte.</td>
-                <td><div class="fam-thumb"><svg viewBox="0 0 24 24"><path d="M3 13c4-4 8-5 13-4 1-2 3-3 4-2-1 1-1 2-1 3s0 2 1 3c-1 1-3 0-4-2-5 1-9 0-13-4z"/></svg></div></td>
+                <td><div class="fam-thumb img-placeholder"><span>Imagem</span></div></td>
               </tr>
             </tbody>
           </table>
@@ -563,27 +596,27 @@
             <div class="panel-head"><h3 style="font-size:1.05rem;">Classificação taxonômica</h3></div>
             <ul class="tax-list">
               <li>
-                <span class="tax-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span>
+                <span class="tax-icon img-placeholder"></span>
                 <div><div class="k">Reino</div><div class="v">Animalia</div></div>
               </li>
               <li>
-                <span class="tax-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M4 8l8-6 8 6M4 16l8 6 8-6"/></svg></span>
+                <span class="tax-icon img-placeholder"></span>
                 <div><div class="k">Filo</div><div class="v">Chordata</div></div>
               </li>
               <li>
-                <span class="tax-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2 7h7l-6 5 2 7-6-4-6 4 2-7-6-5h7z"/></svg></span>
+                <span class="tax-icon img-placeholder"></span>
                 <div><div class="k">Classe</div><div class="v">Chondrichthyes</div></div>
               </li>
               <li>
-                <span class="tax-icon"><svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6z"/></svg></span>
+                <span class="tax-icon img-placeholder"></span>
                 <div><div class="k">Ordem</div><div class="v">Selachimorpha</div></div>
               </li>
               <li>
-                <span class="tax-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg></span>
+                <span class="tax-icon img-placeholder"></span>
                 <div><div class="k">Superordem</div><div class="v">Galeomorphii</div></div>
               </li>
               <li>
-                <span class="tax-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></span>
+                <span class="tax-icon img-placeholder"></span>
                 <div><div class="k">Informação</div><div class="v"><a href="#" data-action="toast:Artigo sobre classificação em construção.">Saiba mais sobre a classificação</a></div></div>
               </li>
             </ul>
@@ -592,12 +625,12 @@
           <div class="panel quick-nav-panel">
             <div class="panel-head"><h3 style="font-size:1.05rem;">Navegação rápida</h3></div>
             <ul class="quick-nav">
-              <li data-action="toast:Página de espécies por habitat em construção.">Espécies por habitat <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
-              <li data-action="toast:Página de tubarões de água doce em construção.">Tubarões de água doce <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
-              <li data-action="toast:Página de tubarões ameaçados em construção.">Tubarões ameaçados <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
-              <li data-action="toast:Página sobre dentes de tubarão em construção.">Dentes de tubarão <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
-              <li data-action="toast:Vídeos e documentários em construção.">Vídeos e documentários <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
-              <li data-action="toast:FAQ em construção.">Perguntas frequentes (FAQ) <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></li>
+              <li data-action="toast:Página de espécies por habitat em construção.">Espécies por habitat <span class="icon-placeholder"></span></li>
+              <li data-action="toast:Página de tubarões de água doce em construção.">Tubarões de água doce <span class="icon-placeholder"></span></li>
+              <li data-action="toast:Página de tubarões ameaçados em construção.">Tubarões ameaçados <span class="icon-placeholder"></span></li>
+              <li data-action="toast:Página sobre dentes de tubarão em construção.">Dentes de tubarão <span class="icon-placeholder"></span></li>
+              <li data-action="toast:Vídeos e documentários em construção.">Vídeos e documentários <span class="icon-placeholder"></span></li>
+              <li data-action="toast:FAQ em construção.">Perguntas frequentes (FAQ) <span class="icon-placeholder"></span></li>
             </ul>
           </div>
 
@@ -616,28 +649,28 @@
         </div>
         <div class="articles-grid">
           <div class="article-card">
-            <div class="article-thumb thumb-1"><svg viewBox="0 0 24 24" fill="#fff"><path d="M2 12c4-5 9-7 14-6 1-3 4-5 6-4-1 2-2 4-1 6 3 2 5 4 3 6-2 1-5 1-8 0-5 1-10-1-14-2z"/></svg></div>
+            <div class="article-thumb thumb-1 img-placeholder"><span>Imagem do artigo</span></div>
             <h4>Tubarão-baleia</h4>
             <em>Rhincodon typus</em>
             <p>O maior peixe do mundo. Alimentação, habitat e curiosidades.</p>
             <div class="link" data-action="open-article:1" style="cursor:pointer;">Ler artigo →</div>
           </div>
           <div class="article-card">
-            <div class="article-thumb thumb-2"><svg viewBox="0 0 24 24" fill="#fff"><path d="M2 10h6l2-4h4l2 4h6v3h-4l-2 4h-6l-2-4H2z"/></svg></div>
+            <div class="article-thumb thumb-2 img-placeholder"><span>Imagem do artigo</span></div>
             <h4>Tubarão-martelo-comum</h4>
             <em>Sphyrna lewini</em>
             <p>Características, comportamento e distribuição geográfica.</p>
             <div class="link" data-action="open-article:2" style="cursor:pointer;">Ler artigo →</div>
           </div>
           <div class="article-card">
-            <div class="article-thumb thumb-3"><svg viewBox="0 0 24 24" fill="#fff"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6z"/></svg></div>
+            <div class="article-thumb thumb-3 img-placeholder"><span>Imagem do artigo</span></div>
             <h4>Tubarões de águas profundas</h4>
             <em></em>
             <p>Espécies que vivem nas profundezas oceânicas e suas adaptações.</p>
             <div class="link" data-action="open-article:3" style="cursor:pointer;">Ler artigo →</div>
           </div>
           <div class="article-card">
-            <div class="article-thumb thumb-4"><svg viewBox="0 0 24 24" fill="#d9c9a8"><path d="M12 2l3 9h9l-7 6 3 9-8-5-8 5 3-9-7-6h9z"/></svg></div>
+            <div class="article-thumb thumb-4 img-placeholder"><span>Imagem do artigo</span></div>
             <h4>Fósseis de tubarão</h4>
             <em></em>
             <p>História evolutiva e os registros fósseis mais importantes.</p>
@@ -651,7 +684,7 @@
     <footer class="footer">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="mark"><svg viewBox="0 0 24 24" fill="#c7cfe0"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6z"/></svg></div>
+          <div class="mark img-placeholder"></div>
           <div>
             <h5>TubaroPédia</h5>
             <p>A enciclopédia livre sobre tubarões. Conteúdo colaborativo para educação, pesquisa e conservação.</p>
