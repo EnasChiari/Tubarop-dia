@@ -13,6 +13,7 @@
 
   .menu-ic{
     position:relative;
+    z-index:850;
     width:20px;
     height:16px;
     display:flex;
