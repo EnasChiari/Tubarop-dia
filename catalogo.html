@@ -490,16 +490,6 @@
 
 <script>
 (function(){
-  /* =========================================================
-     "BANCO DE DADOS" DE ESPÉCIES
-     Modelado nos mesmos campos que BancoDadosTubaroes.java vai
-     exportar como JSON (id/slug, nomeComum, nomeCientifico,
-     familia, habitat[], porteMetros, statusConservacao, água doce,
-     águas profundas, raro, recémDescoberto). Quando o backend
-     Java estiver servindo o JSON, troque SPECIES por um fetch().
-     Cada card já aponta para especie.html?especie=<slug>, o mesmo
-     padrão usado na página da espécie Tubarão-branco.
-  ========================================================= */
   const SPECIES = [
     {id:"tubarao-de-nariz-preto",nome:"Tubarão-de-nariz-preto",cientifico:"Carcharhinus acronotus",familia:"Carcharhinidae",habitat:["Costeiro"],porte:1.4,status:"VU",thumb:1},
     {id:"tubarao-de-pontas-prateadas",nome:"Tubarão-de-pontas-prateadas",cientifico:"Carcharhinus albimarginatus",familia:"Carcharhinidae",habitat:["Recifes de coral", "Costeiro", "Oceânico"],porte: 3.0,status: "VU",thumb:2},
