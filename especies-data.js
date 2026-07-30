@@ -195,37 +195,84 @@ const ESPECIES = [
     "tubarao-de-nariz-grande.jpg"
   ],
 },
-  {
-    slug: "tubarao-touro",
-    nomePopular: "Tubarão-touro", nomeCientifico: "Carcharhinus leucas", nomeIngles: "Bull Shark",
-    familia: "Carcharhinidae", ordem: "Carcharhiniformes", classe: "Chondrichthyes",
-    descricao: "Uma das poucas espécies capazes de tolerar água doce, sendo encontrada em rios como o Amazonas.",
-    comprimento: "2,3 – 2,4 m (podendo ultrapassar 3,3 m)", peso: "90 – 230 kg",
-    profundidade: "0 – 150 m", expectativaVida: "cerca de 16 a 25 anos", denticao: "dentes largos, triangulares e serrilhados",
-    caracteristicasTexto: "Corpo robusto, focinho curto e largo, coloração acinzentada. Adaptado a grandes variações de salinidade.",
-    distribuicao: "Encontrado em águas costeiras tropicais e subtropicais de todo o mundo, incluindo rios e estuários.",
-    habitat: "Vive tanto em água salgada quanto em água doce, sendo registrado em rios como o Amazonas e o Mississippi.",
-    alimentacao: "Predador oportunista: peixes, outros tubarões, raias, tartarugas e mamíferos que entram na água.",
-    presas: ["Peixes", "Tartarugas", "Outros tubarões", "Aves marinhas"],
-    reproducao: "Vivíparo placentário. Gestação de 10 a 11 meses, com 1 a 13 filhotes, geralmente em águas doces ou estuarinas.",
-    comportamento: "Territorial e defensivo quando ameaçado. Tolera grandes variações de salinidade.",
-    tracosComportamento: ["Tolera água doce", "Territorial", "Adaptável a ambientes variados"],
-    relacaoHumanos: "Uma das espécies mais associadas a ataques a humanos, por sua presença em águas rasas habitadas.",
-    tracosRelacaoHumanos: ["Maior interação com áreas costeiras", "Envolvido em ataques ocasionais", "Sensível à poluição de rios"],
-    statusIUCN: "VU", statusTexto: "Classificado como Vulnerável (VU) pela IUCN, com declínio por pesca e degradação de rios.",
-    curiosidades: [
-      "É um dos poucos tubarões que sobrevive bem em água doce.",
-      "Já foi registrado a milhares de quilômetros rio acima, no Amazonas.",
-      "Possui uma das maiores concentrações de testosterona entre os animais.",
-      "Seu nome vem do comportamento agressivo e do focinho curto e largo."
-    ],
-    especiesRelacionadas: [
-      { slug: "tubarao-martelo", nomePopular: "Tubarão-martelo-comum", nomeCientifico: "Sphyrna lewini" }
-    ],
-    imagens: [
-      "tubarao-touro.jpg",
-    ],
-  },
+{
+  slug: "tubarao-olho-de-porco",
+  nomePopular: "Tubarão-olho-de-porco",
+  nomeCientifico: "Carcharhinus amboinensis",
+  nomeIngles: "Pigeye Shark",
+
+  familia: "Carcharhinidae",
+  ordem: "Carcharhiniformes",
+  classe: "Chondrichthyes",
+
+  descricao: "Grande tubarão costeiro de regiões tropicais e subtropicais, semelhante ao tubarão-touro. É um predador oportunista que habita estuários, baías e águas costeiras.",
+
+  comprimento: "2,1 – 2,5 m (máximo cerca de 2,8 m)",
+  peso: "120 – 170 kg",
+  profundidade: "0 – 150 m",
+  expectativaVida: "cerca de 25 a 30 anos",
+  denticao: "Dentes superiores largos e serrilhados e dentes inferiores estreitos e pontiagudos, adaptados para capturar e cortar presas.",
+
+  caracteristicasTexto: "Corpo robusto e musculoso, focinho curto e arredondado, olhos relativamente pequenos e coloração cinza uniforme com ventre branco. É muito semelhante ao tubarão-touro.",
+
+  distribuicao: "Distribuído em águas tropicais do Atlântico oriental, Índico e Pacífico ocidental, incluindo África, sul da Ásia, Austrália e ilhas do Pacífico.",
+
+  habitat: "Habita águas costeiras, baías, estuários, plataformas continentais e ocasionalmente áreas próximas à foz de rios.",
+
+  alimentacao: "Alimenta-se de peixes ósseos, raias, pequenos tubarões, cefalópodes e crustáceos.",
+
+  presas: [
+    "Peixes ósseos",
+    "Raias",
+    "Pequenos tubarões",
+    "Lulas"
+  ],
+
+  reproducao: "Vivíparo. Os embriões desenvolvem-se ligados à mãe por uma placenta vitelínica. As ninhadas geralmente possuem entre 3 e 13 filhotes.",
+
+  comportamento: "Espécie geralmente solitária, ativa principalmente próximo ao fundo. É um predador oportunista e pode demonstrar comportamento agressivo quando provocado.",
+
+  tracosComportamento: [
+    "Predador oportunista",
+    "Solitário",
+    "Habita áreas costeiras"
+  ],
+
+  relacaoHumanos: "Raramente entra em contato com pessoas, mas devido ao seu porte é considerado potencialmente perigoso. Ataques confirmados são extremamente raros.",
+
+  tracosRelacaoHumanos: [
+    "Potencialmente perigoso",
+    "Ataques muito raros",
+    "Capturado pela pesca comercial"
+  ],
+
+  statusIUCN: "VU",
+  statusTexto: "Classificado como Vulnerável (VU) pela IUCN devido à sobrepesca, captura incidental e baixa taxa reprodutiva.",
+
+  curiosidades: [
+    "Recebe esse nome por possuir olhos relativamente pequenos.",
+    "É frequentemente confundido com o tubarão-touro (Carcharhinus leucas).",
+    "Pode viver tanto em águas costeiras rasas quanto em áreas mais profundas da plataforma continental.",
+    "É uma espécie pouco estudada em comparação com outros tubarões costeiros."
+  ],
+
+  especiesRelacionadas: [
+    {
+      slug: "tubarao-touro",
+      nomePopular: "Tubarão-touro",
+      nomeCientifico: "Carcharhinus leucas"
+    },
+    {
+      slug: "tubarao-de-pontas-prateadas",
+      nomePopular: "Tubarão-de-pontas-prateadas",
+      nomeCientifico: "Carcharhinus albimarginatus"
+    }
+  ],
+
+  imagens: [
+    "tubarao-olho-de-porco.jpg"
+  ],
+},
   {
     slug: "tubarao-mako",
     nomePopular: "Tubarão-mako", nomeCientifico: "Isurus oxyrinchus", nomeIngles: "Shortfin Mako",
