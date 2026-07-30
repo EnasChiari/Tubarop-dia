@@ -418,11 +418,14 @@
       z-index:500;
       box-shadow:0 0 40px rgba(0,0,0,0.4);
     }
-    .sidebar.open{transform:translateX(0);}
   }
 </style>
 </head>
 <body>
+
+<input type="checkbox" id="menu-toggle">
+<label for="menu-toggle" class="overlay"></label>
+
 <div class="shell">
 
   <!-- ================= SIDEBAR ================= -->
@@ -496,7 +499,11 @@
       <div class="topbar-actions">
         <span class="item" data-action="open-modal:contribuir"><span class="icon-placeholder"><img src="opinião.png" alt=""></span>Contribuir</span>
         <span class="item" data-action="open-modal:entrar"><span class="icon-placeholder"><img src="login.png" alt=""></span>Entrar</span>
-        <span class="menu-ic" id="sidebarToggle" style="cursor:pointer;"><span class="icon-placeholder"><img src="menu.png" alt=""></span></span>
+        <label for="menu-toggle" class="menu-ic" aria-label="Abrir menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </label>
       </div>
     </header>
 
@@ -829,13 +836,6 @@
     document.querySelectorAll('.nav-item.active').forEach(n=>n.classList.remove('active'));
     el.classList.add('active');
   }
-
-  // Sidebar toggle (mobile)
-  const sidebar = document.querySelector('.sidebar');
-  const sidebarToggle = document.getElementById('sidebarToggle');
-  sidebarToggle.addEventListener('click', function(){
-    sidebar.classList.toggle('open');
-  });
 
   // Search
   const searchForm = document.getElementById('searchForm');

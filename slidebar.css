@@ -1,3 +1,58 @@
+  /* ===== TOGGLE DO MENU (modelo Barra-de-navegação) ===== */
+  #menu-toggle{ display:none; }
+
+  .overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.4);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .35s ease;
+    z-index:800;
+  }
+
+  .menu-ic{
+    position:relative;
+    width:20px;
+    height:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+  }
+  .menu-ic .bar{
+    position:absolute;
+    width:20px;
+    height:2px;
+    background:var(--ink);
+    border-radius:2px;
+    transition:transform .3s ease, opacity .2s ease, top .3s ease;
+  }
+  .menu-ic .bar:nth-child(1){ top:2px; }
+  .menu-ic .bar:nth-child(2){ top:8px; }
+  .menu-ic .bar:nth-child(3){ top:14px; }
+
+  #menu-toggle:checked ~ .overlay{
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  #menu-toggle:checked ~ .shell .sidebar{
+    transform:translateX(0);
+  }
+
+  #menu-toggle:checked ~ .shell .menu-ic .bar:nth-child(1){
+    top:8px;
+    transform:rotate(45deg);
+  }
+  #menu-toggle:checked ~ .shell .menu-ic .bar:nth-child(2){
+    opacity:0;
+  }
+  #menu-toggle:checked ~ .shell .menu-ic .bar:nth-child(3){
+    top:8px;
+    transform:rotate(-45deg);
+  }
+
   /* ===== SIDEBAR ===== */
   .sidebar{
     background:var(--navy-950);
