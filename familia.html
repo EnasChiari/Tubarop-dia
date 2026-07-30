@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Família — Tubaropédia</title>
+<style>
+  :root{
+    --navy-950:#0a0f1e;
+    --navy-900:#0d1424;
+    --navy-800:#121b32;
+    --blue-accent:#3f5dd9;
+    --blue-accent-light:#5b7ae8;
+    --ink:#0d1424;
+    --paper:#f4f6fa;
+    --line:#e3e7ef;
+    --muted:#5b6478;
+    --amber:#e8a23f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);}
+  .serif{font-family:Georgia,'Iowan Old Style',serif;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font:inherit;cursor:pointer;}
+
+  .shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
+
+  /* ---------- SIDEBAR (igual ao resto do site) ---------- */
+  .sidebar{background:var(--navy-950);color:#c7cfe0;padding:24px 20px;position:sticky;top:0;height:100vh;overflow-y:auto;}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:26px;}
+  .brand-mark{width:40px;height:40px;border:2px solid #7d8bb5;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .brand-mark svg{width:22px;height:22px;fill:#e8ebf3;}
+  .brand h1{font-family:Georgia,serif;font-size:1.15rem;color:#fff;}
+  .brand p{font-size:0.64rem;color:#8a93ad;margin-top:2px;}
+  .nav-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.09em;color:#5f6784;padding:0 8px 8px;}
+  .nav-item{display:flex;align-items:center;gap:11px;padding:8px 8px;border-radius:8px;font-size:0.85rem;color:#b7bfd6;}
+  .nav-item:hover{background:#141d33;color:#fff;}
+  .nav-item.active{background:var(--blue-accent);color:#fff;font-weight:600;}
+  .nav-item .ic{width:16px;height:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .nav-item .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-group{margin-bottom:18px;}
+  .feature-box{background:var(--navy-900);border-radius:12px;overflow:hidden;margin-top:6px;}
+  .feature-box .thumb{height:76px;position:relative;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);}
+  .feature-box .thumb svg{position:absolute;right:-6px;bottom:-6px;width:70%;opacity:.9;}
+  .feature-box .txt{padding:10px 12px 12px;}
+  .feature-box .txt strong{display:block;font-size:0.8rem;color:#fff;}
+  .feature-box .txt em{display:block;font-size:0.7rem;color:#8a93ad;margin:2px 0 6px;}
+  .feature-box .txt a{font-size:0.72rem;color:#8fb0ff;font-weight:600;}
+  .social-row{display:flex;gap:12px;padding:16px 6px 0;}
+  .social-row .ic{width:16px;height:16px;color:#8a93ad;}
+  .social-row .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;}
+
+  /* ---------- TOPBAR ---------- */
+  .topbar{background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:20px;padding:16px 36px;}
+  .search-box{flex:1;max-width:420px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 16px;color:var(--muted);font-size:0.86rem;}
+  .search-box svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;flex-shrink:0;}
+  .search-box input{border:none;background:none;outline:none;font:inherit;color:var(--ink);width:100%;}
+  .topbar-actions{margin-left:auto;display:flex;align-items:center;gap:22px;}
+  .topbar-link{display:flex;align-items:center;gap:7px;font-size:0.85rem;font-weight:600;color:var(--ink);}
+  .topbar-link svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;}
+  .icon-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;}
+  .icon-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;}
+
+  /* ---------- BREADCRUMB ---------- */
+  .breadcrumb{padding:16px 40px 0;font-size:0.82rem;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .breadcrumb a{color:var(--blue-accent);font-weight:600;}
+  .breadcrumb .cur{color:var(--ink);font-weight:600;}
+
+  /* ---------- HERO ---------- */
+  .hero-family{position:relative;margin:16px 40px 0;border-radius:16px;overflow:hidden;min-height:320px;
+    background:linear-gradient(160deg,#1c3f6e 0%,#081428 85%);display:grid;grid-template-columns:1fr 300px;}
+  .hero-family img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+  .hero-family .silhouette{position:absolute;right:6%;bottom:-6%;width:60%;opacity:.5;}
+  .hero-family .scrim{position:absolute;inset:0;background:linear-gradient(100deg,rgba(6,12,28,.92) 20%,rgba(6,12,28,.35) 60%,rgba(6,12,28,.15) 100%);}
+  .hero-family-text{position:relative;padding:34px 20px 34px 36px;display:flex;flex-direction:column;justify-content:center;}
+  .hero-family-text h1{font-family:Georgia,serif;color:#fff;font-size:2.5rem;margin-bottom:4px;}
+  .hero-family-text .tipo{color:#9db1e0;font-style:italic;font-size:1.05rem;margin-bottom:14px;}
+  .hero-family-text p{color:#cbd4ea;font-size:0.92rem;line-height:1.65;max-width:480px;}
+  .fact-panel{position:relative;background:rgba(10,15,30,.82);backdrop-filter:blur(2px);margin:20px 20px 20px 0;border-radius:12px;padding:20px;align-self:flex-start;}
+  .fact-row{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+  .fact-row:last-child{border-bottom:none;}
+  .fact-row .ic{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .fact-row .ic svg{width:13px;height:13px;fill:none;stroke:#cfe0ff;stroke-width:2;}
+  .fact-row .k{font-size:0.68rem;color:#93a0c4;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;}
+  .fact-row .v{font-family:Georgia,serif;font-size:0.92rem;color:#fff;font-weight:700;line-height:1.35;}
+
+  /* ---------- TABS ---------- */
+  .tabs{display:flex;gap:26px;padding:22px 40px 0;border-bottom:1px solid var(--line);font-size:0.9rem;font-weight:600;color:var(--muted);flex-wrap:wrap;}
+  .tab{display:flex;align-items:center;gap:7px;padding-bottom:14px;cursor:pointer;border-bottom:2px solid transparent;}
+  .tab svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;}
+  .tab.active{color:var(--blue-accent);border-color:var(--blue-accent);}
+
+  /* ---------- LAYOUT / CARDS ---------- */
+  .layout{display:grid;grid-template-columns:1fr 300px;gap:26px;padding:28px 40px 60px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:22px;}
+  .card h3{display:flex;align-items:center;gap:10px;font-family:Georgia,serif;font-size:1.15rem;margin-bottom:12px;}
+  .card h3 .ic{width:26px;height:26px;border-radius:50%;background:var(--navy-900);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .card h3 .ic svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2;}
+  .card p{font-size:0.88rem;color:var(--ink);line-height:1.65;}
+  .card p + p{margin-top:10px;}
+  .stub-note{font-size:0.8rem;color:var(--muted);background:var(--paper);border:1px dashed var(--line);border-radius:8px;padding:10px 14px;margin-top:10px;}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .two-col .card{margin-bottom:0;}
+
+  .desc-diagram{display:grid;grid-template-columns:1fr 260px;gap:22px;align-items:center;}
+  .diagram-box svg{width:100%;height:auto;}
+  .diagram-legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin-top:10px;font-size:0.72rem;color:var(--muted);}
+  .diagram-legend span.n{display:inline-flex;width:15px;height:15px;border-radius:50%;background:var(--blue-accent);color:#fff;font-size:0.62rem;font-weight:700;align-items:center;justify-content:center;margin-right:5px;}
+
+  ul.bullets{margin-top:2px;}
+  ul.bullets li{font-size:0.88rem;color:var(--ink);padding:4px 0 4px 16px;position:relative;line-height:1.5;}
+  ul.bullets li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--blue-accent);position:absolute;left:0;top:11px;}
+
+  .map-box{margin-top:14px;height:140px;border-radius:10px;background:linear-gradient(180deg,#eef2f9,#e4e9f4);position:relative;overflow:hidden;}
+  .map-box svg{width:100%;height:100%;}
+  .map-legend{display:flex;align-items:center;gap:8px;font-size:0.74rem;color:var(--muted);margin-top:8px;}
+  .map-legend .dot{width:9px;height:9px;border-radius:50%;background:var(--blue-accent-light);}
+
+  .habitat-photo{margin-top:14px;height:140px;border-radius:10px;overflow:hidden;position:relative;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);}
+  .habitat-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+  .habitat-photo svg{position:absolute;right:-10px;bottom:-8px;width:60%;opacity:.85;}
+
+  .icon-row{display:flex;gap:20px;margin-top:14px;flex-wrap:wrap;}
+  .icon-row .item{text-align:center;width:78px;}
+  .icon-row .item .circ{width:44px;height:44px;border-radius:50%;background:#eef1f8;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;}
+  .icon-row .item .circ svg{width:19px;height:19px;fill:none;stroke:var(--blue-accent);stroke-width:1.8;}
+  .icon-row .item span{font-size:0.7rem;color:var(--muted);line-height:1.3;}
+
+  .iucn-scale{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+  .iucn-scale .chip{flex:1;min-width:58px;text-align:center;padding:10px 6px;border-radius:8px;background:#eef1f8;color:var(--muted);font-size:0.68rem;font-weight:700;}
+  .iucn-scale .chip .code{display:block;font-size:0.88rem;margin-bottom:3px;}
+  .iucn-scale .chip.active{color:#fff;}
+  .conserv-link{display:inline-block;margin-top:12px;font-size:0.8rem;font-weight:700;color:var(--blue-accent);}
+
+  .species-section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 26px;}
+  .species-section-head{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+  .species-section-head h3{font-family:Georgia,serif;font-size:1.15rem;flex:1;}
+  .species-section-head a{font-size:0.82rem;font-weight:700;color:var(--blue-accent);}
+  .species-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:14px;}
+  .species-thumb{border-radius:10px;overflow:hidden;}
+  .species-thumb .ph{height:90px;border-radius:10px;position:relative;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);}
+  .species-thumb .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+  .species-thumb .ph svg{position:absolute;right:-8px;bottom:-6px;width:65%;opacity:.85;}
+  .species-thumb .nome{font-size:0.83rem;font-weight:700;margin-top:8px;}
+  .species-thumb .cient{font-size:0.72rem;font-style:italic;color:var(--muted);}
+  .species-thumb-more{border:1px dashed var(--line);border-radius:10px;height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--blue-accent);font-size:0.78rem;font-weight:700;text-align:center;}
+  .species-thumb-more svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;}
+
+  /* ---------- SIDEBAR (direita) ---------- */
+  .side-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:20px;}
+  .side-card h3{font-family:Georgia,serif;font-size:1.02rem;margin-bottom:12px;}
+  .tax-row{display:flex;justify-content:space-between;padding:6px 0;font-size:0.84rem;border-bottom:1px solid var(--line);}
+  .tax-row:last-of-type{border-bottom:none;}
+  .tax-row .k{color:var(--muted);}
+  .tax-row .v{font-weight:700;}
+  .tax-row .v em{font-style:italic;font-weight:400;color:var(--muted);font-size:0.76rem;display:block;}
+  .btn-primary{display:block;text-align:center;background:var(--blue-accent);color:#fff;font-size:0.83rem;font-weight:700;padding:10px 16px;border-radius:9px;border:none;width:100%;margin-top:14px;}
+
+  .num-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:0.85rem;}
+  .num-row:last-of-type{border-bottom:none;}
+  .num-row .num{font-weight:700;font-family:Georgia,serif;}
+  .mini-species{padding:10px 0;border-bottom:1px solid var(--line);}
+  .mini-species:last-of-type{border-bottom:none;}
+  .mini-species .k{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;}
+  .mini-species .v{font-weight:700;font-size:0.85rem;}
+  .mini-species em{font-style:italic;color:var(--muted);font-size:0.76rem;display:block;}
+  .mini-species .tam{color:var(--muted);font-size:0.78rem;}
+
+  .related-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:0.84rem;font-weight:600;color:var(--blue-accent);}
+  .related-row:last-of-type{border-bottom:none;}
+  .related-row svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;}
+
+  .gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .gallery-grid .ph{height:70px;border-radius:8px;position:relative;overflow:hidden;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);}
+  .gallery-grid .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+  .gallery-grid .ph svg{position:absolute;right:-8px;bottom:-6px;width:65%;opacity:.85;}
+
+  /* ---------- FOOTER ---------- */
+  .footer{background:var(--navy-950);color:#9aa3bd;padding:40px 40px 24px;font-size:0.83rem;}
+  .footer a{color:#9aa3bd;}
+  .footer a:hover{color:#fff;}
+  .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px;max-width:1200px;margin:0 auto 30px;}
+  .footer-brand{display:flex;gap:12px;}
+  .footer-brand .brand-mark{width:34px;height:34px;border:2px solid #4a5578;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .footer-brand .brand-mark svg{width:18px;height:18px;fill:#c7cfe0;}
+  .footer-brand h4{color:#fff;font-family:Georgia,serif;font-size:1rem;margin-bottom:4px;}
+  .footer-brand p{font-size:0.78rem;line-height:1.5;color:#7d87a3;}
+  .footer h5{color:#fff;font-size:0.8rem;margin-bottom:12px;}
+  .footer li{margin-bottom:8px;font-size:0.8rem;}
+  .footer-bottom{max-width:1200px;margin:0 auto;padding-top:20px;border-top:1px solid #1c2540;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:0.76rem;color:#7d87a3;}
+
+  @media (max-width:1080px){
+    .shell{grid-template-columns:1fr;}
+    .sidebar{position:relative;height:auto;}
+    .layout{grid-template-columns:1fr;padding:22px 20px 40px;}
+    .breadcrumb,.tabs{padding-left:20px;padding-right:20px;}
+    .hero-family{margin:16px 20px 0;grid-template-columns:1fr;}
+    .fact-panel{margin:0 20px 20px;}
+    .topbar{flex-wrap:wrap;padding:16px 20px;}
+    .two-col{grid-template-columns:1fr;}
+    .desc-diagram{grid-template-columns:1fr;}
+    .footer{padding:32px 20px 20px;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:600px){ .footer-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg></div>
+      <div><h1>Tubaropédia</h1><p>A enciclopédia dos tubarões</p></div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Navegação</div>
+      <a class="nav-item" href="index.html"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v9h14v-9"/></svg></span>Página principal</a>
+      <a class="nav-item" href="especie.html"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 15c1.5-4 6.5-4 8 0"/></svg></span>Todas as espécies</a>
+      <a class="nav-item active" href="familias.html"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l3.5 5.8-3.5 5.8-3.5-5.8z"/></svg></span>Famílias</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 21c0-4 3-6 5-6s5 2 5 6M12 21c0-4 3-6 5-6s5 2 5 6"/></svg></span>Gêneros</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/></svg></span>Anatomia</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L3 9l9 13 9-13z"/></svg></span>Habitat</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>Comportamento</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.5 8.5-9 10-5.5-1.5-9-5-9-10V6z"/></svg></span>Conservação</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v5l3 3M5 12a7 7 0 1014 0 7 7 0 00-14 0z"/></svg></span>Fósseis</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg></span>Notícias</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg></span>Bibliografia</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Ferramentas</div>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M17 3l4 4-11 11H6v-4z"/></svg></span>Páginas aleatórias</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1015-6.7M3 5v6h6"/></svg></span>Mudanças recentes</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg></span>Página de testes</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.5-2.5 1.5-2.5 3.5M12 17h.01"/></svg></span>Ajuda</a>
+    </div>
+
+    <div class="nav-label">Em destaque</div>
+    <div class="feature-box">
+      <div class="thumb">
+        <svg viewBox="0 0 200 100"><path fill="#8fa3d6" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
+      </div>
+      <div class="txt">
+        <strong>Tubarão-baleia</strong>
+        <em>Rhincodon typus</em>
+        <a href="especie.html?especie=tubarao-baleia">Ver página →</a>
+      </div>
+    </div>
+
+    <div class="social-row">
+      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></span>
+      <span class="ic"><svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4z"/><circle cx="12" cy="12" r="9"/></svg></span>
+      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6l9 7 9-7"/></svg></span>
+    </div>
+  </aside>
+
+  <div>
+    <header class="topbar">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input type="text" placeholder="Pesquisar na Tubaropédia...">
+      </div>
+      <div class="topbar-actions">
+        <a class="topbar-link" href="#"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Contribuir</a>
+        <a class="topbar-link" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Entrar</a>
+        <button class="icon-btn" title="Menu" aria-label="Abrir menu">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <nav class="breadcrumb">
+      <a href="index.html">Página principal</a><span>›</span><a href="familias.html">Famílias</a><span>›</span><span class="cur" id="crumbAtual"></span>
+    </nav>
+
+    <section class="hero-family" id="heroFamily">
+      <div class="hero-family-text">
+        <h1 id="famNome"></h1>
+        <div class="tipo">Família</div>
+        <p id="famDescricaoHero"></p>
+      </div>
+      <div class="fact-panel" id="factPanel"></div>
+    </section>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="visao"><svg viewBox="0 0 24 24"><path d="M12 2l2 7h7l-6 5 2 7-6-4-6 4 2-7-6-5h7z"/></svg>Visão geral</div>
+      <div class="tab" data-tab="especies"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 15c1.5-4 6.5-4 8 0"/></svg>Espécies</div>
+      <div class="tab" data-tab="caracteristicas"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Características</div>
+      <div class="tab" data-tab="distribuicao"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Distribuição</div>
+      <div class="tab" data-tab="galeria"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/></svg>Galeria</div>
+      <div class="tab" data-tab="referencias"><svg viewBox="0 0 24 24"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg>Referências</div>
+    </div>
+
+    <div class="layout">
+      <!-- ===== COLUNA PRINCIPAL ===== -->
+      <div>
+        <div id="avisoIncompleta"></div>
+
+        <div class="card">
+          <div class="desc-diagram">
+            <div>
+              <h3><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></span>Descrição geral</h3>
+              <div id="descricaoGeral"></div>
+            </div>
+            <div class="diagram-box">
+              <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,110 Q60,80 140,82 Q160,60 190,55 Q185,70 190,82 Q280,85 330,100 Q340,75 360,72 Q350,88 345,100 Q400,108 460,90 L500,80 L468,110 L500,140 L460,130 Q400,150 345,148 Q350,162 360,175 Q340,172 330,148 Q280,150 190,152 Q185,164 190,178 Q160,173 140,152 Q60,150 20,110 Z" fill="#c7d3ec" stroke="#5b6478" stroke-width="1.2"/>
+                <path d="M160,140 Q175,168 205,178 Q190,158 175,142 Z" fill="#aebedd" stroke="#5b6478" stroke-width="1"/>
+                <path d="M258,152 Q268,174 288,182 Q276,164 266,150 Z" fill="#aebedd" stroke="#5b6478" stroke-width="1"/>
+                <path d="M90,95 L94,138 M100,92 L105,138 M110,90 L116,138 M120,89 L127,137" stroke="#5b6478" stroke-width="1.3" fill="none"/>
+                <circle cx="40" cy="98" r="3" fill="#0d1424"/>
+                <circle cx="25" cy="108" r="9" fill="#3f5dd9"/><text x="25" y="112" font-size="10" fill="#fff" text-anchor="middle" font-family="Arial">1</text>
+                <circle cx="185" cy="60" r="9" fill="#3f5dd9"/><text x="185" y="64" font-size="10" fill="#fff" text-anchor="middle" font-family="Arial">2</text>
+                <circle cx="345" cy="78" r="9" fill="#3f5dd9"/><text x="345" y="82" font-size="10" fill="#fff" text-anchor="middle" font-family="Arial">3</text>
+                <circle cx="478" cy="103" r="9" fill="#3f5dd9"/><text x="478" y="107" font-size="10" fill="#fff" text-anchor="middle" font-family="Arial">4</text>
+                <circle cx="182" cy="163" r="9" fill="#3f5dd9"/><text x="182" y="167" font-size="10" fill="#fff" text-anchor="middle" font-family="Arial">5</text>
+                <circle cx="272" cy="168" r="9" fill="#3f5dd9"/><text x="272" y="172" font-size="10" fill="#fff" text-anchor="middle" font-family="Arial">6</text>
+                <circle cx="108" cy="118" r="9" fill="#3f5dd9"/><text x="108" y="122" font-size="10" fill="#fff" text-anchor="middle" font-family="Arial">7</text>
+              </svg>
+              <div class="diagram-legend">
+                <div><span class="n">1</span>Focinho</div>
+                <div><span class="n">2</span>1ª nadadeira dorsal</div>
+                <div><span class="n">3</span>2ª nadadeira dorsal</div>
+                <div><span class="n">4</span>Nadadeira caudal</div>
+                <div><span class="n">5</span>Nadadeiras peitorais</div>
+                <div><span class="n">6</span>Nadadeiras pélvicas</div>
+                <div><span class="n">7</span>Fendas branquiais</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-bottom:22px;">
+          <div class="card">
+            <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>Características</h3>
+            <ul class="bullets" id="listaCaracteristicas"></ul>
+          </div>
+          <div class="card">
+            <h3><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span>Distribuição</h3>
+            <p id="distribuicaoTexto"></p>
+            <div class="map-box"><svg viewBox="0 0 400 150"><rect width="400" height="150" fill="#eef2f9"/><ellipse cx="90" cy="65" rx="70" ry="32" fill="#aebedd"/><ellipse cx="230" cy="55" rx="90" ry="38" fill="#aebedd"/><ellipse cx="330" cy="95" rx="50" ry="26" fill="#aebedd"/></svg></div>
+            <div class="map-legend"><span class="dot"></span>Presença da família</div>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-bottom:22px;">
+          <div class="card">
+            <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L3 9l9 13 9-13z"/></svg></span>Habitat</h3>
+            <p id="habitatTexto"></p>
+            <div class="habitat-photo" id="habitatFoto">
+              <svg viewBox="0 0 200 100"><path fill="#8fa3d6" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
+              <img alt="">
+            </div>
+          </div>
+          <div class="card">
+            <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 12c2-6 6-9 8-9s6 3 8 9c-2 6-6 9-8 9s-6-3-8-9z"/><circle cx="12" cy="12" r="2"/></svg></span>Alimentação</h3>
+            <p id="alimentacaoTexto"></p>
+            <div class="icon-row" id="presasLista"></div>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-bottom:22px;">
+          <div class="card">
+            <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 12h16M4 12c0-4 2-6 4-6M20 12c0-4-2-6-4-6"/></svg></span>Reprodução</h3>
+            <p id="reproducaoTexto"></p>
+            <div class="icon-row" id="reproducaoStats"></div>
+          </div>
+          <div class="card">
+            <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>Comportamento</h3>
+            <p id="comportamentoTexto"></p>
+            <div class="icon-row" id="comportamentoTracos"></div>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-bottom:22px;">
+          <div class="card">
+            <h3><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>Relação com humanos</h3>
+            <p id="relacaoHumanosTexto"></p>
+            <div class="icon-row" id="relacaoTracos"></div>
+          </div>
+          <div class="card">
+            <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.5 8.5-9 10-5.5-1.5-9-5-9-10V6z"/></svg></span>Estado de conservação</h3>
+            <p id="statusTexto"></p>
+            <div class="iucn-scale" id="iucnScale"></div>
+            <a class="conserv-link" href="especie.html">Ver espécies desta família e seus status →</a>
+          </div>
+        </div>
+
+        <div class="species-section">
+          <div class="species-section-head">
+            <h3>Espécies desta família</h3>
+            <a id="verTodasEspecies" href="especie.html">Ver todas as espécies →</a>
+          </div>
+          <div class="species-strip" id="especiesStrip"></div>
+        </div>
+      </div>
+
+      <!-- ===== COLUNA LATERAL ===== -->
+      <div>
+        <div class="side-card">
+          <h3>Classificação taxonômica</h3>
+          <div id="taxonomiaLista"></div>
+          <button class="btn-primary">Ver mais detalhes</button>
+        </div>
+
+        <div class="side-card">
+          <h3>Números da família</h3>
+          <div id="numerosLista"></div>
+          <button class="btn-primary">Comparar espécies</button>
+        </div>
+
+        <div class="side-card" id="cardArtigos">
+          <h3>Artigos relacionados</h3>
+          <div id="artigosLista"></div>
+        </div>
+
+        <div class="side-card" id="cardGaleria">
+          <h3>Galeria da família</h3>
+          <div class="gallery-grid" id="galeriaGrid"></div>
+          <a class="conserv-link" style="margin-top:12px;display:inline-block;" href="#">Ver mais fotos →</a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg></div>
+          <div>
+            <h4>Tubaropédia</h4>
+            <p>A enciclopédia livre e colaborativa sobre tubarões. Conteúdo para educação, pesquisa e conservação.</p>
+          </div>
+        </div>
+        <div>
+          <h5>Navegação</h5>
+          <ul>
+            <li><a href="index.html">Página principal</a></li>
+            <li><a href="especie.html">Todas as espécies</a></li>
+            <li><a href="familias.html">Famílias</a></li>
+            <li><a href="#">Gêneros</a></li>
+            <li><a href="#">Artigos aleatórios</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Comunidade</h5>
+          <ul>
+            <li><a href="#">Contribuir</a></li>
+            <li><a href="#">Portal da comunidade</a></li>
+            <li><a href="#">Ajuda</a></li>
+            <li><a href="#">Mudanças recentes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Recursos</h5>
+          <ul>
+            <li><a href="#">Bibliografia</a></li>
+            <li><a href="#">Links externos</a></li>
+            <li><a href="#">Política de privacidade</a></li>
+            <li><a href="#">Sobre o projeto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Tubaropédia · Conteúdo disponível sob licença <a href="#">Creative Commons CC BY-SA 4.0</a></span>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="familias-data.js"></script>
+<script src="familias-detalhe-data.js"></script>
+<script>
+/*
+ * Esta página lê o parâmetro ?familia=slug da URL (os links "Ver detalhes"
+ * de familias.html já apontam pra cá assim). Os dados vêm de dois arquivos:
+ *   - familias-data.js            → nome, descrição curta, contagem básica
+ *   - familias-detalhe-data.js    → ficha completa (por enquanto só a
+ *                                   Carcharhinidae está com tudo preenchido)
+ * Para famílias sem ficha completa, a página mostra o que tem e avisa
+ * que o restante ainda está em construção — igual a uma página de wiki
+ * de verdade que vai sendo completada aos poucos.
+ * Para colocar fotos: pasta "imagens/familias" (mesma da familias.html)
+ * e "imagens" (mesma da especie.html) para as fotos de espécie.
+ */
+
+const silhuetaSVG = `<svg viewBox="0 0 200 100"><path fill="#8fa3d6" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>`;
+
+const IUCN_ORDEM = ["EX","EW","CR","EN","VU","NT","LC"];
+const IUCN_LABEL = {EX:"Extinto",EW:"Extinto na natureza",CR:"Criticamente em perigo",EN:"Em perigo",VU:"Vulnerável",NT:"Quase ameaçado",LC:"Pouco preocupante"};
+const IUCN_COR = {EX:"#111318",EW:"#4a3a63",CR:"#d0364a",EN:"#e8763a",VU:"#e8b23f",NT:"#a9c94e",LC:"#4caf6e"};
+
+function normalizarFicha(slug){
+  const basico = (typeof FAMILIAS !== "undefined") ? FAMILIAS.find(f => f.slug === slug) : null;
+  const f = (typeof FICHAS_FAMILIA !== "undefined") ? FICHAS_FAMILIA[slug] : null;
+  if (!basico && !f) return null;
+
+  return {
+    slug,
+    nome: (f && f.nome) || (basico && basico.nome) || slug,
+    reino: (f && f.reino) || "Animalia",
+    filo: (f && f.filo) || "Chordata",
+    classe: (f && f.classe) || "Chondrichthyes",
+    ordem: (f && f.ordem) || "Não informado",
+    autoridade: (f && f.autoridade) || "",
+    especiesDescritas: (f && f.especiesDescritas) ?? (basico && basico.especies) ?? "—",
+    generos: (f && f.generos) ?? "—",
+    habitatResumo: (f && f.habitatResumo) || "Marinho",
+    distribuicaoResumo: (f && f.distribuicaoResumo) || "Não informado",
+    tamanhoResumo: (f && f.tamanhoResumo) || "Não informado",
+    descricaoHero: (f && f.descricaoHero) || (basico && basico.descricao) || "",
+    heroImagem: (f && f.heroImagem) || null,
+    temFichaCompleta: !!f,
+    descricaoGeral: (f && f.descricaoGeral) || [(basico && basico.descricao) || "Descrição detalhada em breve."],
+    caracteristicas: (f && f.caracteristicas) || [],
+    distribuicaoTexto: (f && f.distribuicaoTexto) || "",
+    habitatTexto: (f && f.habitatTexto) || "",
+    habitatFoto: (f && f.habitatFoto) || null,
+    alimentacaoTexto: (f && f.alimentacaoTexto) || "",
+    presas: (f && f.presas) || [],
+    reproducaoTexto: (f && f.reproducaoTexto) || "",
+    reproducaoStats: (f && f.reproducaoStats) || [],
+    comportamentoTexto: (f && f.comportamentoTexto) || "",
+    comportamentoTracos: (f && f.comportamentoTracos) || [],
+    relacaoHumanosTexto: (f && f.relacaoHumanosTexto) || "",
+    relacaoTracos: (f && f.relacaoTracos) || [],
+    statusTexto: (f && f.statusTexto) || "",
+    iucnDestaque: (f && f.iucnDestaque) || null,
+    maiorEspecie: (f && f.maiorEspecie) || null,
+    menorEspecie: (f && f.menorEspecie) || null,
+    especiesDestaque: (f && f.especiesDestaque) || [],
+    artigosRelacionados: (f && f.artigosRelacionados) || [],
+    galeria: (f && f.galeria) || [],
+  };
+}
+
+function iconCirc(svgInner){
+  return `<div class="circ"><svg viewBox="0 0 24 24">${svgInner}</svg></div>`;
+}
+const ICONE_GENERICO = '<circle cx="12" cy="12" r="9"/><path d="M8 15c1.5-4 6.5-4 8 0"/>';
+
+function render(){
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("familia") || "carcharhinidae";
+  const d = normalizarFicha(slug);
+
+  if (!d){
+    document.getElementById("famNome").textContent = "Família não encontrada";
+    document.getElementById("famDescricaoHero").textContent =
+      "Não encontramos essa família no banco de dados. Volte para a lista de famílias e escolha uma delas.";
+    document.getElementById("crumbAtual").textContent = "Família não encontrada";
+    return;
+  }
+
+  document.title = d.nome + " — Tubaropédia";
+  document.getElementById("crumbAtual").textContent = d.nome;
+  document.getElementById("famNome").textContent = d.nome;
+  document.getElementById("famDescricaoHero").textContent = d.descricaoHero;
+
+  // foto do hero (com fallback pra silhueta se não existir)
+  const hero = document.getElementById("heroFamily");
+  if (d.heroImagem){
+    const img = document.createElement("img");
+    img.alt = d.nome;
+    img.onload = () => { img.style.display = "block"; };
+    img.onerror = () => { img.remove(); };
+    img.src = "imagens/familias/" + d.heroImagem;
+    hero.prepend(img);
+  }
+  const silhueta = document.createElement("div");
+  silhueta.className = "silhouette";
+  silhueta.innerHTML = silhuetaSVG;
+  hero.appendChild(silhueta);
+  const scrim = document.createElement("div");
+  scrim.className = "scrim";
+  hero.appendChild(scrim);
+  // reordena: foto/silhueta/scrim atrás do texto e do painel
+  hero.querySelectorAll(".hero-family-text,.fact-panel").forEach(el => hero.appendChild(el));
+
+  // painel de fatos rápidos
+  document.getElementById("factPanel").innerHTML = `
+    <div class="fact-row">${iconCirc('<path d="M4 6h16M4 12h10M4 18h6"/>')}<div><div class="k">Ordem</div><div class="v">${d.ordem}</div></div></div>
+    <div class="fact-row">${iconCirc('<circle cx="12" cy="12" r="9"/><path d="M8 15c1.5-4 6.5-4 8 0"/>')}<div><div class="k">Número de espécies</div><div class="v">${d.especiesDescritas} espécies descritas</div></div></div>
+    <div class="fact-row">${iconCirc('<path d="M12 2L3 9l9 13 9-13z"/>')}<div><div class="k">Habitat</div><div class="v">${d.habitatResumo}</div></div></div>
+    <div class="fact-row">${iconCirc('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>')}<div><div class="k">Distribuição</div><div class="v">${d.distribuicaoResumo}</div></div></div>
+    <div class="fact-row">${iconCirc('<path d="M4 12h16M4 12c0-4 2-6 4-6M20 12c0-4-2-6-4-6"/>')}<div><div class="k">Tamanho</div><div class="v">${d.tamanhoResumo}</div></div></div>
+  `;
+
+  // aviso de ficha incompleta
+  document.getElementById("avisoIncompleta").innerHTML = d.temFichaCompleta ? "" :
+    `<div class="stub-note" style="margin-bottom:22px;">📖 A ficha completa desta família ainda está sendo escrita. As seções abaixo mostram o que já temos — o resto chega em breve.</div>`;
+
+  // descrição geral
+  document.getElementById("descricaoGeral").innerHTML = d.descricaoGeral.map(p => `<p>${p}</p>`).join("");
+
+  // características
+  document.getElementById("listaCaracteristicas").innerHTML = d.caracteristicas.length
+    ? d.caracteristicas.map(c => `<li>${c}</li>`).join("")
+    : `<li>Em breve.</li>`;
+
+  // distribuição
+  document.getElementById("distribuicaoTexto").textContent = d.distribuicaoTexto || "Informação em breve.";
+
+  // habitat
+  document.getElementById("habitatTexto").textContent = d.habitatTexto || "Informação em breve.";
+  const habitatFoto = document.getElementById("habitatFoto");
+  if (d.habitatFoto){
+    const img = habitatFoto.querySelector("img");
+    img.onload = () => { img.style.display = "block"; habitatFoto.querySelector("svg").style.display = "none"; };
+    img.onerror = () => { img.style.display = "none"; };
+    img.src = "imagens/familias/" + d.habitatFoto;
+  }
+
+  // alimentação
+  document.getElementById("alimentacaoTexto").textContent = d.alimentacaoTexto || "Informação em breve.";
+  document.getElementById("presasLista").innerHTML = d.presas.map(p => `
+    <div class="item">${iconCirc(ICONE_GENERICO)}<span>${p}</span></div>`).join("");
+
+  // reprodução
+  document.getElementById("reproducaoTexto").textContent = d.reproducaoTexto || "Informação em breve.";
+  document.getElementById("reproducaoStats").innerHTML = d.reproducaoStats.map(s => `
+    <div class="item">${iconCirc(ICONE_GENERICO)}<span>${s.label}</span></div>`).join("");
+
+  // comportamento
+  document.getElementById("comportamentoTexto").textContent = d.comportamentoTexto || "Informação em breve.";
+  document.getElementById("comportamentoTracos").innerHTML = d.comportamentoTracos.map(t => `
+    <div class="item">${iconCirc(ICONE_GENERICO)}<span>${t}</span></div>`).join("");
+
+  // relação com humanos
+  document.getElementById("relacaoHumanosTexto").textContent = d.relacaoHumanosTexto || "Informação em breve.";
+  document.getElementById("relacaoTracos").innerHTML = d.relacaoTracos.map(t => `
+    <div class="item">${iconCirc(ICONE_GENERICO)}<span>${t}</span></div>`).join("");
+
+  // conservação / escala IUCN
+  document.getElementById("statusTexto").textContent = d.statusTexto || "Informação em breve.";
+  document.getElementById("iucnScale").innerHTML = IUCN_ORDEM.map(code => {
+    const ativo = code === d.iucnDestaque;
+    const estilo = ativo ? `style="background:${IUCN_COR[code]};"` : "";
+    return `<div class="chip ${ativo ? "active" : ""}" ${estilo}><span class="code">${code}</span>${IUCN_LABEL[code]}</div>`;
+  }).join("");
+
+  // espécies desta família
+  document.getElementById("verTodasEspecies").textContent = `Ver todas as ${d.especiesDescritas} espécies →`;
+  const strip = document.getElementById("especiesStrip");
+  strip.innerHTML = d.especiesDestaque.length
+    ? d.especiesDestaque.map(e => `
+        <a class="species-thumb" href="especie.html${e.slug ? "?especie=" + e.slug : ""}">
+          <div class="ph">${silhuetaSVG}<img alt="${e.nomePopular}" onload="this.style.display='block';this.previousElementSibling.style.display='none';" onerror="this.style.display='none';" src="imagens/${e.imagem}"></div>
+          <div class="nome">${e.nomePopular}</div>
+          <div class="cient">${e.cientifico}</div>
+        </a>`).join("") + `
+        <a class="species-thumb-more" href="especie.html"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>Ver todas as ${d.especiesDescritas} espécies</a>`
+    : `<div class="stub-note">Nenhuma espécie de destaque cadastrada ainda para esta família.</div>`;
+
+  // classificação taxonômica
+  document.getElementById("taxonomiaLista").innerHTML = `
+    <div class="tax-row"><span class="k">Reino</span><span class="v">${d.reino}</span></div>
+    <div class="tax-row"><span class="k">Filo</span><span class="v">${d.filo}</span></div>
+    <div class="tax-row"><span class="k">Classe</span><span class="v">${d.classe}</span></div>
+    <div class="tax-row"><span class="k">Ordem</span><span class="v">${d.ordem}</span></div>
+    <div class="tax-row"><span class="k">Família</span><span class="v">${d.nome}${d.autoridade ? `<em>${d.autoridade}</em>` : ""}</span></div>
+  `;
+
+  // números da família
+  let numerosHtml = `
+    <div class="num-row"><span>Espécies descritas</span><span class="num">${d.especiesDescritas}</span></div>
+    <div class="num-row"><span>Gêneros</span><span class="num">${d.generos}</span></div>`;
+  if (d.maiorEspecie){
+    numerosHtml += `<div class="mini-species"><div class="k">Maior espécie</div><div class="v">${d.maiorEspecie.nome}</div><em>${d.maiorEspecie.cientifico}</em><div class="tam">${d.maiorEspecie.tamanho}</div></div>`;
+  }
+  if (d.menorEspecie){
+    numerosHtml += `<div class="mini-species"><div class="k">Menor espécie</div><div class="v">${d.menorEspecie.nome}</div><em>${d.menorEspecie.cientifico}</em><div class="tam">${d.menorEspecie.tamanho}</div></div>`;
+  }
+  document.getElementById("numerosLista").innerHTML = numerosHtml;
+
+  // artigos relacionados
+  const cardArtigos = document.getElementById("cardArtigos");
+  if (d.artigosRelacionados.length){
+    document.getElementById("artigosLista").innerHTML = d.artigosRelacionados.map(a => `
+      <a class="related-row" href="${a.href}">${a.titulo}<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a>`).join("");
+  } else {
+    cardArtigos.style.display = "none";
+  }
+
+  // galeria
+  const cardGaleria = document.getElementById("cardGaleria");
+  if (d.galeria.length){
+    document.getElementById("galeriaGrid").innerHTML = d.galeria.slice(0,4).map(g => `
+      <div class="ph">${silhuetaSVG}<img alt="" onload="this.style.display='block';this.previousElementSibling.style.display='none';" onerror="this.style.display='none';" src="imagens/familias/${g}"></div>`).join("");
+  } else {
+    cardGaleria.style.display = "none";
+  }
+}
+
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+  });
+});
+
+render();
+</script>
+</body>
+</html>
