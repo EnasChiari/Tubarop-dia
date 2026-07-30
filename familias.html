@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="slidebar.css">
 <title>Famílias de tubarões — Tubaropédia</title>
 <style>
   :root{
@@ -26,47 +27,7 @@
 
   .shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
 
-  /* ---------- SIDEBAR ---------- */
-  .sidebar{
-    background:var(--navy-950);color:#c7cfe0;padding:24px 20px;
-    position:sticky;top:0;height:100vh;overflow-y:auto;
-  }
-  .brand{display:flex;align-items:center;gap:12px;margin-bottom:26px;}
-  .brand-mark{width:40px;height:40px;border:2px solid #7d8bb5;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .brand-mark svg{width:22px;height:22px;fill:#e8ebf3;}
-  .brand h1{font-family:Georgia,serif;font-size:1.15rem;color:#fff;}
-  .brand p{font-size:0.64rem;color:#8a93ad;margin-top:2px;}
-  .nav-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.09em;color:#5f6784;padding:0 8px 8px;}
-  .nav-item{display:flex;align-items:center;gap:11px;padding:8px 8px;border-radius:8px;font-size:0.85rem;color:#b7bfd6;}
-  .nav-item:hover{background:#141d33;color:#fff;}
-  .nav-item.active{background:var(--blue-accent);color:#fff;font-weight:600;}
-  .nav-item .ic{width:16px;height:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
-  .nav-item .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-  .nav-group{margin-bottom:18px;}
-  .feature-box{background:var(--navy-900);border-radius:12px;overflow:hidden;margin-top:6px;}
-  .feature-box .thumb{height:76px;position:relative;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);}
-  .feature-box .thumb svg{position:absolute;right:-6px;bottom:-6px;width:70%;opacity:.9;}
-  .feature-box .txt{padding:10px 12px 12px;}
-  .feature-box .txt strong{display:block;font-size:0.8rem;color:#fff;}
-  .feature-box .txt em{display:block;font-size:0.7rem;color:#8a93ad;margin:2px 0 6px;}
-  .feature-box .txt a{font-size:0.72rem;color:#8fb0ff;font-weight:600;}
-  .social-row{display:flex;gap:12px;padding:16px 6px 0;}
-  .social-row .ic{width:16px;height:16px;color:#8a93ad;}
-  .social-row .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;}
 
-  /* ---------- TOPBAR ---------- */
-  .topbar{
-    background:#fff;border-bottom:1px solid var(--line);
-    display:flex;align-items:center;gap:20px;padding:16px 36px;
-  }
-  .search-box{flex:1;max-width:420px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 16px;color:var(--muted);font-size:0.86rem;}
-  .search-box svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;flex-shrink:0;}
-  .search-box input{border:none;background:none;outline:none;font:inherit;color:var(--ink);width:100%;}
-  .topbar-actions{margin-left:auto;display:flex;align-items:center;gap:22px;}
-  .topbar-link{display:flex;align-items:center;gap:7px;font-size:0.85rem;font-weight:600;color:var(--ink);}
-  .topbar-link svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;}
-  .icon-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;color:var(--muted);}
-  .icon-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;}
 
   /* ---------- HERO ---------- */
   .hero{
@@ -193,66 +154,77 @@
 <body>
 <div class="shell">
 
-  <aside class="sidebar">
+   <!-- ================= SIDEBAR ================= -->
+   <aside class="sidebar">
     <div class="brand">
-      <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg></div>
-      <div><h1>Tubaropédia</h1><p>A enciclopédia dos tubarões</p></div>
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg>
+      </div>
+      <div>
+        <h1>TubaroPédia</h1>
+        <p>A enciclopédia dos tubarões</p>
+      </div>
     </div>
 
+
     <div class="nav-group">
-      <div class="nav-label">Navegação</div>
-      <a class="nav-item" href="index.html"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v9h14v-9"/></svg></span>Página principal</a>
-      <a class="nav-item" href="especie.html"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 15c1.5-4 6.5-4 8 0"/></svg></span>Todas as espécies</a>
-      <a class="nav-item active" href="familias.html"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l3 5-3 5-3-5zM4 12l3 5-3 5-3-5zM20 12l3 5-3 5-3-5z" transform="translate(0,0)"/><path d="M12 3l3.5 5.8-3.5 5.8-3.5-5.8z"/></svg></span>Famílias</a>
-      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 21c0-4 3-6 5-6s5 2 5 6M12 21c0-4 3-6 5-6s5 2 5 6"/></svg></span>Gêneros</a>
-      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/></svg></span>Anatomia</a>
-      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L3 9l9 13 9-13z"/></svg></span>Habitat</a>
-      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>Comportamento</a>
-      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.5 8.5-9 10-5.5-1.5-9-5-9-10V6z"/></svg></span>Conservação</a>
-      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v5l3 3M5 12a7 7 0 1014 0 7 7 0 00-14 0z"/></svg></span>Fósseis</a>
-      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg></span>Notícias</a>
-      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg></span>Bibliografia</a>
+      <div class="nav-item" data-action="scroll-top"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/></svg></span>Página principal</div>
+      <div class="nav-item" ><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 10h16v4H4zM4 16h16v4H4z"/></svg><a href="catalogo.html"></span>Todas as espécies</a></div>
+      <div class="nav-item active" ><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l4 4-4 4-4-4zM4 12l4-4 4 4-4 4zM16 12l4-4 4 4-4 4zM12 22l-4-4 4-4 4 4z"/></svg><a href="familias.html"></span>Famílias</a></div>
+      <div class="nav-item" data-action="toast:Seção de Gêneros em construção."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="3"/><circle cx="6" cy="16" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>Gêneros</div>
+      <div class="nav-item" data-action="toast:Seção de Anatomia em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/></svg></span>Anatomia</div>
+      <div class="nav-item" data-action="toast:Seção de Habitat em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L3 9l9 13 9-13z"/></svg></span>Habitat</div>
+      <div class="nav-item" data-action="toast:Seção de Comportamento em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 12c2-6 6-9 8-9s6 3 8 9c-2 6-6 9-8 9s-6-3-8-9z"/><circle cx="12" cy="12" r="2"/></svg></span>Comportamento</div>
+      <div class="nav-item" data-action="toast:Seção de Conservação em construção."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18M3 12h18" stroke="#0a0f1e" stroke-width="1"/></svg></span>Conservação</div>
+      <div class="nav-item" data-action="toast:Seção de Fósseis em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/></svg></span>Fósseis</div>
+      <div class="nav-item" data-action="toast:Seção de Notícias em construção."><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/></svg></span>Notícias</div>
+      <div class="nav-item" data-action="toast:Seção de Bibliografia em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/></svg></span>Bibliografia</div>
     </div>
 
     <div class="nav-group">
       <div class="nav-label">Ferramentas</div>
-      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M17 3l4 4-11 11H6v-4z"/></svg></span>Páginas aleatórias</a>
-      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1015-6.7M3 5v6h6"/></svg></span>Mudanças recentes</a>
-      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg></span>Página de testes</a>
-      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.5-2.5 1.5-2.5 3.5M12 17h.01"/></svg></span>Ajuda</a>
+      <div class="nav-item" data-action="random-article"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg></span>Páginas aleatórias</div>
+      <div class="nav-item" data-action="toast:Nenhuma mudança recente registrada ainda."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span>Mudanças recentes</div>
+      <div class="nav-item" data-action="toast:Página de testes em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg></span>Página de testes</div>
+      <div class="nav-item" data-action="toast:Central de ajuda em construção."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span>Ajuda</div>
     </div>
 
-    <div class="nav-label">Em destaque</div>
-    <div class="feature-box">
-      <div class="thumb">
-        <svg viewBox="0 0 200 100"><path fill="#8fa3d6" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
-      </div>
-      <div class="txt">
-        <strong>Tubarão-baleia</strong>
-        <em>Rhincodon typus</em>
-        <a href="especie.html?especie=tubarao-baleia">Ver artigo →</a>
+    <div class="nav-group">
+      <div class="nav-label">Em destaque</div>
+      <div class="featured-card">
+        <div class="img">
+          <svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg>
+        </div>
+        <div class="body">
+          <h4>Grande Tubarão Branco</h4>
+          <em>Carcharodon carcharias</em>
+          <div class="link" data-action="open-article:0" style="cursor:pointer;">Ver artigo →</div>
+        </div>
       </div>
     </div>
 
     <div class="social-row">
-      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></span>
+      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/></svg></span>
       <span class="ic"><svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4z"/><circle cx="12" cy="12" r="9"/></svg></span>
       <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6l9 7 9-7"/></svg></span>
     </div>
   </aside>
 
+  <!-- ================= MAIN ================= -->
   <div>
     <header class="topbar">
-      <div class="search-box">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-        <input type="text" placeholder="Pesquisar na Tubaropédia...">
+      <div class="title">
+        <h2>TubaroPédia</h2>
+        <p>A enciclopédia dos tubarões</p>
       </div>
+      <form class="search-box" id="searchForm">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input id="searchInput" type="text" placeholder="Pesquisar na TubaroPédia" autocomplete="off" style="border:none;background:transparent;outline:none;font-family:inherit;font-size:0.86rem;color:var(--ink);flex:1;">
+      </form>
       <div class="topbar-actions">
-        <a class="topbar-link" href="#"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Contribuir</a>
-        <a class="topbar-link" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Entrar</a>
-        <button class="icon-btn" id="btnTema" title="Alternar tema" aria-label="Alternar tema claro/escuro">
-          <svg viewBox="0 0 24 24"><path d="M21 12.5A9 9 0 1111.5 3 7 7 0 0021 12.5z"/></svg>
-        </button>
+        <span class="item" data-action="open-modal:contribuir"><svg viewBox="0 0 24 24"><path d="M3 21l3-9 12-8 3 3-8 12z"/></svg>Contribuir</span>
+        <span class="item" data-action="open-modal:entrar"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Entrar</span>
+        <span class="menu-ic" id="sidebarToggle" style="cursor:pointer;"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
       </div>
     </header>
 

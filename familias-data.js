@@ -1,13 +1,4 @@
-/* ═══════════════════════════════════════════════
-   TUBAROPÉDIA — BASE DE DADOS DAS FAMÍLIAS
-   Edite apenas este arquivo para gerenciar as famílias.
-   A página familias.html lê daqui automaticamente.
 
-   Para colocar uma foto: salve a imagem numa pasta
-   "imagens/familias" ao lado do familias.html, com o
-   nome indicado no campo "imagem" de cada família.
-   Sem a foto, aparece um ícone de tubarão no lugar.
-   ═══════════════════════════════════════════════ */
 
 const FAMILIAS = [
   { slug: "alopiidae", nome: "Alopiidae", especies: 3,

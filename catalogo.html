@@ -434,7 +434,7 @@
           <div class="panel">
             <h3>Taxonomia</h3>
             <div class="tax-rows" id="taxRows"></div>
-            <div class="btn-primary-sm" data-action="group-familias">Ver todas as famílias</div>
+            <div class="btn-primary-sm"> <a href="familias.html">Ver todas as famílias</div></a>
           </div>
 
           <div class="panel">
@@ -490,19 +490,9 @@
 
 <script>
 (function(){
-  /* =========================================================
-     "BANCO DE DADOS" DE ESPÉCIES
-     Modelado nos mesmos campos que BancoDadosTubaroes.java vai
-     exportar como JSON (id/slug, nomeComum, nomeCientifico,
-     familia, habitat[], porteMetros, statusConservacao, água doce,
-     águas profundas, raro, recémDescoberto). Quando o backend
-     Java estiver servindo o JSON, troque SPECIES por um fetch().
-     Cada card já aponta para especie.html?especie=<slug>, o mesmo
-     padrão usado na página da espécie Tubarão-branco.
-  ========================================================= */
   const SPECIES = [
     {id:"tubarão-de-nariz-preto",nome:"Tubarão-de-nariz-preto",cientifico:"Carcharhinus acronotus",familia:"Carcharhinidae",habitat:["Costeiro"],porte:1.4,status:"VU",thumb:1},
-    {id:"tubarao-de-pontas-prateadas",nome:"Tubarão-de-pontas-prateadas",cientifico:"Carcharhinus albimarginatus",familia:"Carcharhinidae",habitat:["Recifes de coral", "Costeiro", "Oceânico"],porte: 3.0,status: "VU",thumb:2},
+    {id:"tubarão-de-pontas-prateadas",nome:"Tubarão-de-pontas-prateadas",cientifico:"Carcharhinus albimarginatus",familia:"Carcharhinidae",habitat:["Recifes de coral", "Costeiro", "Oceânico"],porte: 3.0,status: "VU",thumb:2},
     ];
   const STATUS_LABEL = {CR:"Criticamente ameaçada",AM:"Ameaçada",VU:"Vulnerável",NT:"Quase ameaçada",LC:"Pouco preocupante",DD:"Dados insuficientes"};
   const STATUS_BADGE = {CR:"badge-cr",AM:"badge-cr",VU:"badge-vu",NT:"badge-nt",LC:"badge-lc",DD:"badge-dd"};
@@ -517,7 +507,7 @@
   document.getElementById('dataNote').textContent =
     "Catálogo de demonstração com " + SPECIES.length + " espécies — pronto para ser alimentado pelo banco de dados Java assim que o endpoint JSON estiver no ar.";
 
-  /* ---------- popula selects de família e habitat ---------- */
+
   const famSelect = document.getElementById('filterFamily');
   const habSelect = document.getElementById('filterHabitat');
   const families = [...new Set(SPECIES.map(s=>s.familia))].sort();
@@ -525,7 +515,7 @@
   famSelect.innerHTML = '<option value="">Todas as famílias</option>' + families.map(f=>`<option value="${f}">${f}</option>`).join('');
   habSelect.innerHTML = '<option value="">Todos os habitats</option>' + habitats.map(h=>`<option value="${h}">${h}</option>`).join('');
 
-  /* ---------- helpers ---------- */
+
   function normalize(s){ return (s||"").toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,""); }
 
   function getFiltered(){
@@ -559,7 +549,7 @@
     return '<svg viewBox="0 0 24 24" fill="#fff"><path d="M2 12c4-5 9-7 14-6 1-3 4-5 6-4-1 2-2 4-1 6 3 2 5 4 3 6-2 1-5 1-8 0-5 1-10-1-14-2z"/></svg>';
   }
 
-  /* ---------- render ---------- */
+
   function render(){
     const grid = document.getElementById('speciesGrid');
     const all = getFiltered();
@@ -596,7 +586,7 @@
 
     document.getElementById('resultsBar').innerHTML = `${all.length} espécie${all.length===1?'':'s'} encontrada${all.length===1?'':'s'}`;
 
-    // pagination
+
     const pag = document.getElementById('pagination');
     let html = `<button class="nav-btn" data-page="prev" ${state.page<=1?'disabled':''}>← Anterior</button>`;
     for(let p=1;p<=totalPages;p++){
@@ -661,12 +651,12 @@
       <button class="modal-close" data-close>✕</button>
       <h3>${s.nome}</h3>
       <p class="modal-sub" style="font-style:italic;">${s.cientifico}</p>
-      <p class="article-body">Família ${s.familia}, encontrado em ${s.habitat.join(', ').toLowerCase()}. Prévia rápida — a página completa da espécie (especie.html?especie=${s.id}) reúne anatomia, comportamento e distribuição.</p>
+      <p class="article-body">Família ${s.familia}, encontrado em ${s.habitat.join(', ').toLowerCase()}. Prévia rápida — a página completa da espécie (especie.html?id=${s.id}) reúne anatomia, comportamento e distribuição.</p>
       <div class="field-row">
         <div><div class="k">Porte</div><div class="v">${s.porte} m</div></div>
         <div><div class="k">Status</div><div class="v">${STATUS_LABEL[s.status]}</div></div>
       </div>
-      <div class="btn-primary-sm" style="margin-top:18px;" data-action="href:especie.html?especie=${s.id}">Abrir página completa →</div>
+      <div class="btn-primary-sm" style="margin-top:18px;" data-action="href:especie.html?id=${s.id}">Abrir página completa →</div>
     `;
     overlay.classList.add('show');
   }

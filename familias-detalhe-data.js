@@ -1,17 +1,3 @@
-/* ═══════════════════════════════════════════════
-   TUBAROPÉDIA — FICHAS DETALHADAS DE FAMÍLIA
-   Usado pela página familia.html (familia.html?familia=slug)
-
-   Cada chave é o "slug" da família (igual ao slug usado em
-   familias-data.js). Por enquanto só a Carcharhinidae tem a
-   ficha completa (do jeito que foi desenhada). Para as outras
-   famílias, a página usa os dados básicos de familias-data.js
-   e mostra um aviso de "ficha em construção" nas seções que
-   ainda não têm conteúdo — assim nenhum link fica quebrado.
-
-   Para completar a ficha de outra família, copie o bloco da
-   Carcharhinidae abaixo, troque o slug e preencha os campos.
-   ═══════════════════════════════════════════════ */
 
 const FICHAS_FAMILIA = {
 

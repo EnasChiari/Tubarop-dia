@@ -31,7 +31,7 @@ const ESPECIES = [
     ],
   },
   {
-      slug: "tubarao-de-pontas-prateadas",
+      slug: "tubarão-de-pontas-prateadas",
       nomePopular: "Tubarão-de-pontas-prateadas",
       nomeCientifico: "Carcharhinus albimarginatus",
       nomeIngles: "Silvertip Shark",
