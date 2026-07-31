@@ -1,16 +1,4 @@
-/*
- * Campos de imagem por seção (opcionais, um por espécie), a serem
- * preenchidos quando o BancoDadosTubaroes.java passar a exportá-los
- * no JSON — mesmo padrão do campo "imagens": só o nome do arquivo,
- * salvo na pasta "imagens" ao lado de especie.html.
- *
- *   imagemDistribuicao:   "arquivo.jpg",   // mapa/foto de Distribuição
- *   imagemAlimentacao:    "arquivo.jpg",   // foto de Alimentação
- *   imagemComportamento:  "arquivo.jpg",   // foto de Comportamento
- *   imagemRelacaoHumanos: "arquivo.jpg",   // foto de Relação com humanos
- *
- * Sem esses campos, especie.html mostra um placeholder no lugar da foto.
- */
+
 const ESPECIES = [
   {
     slug: "tubarao-de-nariz-preto",
