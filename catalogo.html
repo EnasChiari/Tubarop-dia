@@ -495,43 +495,72 @@
 (function(){
   /* =========================================================
      "BANCO DE DADOS" DE ESPÉCIES
-     Modelado nos mesmos campos que BancoDadosTubaroes.java vai
-     exportar como JSON (id/slug, nomeComum, nomeCientifico,
-     familia, habitat[], porteMetros, statusConservacao, água doce,
-     águas profundas, raro, recémDescoberto). Quando o backend
-     Java estiver servindo o JSON, troque SPECIES por um fetch().
-     Cada card já aponta para especie.html?especie=<slug>, o mesmo
-     padrão usado na página da espécie Tubarão-branco.
-
-     CAMPO "imagem": preenchido automaticamente com a primeira foto do
-     especies-data.js (campo "imagens"), quando a espécie existir lá com
-     o mesmo slug/id. Sem foto cadastrada, o card mostra só o fundo
-     colorido (thumb-N) como placeholder.
+     O catálogo agora é gerado automaticamente a partir do array
+     ESPECIES (especies-data.js) — o mesmo arquivo que alimenta a
+     página especie.html. Não é mais preciso cadastrar cada espécie
+     duas vezes: basta adicionar a ficha completa em especies-data.js
+     que ela já aparece aqui, com foto, porte, status e habitat
+     calculados a partir dos campos da ficha.
+     Quando o backend Java estiver servindo o JSON, é só trocar
+     ESPECIES por um fetch() que devolva o mesmo formato de ficha.
+     Cada card já aponta para especie.html?especie=<slug>.
   ========================================================= */
-  const SPECIES = [
-    {id:"tubarao-de-nariz-preto",nome:"Tubarão-de-nariz-preto",cientifico:"Carcharhinus acronotus",familia:"Carcharhinidae",habitat:["Costeiro"],porte:1.4,status:"VU",thumb:1,imagem:""},
-    {id:"tubarao-de-pontas-prateadas",nome:"Tubarão-de-pontas-prateadas",cientifico:"Carcharhinus albimarginatus",familia:"Carcharhinidae",habitat:["Recifes de coral", "Costeiro", "Oceânico"],porte: 3.0,status: "VU",thumb:2,imagem:""},
-    {id:"tubarao-de-nariz-grande",nome:"Tubarão-de-nariz-grande",cientifico:"Carcharhinus altimus",familia:"Carcharhinidae",habitat:["Oceânico", "Talude continental"],porte: 3.0,status: "DD",thumb:3,imagem:""},
-    {id: "tubarao-gracioso",nome: "Tubarão-gracioso",cientifico: "Carcharhinus amblyrhynchoides",familia: "Carcharhinidae",habitat: ["Costeiro", "Recifal"],porte: 2.6,status: "NT",thumb: 1,imagem:""},
-  ];
-  const STATUS_LABEL = {CR:"Criticamente ameaçada",AM:"Ameaçada",VU:"Vulnerável",NT:"Quase ameaçada",LC:"Pouco preocupante",DD:"Dados insuficientes"};
-  const STATUS_BADGE = {CR:"badge-cr",AM:"badge-cr",VU:"badge-vu",NT:"badge-nt",LC:"badge-lc",DD:"badge-dd"};
+  const STATUS_LABEL = {CR:"Criticamente ameaçada",AM:"Ameaçada",EN:"Em perigo",VU:"Vulnerável",NT:"Quase ameaçada",LC:"Pouco preocupante",DD:"Dados insuficientes"};
+  const STATUS_BADGE = {CR:"badge-cr",AM:"badge-cr",EN:"badge-cr",VU:"badge-vu",NT:"badge-nt",LC:"badge-lc",DD:"badge-dd"};
   const PER_PAGE = 12;
 
-  /* As fotos de verdade moram no especies-data.js (mesmo arquivo que
-     alimenta especie.html), no campo "imagens" de cada espécie. Aqui a
-     gente só busca, pelo slug, a primeira foto cadastrada lá e usa no
-     card do catálogo — assim uma foto adicionada uma vez (para a Java
-     exportar) já aparece nas duas páginas, sem duplicar arquivo. */
-  if (typeof ESPECIES !== "undefined") {
-    const fotoPorSlug = {};
-    ESPECIES.forEach(ficha => {
-      if (ficha.imagens && ficha.imagens.length) fotoPorSlug[ficha.slug] = ficha.imagens[0];
-    });
-    SPECIES.forEach(s => {
-      if (fotoPorSlug[s.id]) s.imagem = fotoPorSlug[s.id];
-    });
+  function normalize(s){ return (s||"").toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,""); }
+
+  /* A ficha em especies-data.js guarda "habitat" como texto corrido
+     (para a página especie.html). Aqui a gente lê esse texto e
+     identifica algumas etiquetas conhecidas (Costeiro, Recifes de
+     coral, Oceânico, Águas profundas, Água doce, etc.) para alimentar
+     os filtros do catálogo. Se nenhuma palavra-chave bater, cai no
+     padrão "Costeiro". */
+  const HABITAT_KEYWORDS = [
+    { tag: "Recifes de coral",       test: /recif/ },
+    { tag: "Estuarino",              test: /estuari|ba[ií]a/ },
+    { tag: "Água doce",              test: /[aá]gua doce|\brio\b|\blago\b/ },
+    { tag: "Águas profundas",        test: /profund/ },
+    { tag: "Talude continental",     test: /talude continental/ },
+    { tag: "Oceânico",               test: /ocean[ií]c|ilhas ocean/ },
+    { tag: "Plataforma continental", test: /plataforma continental/ },
+    { tag: "Costeiro",               test: /costeir|praia|litor/ },
+  ];
+  function deriveHabitats(habitatTexto){
+    const t = normalize(habitatTexto);
+    const found = HABITAT_KEYWORDS.filter(h => h.test.test(t)).map(h => h.tag);
+    return found.length ? found : ["Costeiro"];
   }
+
+  /* O "comprimento" também é texto corrido (ex.: "1,2–1,5 m (podendo
+     ter até 2 m)"). Aqui a gente extrai o maior valor em metros
+     (convertendo cm quando necessário) para usar no porte e nos
+     filtros/ordenação por tamanho. */
+  function derivePorte(comprimento){
+    if(!comprimento) return 0;
+    const t = comprimento.toLowerCase();
+    const re = /(\d+(?:,\d+)?)\s*(cm|m)\b/g;
+    let m, max = 0;
+    while((m = re.exec(t))){
+      let v = parseFloat(m[1].replace(',', '.'));
+      if(m[2] === 'cm') v /= 100;
+      if(v > max) max = v;
+    }
+    return max;
+  }
+
+  const SPECIES = (typeof ESPECIES !== "undefined" ? ESPECIES : []).map((ficha, i) => ({
+    id: ficha.slug,
+    nome: ficha.nomePopular,
+    cientifico: ficha.nomeCientifico,
+    familia: ficha.familia,
+    habitat: deriveHabitats(ficha.habitat),
+    porte: derivePorte(ficha.comprimento),
+    status: ficha.statusIUCN || "DD",
+    thumb: (i % 6) + 1,
+    imagem: (ficha.imagens && ficha.imagens[0]) || ""
+  }));
 
   let state = {
     query:"", family:"", habitat:"", status:"", minSize:0,
@@ -551,8 +580,6 @@
   habSelect.innerHTML = '<option value="">Todos os habitats</option>' + habitats.map(h=>`<option value="${h}">${h}</option>`).join('');
 
   /* ---------- helpers ---------- */
-  function normalize(s){ return (s||"").toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,""); }
-
   function getFiltered(){
     let list = SPECIES.filter(s=>{
       if(state.query){
