@@ -470,8 +470,8 @@
           <span>Imagem</span>
         </div>
         <div class="body">
-          <h4>Grande Tubarão Branco</h4>
-          <em>Carcharodon carcharias</em>
+          <h4>Tubarão-de-nariz-preto</h4>
+          <em>Carcharhinus acronotus</em>
           <div class="link" data-action="open-article:0" style="cursor:pointer;">Ver artigo →</div>
         </div>
       </div>
@@ -648,30 +648,30 @@
         <div class="articles-grid">
           <div class="article-card">
             <div class="article-thumb thumb-1 img-placeholder"><span>Imagem do artigo</span></div>
-            <h4>Tubarão-baleia</h4>
-            <em>Rhincodon typus</em>
-            <p>O maior peixe do mundo. Alimentação, habitat e curiosidades.</p>
+            <h4>Tubarão-de-pontas-prateadas</h4>
+            <em>Carcharhinus albimarginatus</em>
+            <p>Grande tubarão oceânico com marcantes pontas brancas nas nadadeiras.</p>
             <div class="link" data-action="open-article:1" style="cursor:pointer;">Ler artigo →</div>
           </div>
           <div class="article-card">
             <div class="article-thumb thumb-2 img-placeholder"><span>Imagem do artigo</span></div>
-            <h4>Tubarão-martelo-comum</h4>
-            <em>Sphyrna lewini</em>
-            <p>Características, comportamento e distribuição geográfica.</p>
+            <h4>Tubarão-de-nariz-grande</h4>
+            <em>Carcharhinus altimus</em>
+            <p>Predador de águas profundas com focinho longo, comum na plataforma continental.</p>
             <div class="link" data-action="open-article:2" style="cursor:pointer;">Ler artigo →</div>
           </div>
           <div class="article-card">
             <div class="article-thumb thumb-3 img-placeholder"><span>Imagem do artigo</span></div>
-            <h4>Tubarões de águas profundas</h4>
-            <em></em>
-            <p>Espécies que vivem nas profundezas oceânicas e suas adaptações.</p>
+            <h4>Tubarão-gracioso</h4>
+            <em>Carcharhinus amblyrhynchoides</em>
+            <p>Tubarão costeiro esguio e ágil das águas tropicais do Indo-Pacífico.</p>
             <div class="link" data-action="open-article:3" style="cursor:pointer;">Ler artigo →</div>
           </div>
           <div class="article-card">
             <div class="article-thumb thumb-4 img-placeholder"><span>Imagem do artigo</span></div>
-            <h4>Fósseis de tubarão</h4>
-            <em></em>
-            <p>História evolutiva e os registros fósseis mais importantes.</p>
+            <h4>Tubarão-cinzento-dos-recifes</h4>
+            <em>Carcharhinus amblyrhynchos</em>
+            <p>Predador ágil e comum nos recifes de coral do Indo-Pacífico.</p>
             <div class="link" data-action="open-article:4" style="cursor:pointer;">Ler artigo →</div>
           </div>
         </div>
@@ -734,20 +734,12 @@
   <div class="modal-box" id="modalBox"></div>
 </div>
 
+<script src="especies-data.js"></script>
 <script>
 (function(){
-  const ARTICLES = [
-    { title:"Grande Tubarão Branco", em:"Carcharodon carcharias",
-      body:"O maior predador marinho do planeta, encontrado em águas costeiras e oceânicas de quase todo o mundo. Pode ultrapassar 6 metros de comprimento e é reconhecido por seus saltos espetaculares ao caçar." },
-    { title:"Tubarão-baleia", em:"Rhincodon typus",
-      body:"O maior peixe do mundo, podendo chegar a mais de 12 metros. Apesar do tamanho, é um filtrador pacífico que se alimenta de plâncton e pequenos peixes." },
-    { title:"Tubarão-martelo-comum", em:"Sphyrna lewini",
-      body:"Reconhecido pela cabeça em forma de martelo, que melhora seu campo de visão e sua capacidade de detectar presas enterradas na areia." },
-    { title:"Tubarões de águas profundas", em:"",
-      body:"Espécies adaptadas à escuridão e à alta pressão das profundezas oceânicas, muitas vezes com bioluminescência e metabolismo lento." },
-    { title:"Fósseis de tubarão", em:"",
-      body:"Os tubarões existem há mais de 400 milhões de anos. Como seu esqueleto é cartilaginoso, os dentes são o registro fóssil mais comum e valioso para os pesquisadores." }
-  ];
+  /* Os artigos agora usam o banco de dados real de especies-data.js
+     (array ESPECIES) em vez de um conteúdo fixo escrito à mão. */
+  const STATUS_LABEL = {CR:"Criticamente ameaçada",AM:"Ameaçada",VU:"Vulnerável",NT:"Quase ameaçada",LC:"Pouco preocupante",DD:"Dados insuficientes"};
 
   const toastEl = document.getElementById('toast');
   let toastTimer;
@@ -769,13 +761,19 @@
   });
 
   function openArticleModal(idx){
-    const a = ARTICLES[idx];
-    if(!a) return;
+    const e = ESPECIES[idx];
+    if(!e) return;
+    const status = STATUS_LABEL[e.statusIUCN] || e.statusIUCN || '';
+    const curiosidade = (e.curiosidades && e.curiosidades[0]) ? '<br><br><em>Curiosidade:</em> '+e.curiosidades[0] : '';
     modalBox.innerHTML =
       '<button class="modal-close" data-close>✕</button>' +
-      '<h3>'+a.title+'</h3>' +
-      (a.em ? '<em class="article-em">'+a.em+'</em>' : '') +
-      '<p class="article-body">'+a.body+'</p>';
+      '<h3>'+e.nomePopular+'</h3>' +
+      '<em class="article-em">'+e.nomeCientifico+'</em>' +
+      '<p class="article-body">'+e.descricao+
+        '<br><br><strong>Porte:</strong> '+e.comprimento+
+        (status ? ' &nbsp;•&nbsp; <strong>Status de conservação:</strong> '+status : '') +
+        curiosidade +
+      '</p>';
     overlay.classList.add('show');
   }
 
@@ -819,7 +817,7 @@
       if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
       setActiveNav(el);
     } else if(action === 'random-article'){
-      const idx = Math.floor(Math.random()*ARTICLES.length);
+      const idx = Math.floor(Math.random()*ESPECIES.length);
       openArticleModal(idx);
     } else if(action.startsWith('open-article:')){
       openArticleModal(parseInt(action.split(':')[1], 10));
