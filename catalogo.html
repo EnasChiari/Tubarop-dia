@@ -493,30 +493,14 @@
 <script src="especies-data.js"></script>
 <script>
 (function(){
-  /* =========================================================
-     "BANCO DE DADOS" DE ESPÉCIES
-     O catálogo agora é gerado automaticamente a partir do array
-     ESPECIES (especies-data.js) — o mesmo arquivo que alimenta a
-     página especie.html. Não é mais preciso cadastrar cada espécie
-     duas vezes: basta adicionar a ficha completa em especies-data.js
-     que ela já aparece aqui, com foto, porte, status e habitat
-     calculados a partir dos campos da ficha.
-     Quando o backend Java estiver servindo o JSON, é só trocar
-     ESPECIES por um fetch() que devolva o mesmo formato de ficha.
-     Cada card já aponta para especie.html?especie=<slug>.
-  ========================================================= */
+
   const STATUS_LABEL = {CR:"Criticamente ameaçada",AM:"Ameaçada",EN:"Em perigo",VU:"Vulnerável",NT:"Quase ameaçada",LC:"Pouco preocupante",DD:"Dados insuficientes"};
   const STATUS_BADGE = {CR:"badge-cr",AM:"badge-cr",EN:"badge-cr",VU:"badge-vu",NT:"badge-nt",LC:"badge-lc",DD:"badge-dd"};
   const PER_PAGE = 12;
 
   function normalize(s){ return (s||"").toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,""); }
 
-  /* A ficha em especies-data.js guarda "habitat" como texto corrido
-     (para a página especie.html). Aqui a gente lê esse texto e
-     identifica algumas etiquetas conhecidas (Costeiro, Recifes de
-     coral, Oceânico, Águas profundas, Água doce, etc.) para alimentar
-     os filtros do catálogo. Se nenhuma palavra-chave bater, cai no
-     padrão "Costeiro". */
+
   const HABITAT_KEYWORDS = [
     { tag: "Recifes de coral",       test: /recif/ },
     { tag: "Estuarino",              test: /estuari|ba[ií]a/ },
