@@ -490,6 +490,7 @@
 <div id="toast"></div>
 <div class="modal-overlay" id="modalOverlay"><div class="modal-box" id="modalBox"></div></div>
 
+<script src="especies-data.js"></script>
 <script>
 (function(){
   /* =========================================================
@@ -502,10 +503,10 @@
      Cada card já aponta para especie.html?especie=<slug>, o mesmo
      padrão usado na página da espécie Tubarão-branco.
 
-     CAMPO "imagem": nome do arquivo de foto da espécie, salvo numa
-     pasta "imagens" ao lado deste arquivo (ex.: "imagem: 'tubarao-
-     de-nariz-preto.jpg'"). Deixe em branco ("") enquanto não tiver
-     a foto — o card mostra só o fundo colorido como placeholder.
+     CAMPO "imagem": preenchido automaticamente com a primeira foto do
+     especies-data.js (campo "imagens"), quando a espécie existir lá com
+     o mesmo slug/id. Sem foto cadastrada, o card mostra só o fundo
+     colorido (thumb-N) como placeholder.
   ========================================================= */
   const SPECIES = [
     {id:"tubarao-de-nariz-preto",nome:"Tubarão-de-nariz-preto",cientifico:"Carcharhinus acronotus",familia:"Carcharhinidae",habitat:["Costeiro"],porte:1.4,status:"VU",thumb:1,imagem:""},
@@ -516,6 +517,21 @@
   const STATUS_LABEL = {CR:"Criticamente ameaçada",AM:"Ameaçada",VU:"Vulnerável",NT:"Quase ameaçada",LC:"Pouco preocupante",DD:"Dados insuficientes"};
   const STATUS_BADGE = {CR:"badge-cr",AM:"badge-cr",VU:"badge-vu",NT:"badge-nt",LC:"badge-lc",DD:"badge-dd"};
   const PER_PAGE = 12;
+
+  /* As fotos de verdade moram no especies-data.js (mesmo arquivo que
+     alimenta especie.html), no campo "imagens" de cada espécie. Aqui a
+     gente só busca, pelo slug, a primeira foto cadastrada lá e usa no
+     card do catálogo — assim uma foto adicionada uma vez (para a Java
+     exportar) já aparece nas duas páginas, sem duplicar arquivo. */
+  if (typeof ESPECIES !== "undefined") {
+    const fotoPorSlug = {};
+    ESPECIES.forEach(ficha => {
+      if (ficha.imagens && ficha.imagens.length) fotoPorSlug[ficha.slug] = ficha.imagens[0];
+    });
+    SPECIES.forEach(s => {
+      if (fotoPorSlug[s.id]) s.imagem = fotoPorSlug[s.id];
+    });
+  }
 
   let state = {
     query:"", family:"", habitat:"", status:"", minSize:0,
