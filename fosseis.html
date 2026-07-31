@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tubarões Fósseis — História que oceanos não apagaram</title>
+<style>
+  :root{
+    --bg-dark:#15100a;
+    --bg-dark2:#1c150e;
+    --tan:#c9a367;
+    --tan-light:#e7d5ac;
+    --cream:#e8dcc3;
+    --cream-dark:#d6c39a;
+    --ink:#2a2013;
+    --muted:#7a6a52;
+    --muted-light:#a99a7f;
+    --line:rgba(60,45,20,.18);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--cream);color:var(--ink);}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font:inherit;cursor:pointer;}
+  h1,h2,h3{font-family:Georgia,'Iowan Old Style',serif;}
+  .caps{font-variant:small-caps;letter-spacing:.03em;}
+
+  /* ---------- HEADER ---------- */
+  .site-header{
+    background:var(--bg-dark);color:#e7dcc4;
+    display:flex;align-items:center;gap:34px;padding:16px 40px;
+    position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .brand{display:flex;align-items:center;gap:12px;margin-right:10px;}
+  .brand-mark{width:42px;height:42px;border:2px solid var(--tan);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--tan);}
+  .brand-mark svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;}
+  .brand-txt{font-family:Georgia,serif;font-variant:small-caps;line-height:1.15;font-size:1.02rem;letter-spacing:.03em;}
+  .site-nav{display:flex;gap:28px;flex:1;font-size:0.86rem;font-variant:small-caps;letter-spacing:.03em;color:#cfc3a8;}
+  .site-nav a{padding-bottom:4px;border-bottom:2px solid transparent;}
+  .site-nav a:hover{color:#fff;}
+  .site-nav a.active{color:#fff;border-color:var(--tan);}
+  .header-search{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:8px 16px;font-size:0.82rem;color:#cfc3a8;}
+  .header-search input{background:none;border:none;outline:none;color:#fff;font:inherit;width:120px;}
+  .header-search svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0;}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;background:var(--bg-dark);overflow:hidden;padding:70px 40px 110px;}
+  .hero-texture{position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(90,65,35,.35), transparent 55%),
+      radial-gradient(ellipse at 75% 60%, rgba(120,90,50,.3), transparent 60%),
+      linear-gradient(120deg,#241a10 0%,#0f0b07 80%);
+  }
+  .hero-fossil{position:absolute;right:0;top:0;bottom:0;width:56%;display:flex;align-items:center;justify-content:center;opacity:.95;}
+  .hero-fossil img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;mask-image:linear-gradient(to left, black 60%, transparent 100%);-webkit-mask-image:linear-gradient(to left, black 60%, transparent 100%);}
+  .hero-fossil svg{width:80%;max-width:480px;color:#4a3a26;filter:drop-shadow(0 10px 30px rgba(0,0,0,.5));}
+  .hero-content{position:relative;max-width:560px;}
+  .hero-content h1{color:var(--tan-light);font-size:3rem;line-height:1.12;font-variant:small-caps;letter-spacing:.01em;margin-bottom:20px;}
+  .hero-content p{color:#cbbfa4;font-size:0.98rem;line-height:1.7;margin-bottom:28px;max-width:440px;}
+  .btn-gold{display:inline-block;background:var(--tan);color:#241a0c;font-weight:700;font-size:0.82rem;letter-spacing:.06em;padding:15px 30px;border-radius:3px;font-variant:small-caps;border:none;}
+  .btn-gold:hover{background:var(--tan-light);}
+
+  /* ---------- STATS BAR ---------- */
+  .stats-bar{
+    position:relative;z-index:2;margin:-60px 40px 0;background:rgba(15,11,7,.92);
+    border:1px solid rgba(255,255,255,.08);border-radius:10px;
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .stat-item{display:flex;align-items:center;gap:14px;padding:26px 22px;border-right:1px solid rgba(255,255,255,.08);}
+  .stat-item:last-child{border-right:none;}
+  .stat-item .ic{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--tan);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--tan);}
+  .stat-item .ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.5;}
+  .stat-item .num{color:var(--tan-light);font-family:Georgia,serif;font-size:1.5rem;font-weight:700;line-height:1;}
+  .stat-item .lbl{color:#a99a7f;font-size:0.78rem;line-height:1.4;margin-top:4px;}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{padding:90px 40px 60px;}
+  .section-title{text-align:left;margin-bottom:8px;font-size:1.9rem;font-variant:small-caps;letter-spacing:.02em;}
+  .ornament{display:flex;align-items:center;gap:10px;margin-bottom:34px;}
+  .ornament .ln{height:1px;width:46px;background:var(--muted);}
+  .ornament .dot{width:6px;height:6px;border-radius:50%;background:var(--tan);}
+
+  .section.parchment{background:linear-gradient(180deg,var(--cream) 0%,var(--cream-dark) 100%);color:var(--ink);}
+  .section.parchment .section-title{color:var(--ink);}
+
+  .section.dark{background:var(--bg-dark);color:#e7dcc4;}
+  .section.dark .section-title{color:var(--tan-light);}
+  .section.dark .ornament .ln{background:#4a3d29;}
+
+  /* ---------- CARDS: FAMÍLIAS ---------- */
+  .grid-familias{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
+  .fam-card{background:#f1e8d2;border:1px solid var(--line);border-radius:6px;padding:14px 14px 18px;text-align:center;box-shadow:0 3px 10px rgba(40,30,15,.08);}
+  .fam-card .thumb{height:120px;border-radius:4px;background:linear-gradient(160deg,#cbb98d,#8f7c58);position:relative;overflow:hidden;margin-bottom:14px;display:flex;align-items:center;justify-content:center;}
+  .fam-card .thumb svg.fossil-ph{width:52%;color:#5c4c30;}
+  .fam-card .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+  .fam-card h3{font-size:1.02rem;margin-bottom:3px;}
+  .fam-card .badge{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+  .fam-card .periodo{font-size:0.78rem;color:var(--ink);}
+  .fam-card .anos{font-size:0.74rem;color:var(--muted);margin-bottom:12px;}
+  .arrow-btn{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--ink);display:inline-flex;align-items:center;justify-content:center;color:var(--ink);}
+  .arrow-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;}
+  .dark .arrow-btn{border-color:var(--tan);color:var(--tan);}
+
+  .center{text-align:center;margin-top:36px;}
+  .btn-dark{background:var(--ink);color:#f1e8d2;font-size:0.78rem;font-weight:700;letter-spacing:.06em;font-variant:small-caps;padding:14px 30px;border-radius:3px;border:none;}
+  .btn-tan-outline{background:none;border:1.5px solid var(--tan);color:var(--tan-light);font-size:0.78rem;font-weight:700;letter-spacing:.06em;font-variant:small-caps;padding:13px 30px;border-radius:3px;}
+
+  /* ---------- CARDS: GÊNEROS ---------- */
+  .grid-generos{display:grid;grid-template-columns:repeat(7,1fr);gap:14px;}
+  .gen-card{background:#241b10;border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:14px 12px 16px;text-align:center;}
+  .gen-card .thumb{height:90px;border-radius:4px;background:linear-gradient(160deg,#3a2c18,#171009);position:relative;overflow:hidden;margin-bottom:12px;display:flex;align-items:center;justify-content:center;}
+  .gen-card .thumb svg.fossil-ph{width:48%;color:var(--tan);opacity:.75;}
+  .gen-card .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+  .gen-card h3{font-size:0.92rem;color:#fff;margin-bottom:2px;}
+  .gen-card .fam{font-size:0.72rem;color:#a99a7f;margin-bottom:10px;}
+
+  /* ---------- DESTAQUES ROW ---------- */
+  .destaques-row{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:0;background:var(--cream-dark);}
+  .destaque-col{padding:34px 30px;border-right:1px solid var(--line);}
+  .destaque-col:last-child{border-right:none;}
+  .destaque-col h3{font-size:1.05rem;font-variant:small-caps;margin-bottom:16px;}
+
+  .fossil-destaque{display:flex;gap:14px;align-items:flex-start;}
+  .fossil-destaque .thumb{width:82px;height:82px;border-radius:50%;background:linear-gradient(160deg,#cbb98d,#8f7c58);flex-shrink:0;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+  .fossil-destaque .thumb svg.fossil-ph{width:58%;color:#5c4c30;}
+  .fossil-destaque .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+  .fossil-destaque strong{display:block;font-size:0.95rem;margin-bottom:3px;}
+  .fossil-destaque .desc{font-size:0.76rem;color:var(--muted);margin-bottom:8px;line-height:1.4;}
+  .fossil-destaque .meta{font-size:0.76rem;color:var(--ink);line-height:1.6;margin-bottom:10px;}
+  .btn-small-dark{background:var(--ink);color:#f1e8d2;font-size:0.7rem;font-weight:700;letter-spacing:.05em;font-variant:small-caps;padding:9px 16px;border-radius:3px;border:none;}
+
+  .timeline{display:flex;justify-content:space-between;position:relative;margin:10px 0 26px;}
+  .timeline::before{content:"";position:absolute;top:6px;left:0;right:0;height:1px;background:var(--muted-light);}
+  .timeline-item{position:relative;text-align:center;flex:1;font-size:0.7rem;}
+  .timeline-item .pt{width:11px;height:11px;border-radius:50%;background:var(--tan);border:2px solid var(--cream-dark);margin:0 auto 8px;position:relative;z-index:1;}
+  .timeline-item .era{font-weight:700;color:var(--ink);margin-bottom:2px;}
+  .timeline-item .anos{color:var(--muted);font-size:0.66rem;}
+  .btn-dark.full{display:block;width:100%;text-align:center;}
+
+  .curiosidade{display:flex;gap:14px;align-items:flex-start;}
+  .curiosidade .thumb{width:82px;height:100px;border-radius:6px;background:linear-gradient(160deg,#cbb98d,#8f7c58);flex-shrink:0;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+  .curiosidade .thumb svg.fossil-ph{width:55%;color:#5c4c30;}
+  .curiosidade .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+  .curiosidade p{font-size:0.82rem;line-height:1.6;color:var(--ink);}
+
+  /* ---------- FOOTER ---------- */
+  .site-footer{background:var(--bg-dark);color:#a99a7f;padding:44px 40px 22px;position:relative;overflow:hidden;}
+  .footer-watermark{position:absolute;right:20px;bottom:-10px;width:220px;opacity:.06;color:var(--tan);}
+  .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px;max-width:1200px;position:relative;}
+  .footer-brand{display:flex;gap:12px;}
+  .footer-brand .brand-mark{width:36px;height:36px;}
+  .footer-brand h4{color:#e7dcc4;font-family:Georgia,serif;font-variant:small-caps;font-size:1rem;margin-bottom:6px;}
+  .footer-brand p{font-size:0.78rem;line-height:1.5;}
+  .site-footer h5{color:#e7dcc4;font-size:0.8rem;font-variant:small-caps;letter-spacing:.04em;margin-bottom:14px;}
+  .site-footer li{margin-bottom:9px;font-size:0.8rem;}
+  .site-footer li a:hover{color:#fff;}
+  .social-icons{display:flex;gap:10px;}
+  .social-icons a{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:#cfc3a8;}
+  .social-icons svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;}
+  .footer-bottom{max-width:1200px;margin-top:34px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:0.74rem;position:relative;}
+
+  @media (max-width:1080px){
+    .site-nav{display:none;}
+    .grid-familias{grid-template-columns:repeat(3,1fr);}
+    .grid-generos{grid-template-columns:repeat(4,1fr);}
+    .destaques-row{grid-template-columns:1fr;}
+    .destaque-col{border-right:none;border-bottom:1px solid var(--line);}
+    .hero-fossil{width:100%;opacity:.25;}
+    .hero-content{max-width:100%;}
+    .stats-bar{grid-template-columns:repeat(2,1fr);}
+    .stat-item{border-bottom:1px solid rgba(255,255,255,.08);}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:640px){
+    .site-header{padding:14px 20px;flex-wrap:wrap;gap:14px;}
+    .hero{padding:44px 20px 90px;}
+    .hero-content h1{font-size:2.1rem;}
+    .stats-bar{margin:-60px 20px 0;grid-template-columns:1fr;}
+    .section{padding:60px 20px 40px;}
+    .grid-familias{grid-template-columns:1fr 1fr;}
+    .grid-generos{grid-template-columns:1fr 1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .site-footer{padding:34px 20px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M12 2c-3 3-3 7-3 7s0 4 3 7c3-3 3-7 3-7s0-4-3-7z"/><path d="M4 12h16M12 2v20"/></svg></div>
+    <div class="brand-txt">Tubarões<br>Fósseis</div>
+  </div>
+  <nav class="site-nav">
+    <a class="active" href="#inicio">Início</a>
+    <a href="#familias">Famílias Extintas</a>
+    <a href="#generos">Gêneros Extintos</a>
+    <a href="#destaque">Fósseis em Destaque</a>
+    <a href="#linha-do-tempo">Linha do Tempo</a>
+    <a href="#sobre">Sobre</a>
+  </nav>
+  <div class="header-search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+    <input type="text" placeholder="Buscar...">
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="hero-texture"></div>
+  <div class="hero-fossil" id="heroFossil">
+    <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M10,130 C10,90 40,55 100,45 C150,37 210,45 250,75 C270,88 285,100 295,108 L280,118 L295,128 L278,136 C260,150 235,162 205,168 L195,180 L188,167 C160,172 130,170 105,160 L95,175 L88,158 C60,150 30,140 10,130 Z"/>
+      <path fill="#241a10" d="M100,150 L112,168 L124,150 L136,166 L148,150 L160,164 L172,150 L184,162 L196,150 L204,158 L100,158 Z" opacity=".9"/>
+      <circle cx="230" cy="90" r="7" fill="#241a10"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <h1>História que<br>oceanos<br>não apagaram</h1>
+    <p>Explore os tubarões que já habitaram os oceanos milhões de anos atrás. Conheça as famílias e gêneros extintos através de fósseis, descobertas e teorias.</p>
+    <a class="btn-gold" href="#familias">Explorar fósseis</a>
+  </div>
+</section>
+
+<div class="stats-bar" id="statsBar"></div>
+
+<section class="section parchment" id="familias">
+  <h2 class="section-title">Famílias Extintas</h2>
+  <div class="ornament"><span class="ln"></span><span class="dot"></span><span class="ln"></span></div>
+  <div class="grid-familias" id="gridFamilias"></div>
+  <div class="center"><button class="btn-dark">Ver todas as famílias</button></div>
+</section>
+
+<section class="section dark" id="generos">
+  <h2 class="section-title">Gêneros Extintos</h2>
+  <div class="ornament"><span class="ln"></span><span class="dot"></span><span class="ln"></span></div>
+  <div class="grid-generos" id="gridGeneros"></div>
+  <div class="center"><button class="btn-tan-outline">Ver todos os gêneros</button></div>
+</section>
+
+<section class="destaques-row" id="destaque">
+  <div class="destaque-col">
+    <h3>Fósseis em destaque</h3>
+    <div class="fossil-destaque" id="fossilDestaque"></div>
+  </div>
+  <div class="destaque-col" id="linha-do-tempo">
+    <h3 style="text-align:center;">Linha do Tempo</h3>
+    <div class="timeline" id="timeline"></div>
+    <button class="btn-dark full">Explorar linha do tempo</button>
+  </div>
+  <div class="destaque-col">
+    <h3>Você sabia?</h3>
+    <div class="curiosidade" id="curiosidade"></div>
+  </div>
+</section>
+
+<footer class="site-footer" id="sobre">
+  <svg class="footer-watermark" viewBox="0 0 200 100"><path fill="currentColor" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M12 2c-3 3-3 7-3 7s0 4 3 7c3-3 3-7 3-7s0-4-3-7z"/><path d="M4 12h16M12 2v20"/></svg></div>
+      <div>
+        <h4>Tubarões Fósseis</h4>
+        <p>Preservando o passado para compreender o presente e proteger o futuro.</p>
+      </div>
+    </div>
+    <div>
+      <h5>Navegação</h5>
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#familias">Famílias Extintas</a></li>
+        <li><a href="#generos">Gêneros Extintos</a></li>
+        <li><a href="#destaque">Fósseis em Destaque</a></li>
+        <li><a href="#linha-do-tempo">Linha do Tempo</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Recursos</h5>
+      <ul>
+        <li><a href="#">Glossário</a></li>
+        <li><a href="#">Bibliografia</a></li>
+        <li><a href="#">Museus e Coleções</a></li>
+        <li><a href="#">Notícias</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Redes Sociais</h5>
+      <div class="social-icons">
+        <a href="#"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24"><path d="M14 9V6a2 2 0 012-2h2V1h-3a4 4 0 00-4 4v4H8v3h3v9h4v-9h3l1-3h-4z"/></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4z"/><circle cx="12" cy="12" r="9"/></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4 4 0 00-7 3.6A11.5 11.5 0 013 4.6a4 4 0 001.3 5.4c-.6 0-1.2-.2-1.7-.5v.1a4 4 0 003.3 4 4 4 0 01-1.8.1 4 4 0 003.8 2.8A8 8 0 012 18.4a11.4 11.4 0 006.3 1.9c7.5 0 11.6-6.3 11.6-11.6v-.5c.8-.6 1.5-1.3 2.1-2.2z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Tubarões Fósseis — Todos os direitos reservados.</span>
+    <span>Este site é apenas informativo e educacional.</span>
+  </div>
+</footer>
+
+<script src="fosseis-data.js"></script>
+<script>
+/*
+ * Todo o conteúdo (estatísticas, famílias, gêneros, fóssil em destaque,
+ * linha do tempo e a curiosidade) vem do fosseis-data.js — edite só lá.
+ * Fotos: pasta "imagens" ao lado deste arquivo, com o nome indicado em
+ * cada item de fosseis-data.js. Sem a foto, aparece um ícone de amonite
+ * fóssil no lugar.
+ */
+
+const AMONITE_SVG = `<svg class="fossil-ph" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <path d="M50,50 m0,-4 a4,4 0 1,1 -4,4 a8,8 0 1,1 8,-8 a12,12 0 1,1 -12,12 a16,16 0 1,1 16,-16 a20,20 0 1,1 -20,20 a24,24 0 1,1 24,-24"
+        fill="none" stroke="currentColor" stroke-width="3"/>
+</svg>`;
+
+function fotoOuFallback(caminho, alt){
+  return `<img src="imagens/${caminho}" alt="${alt}"
+    onload="this.style.display='block';this.previousElementSibling.style.display='none';"
+    onerror="this.style.display='none';">`;
+}
+
+function renderStats(){
+  const s = FOSSEIS_ESTATISTICAS;
+  document.getElementById("statsBar").innerHTML = `
+    <div class="stat-item">
+      <div class="ic">${AMONITE_SVG.replace('class="fossil-ph"','')}</div>
+      <div><div class="num">${s.especiesExtintas}</div><div class="lbl">Espécies Extintas<br>já identificadas</div></div>
+    </div>
+    <div class="stat-item">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3l6 18 6-18M4 9h16"/></svg></div>
+      <div><div class="num">${s.fosseisCatalogados}</div><div class="lbl">Fósseis Catalogados<br>em coleções mundiais</div></div>
+    </div>
+    <div class="stat-item">
+      <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></div>
+      <div><div class="num">${s.primeirosRegistrosAnos} <small style="font-size:.6em;">M.A.</small></div><div class="lbl">${s.primeirosRegistrosPeriodo}</div></div>
+    </div>
+    <div class="stat-item">
+      <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg></div>
+      <div><div class="num">Hoje</div><div class="lbl">Estudos contínuos<br>e novas descobertas</div></div>
+    </div>`;
+}
+
+function renderFamilias(){
+  document.getElementById("gridFamilias").innerHTML = FAMILIAS_EXTINTAS.map(f => `
+    <div class="fam-card">
+      <div class="thumb">${AMONITE_SVG}${fotoOuFallback(f.imagem, f.nome)}</div>
+      <h3>${f.nome}</h3>
+      <div class="badge">Extinta</div>
+      <div class="periodo">${f.periodo}</div>
+      <div class="anos">(${f.anos})</div>
+      <a class="arrow-btn" href="familia-fossil.html?familia=${f.slug}"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div>`).join("");
+}
+
+function renderGeneros(){
+  document.getElementById("gridGeneros").innerHTML = GENEROS_EXTINTOS.map(g => `
+    <div class="gen-card">
+      <div class="thumb">${AMONITE_SVG}${fotoOuFallback(g.imagem, g.nome)}</div>
+      <h3>${g.nome}</h3>
+      <div class="fam">${g.familia}</div>
+      <a class="arrow-btn" href="genero-fossil.html?genero=${g.slug}"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div>`).join("");
+}
+
+function renderFossilDestaque(){
+  const f = FOSSIL_DESTAQUE;
+  document.getElementById("fossilDestaque").innerHTML = `
+    <div class="thumb">${AMONITE_SVG}${fotoOuFallback(f.imagem, f.nome)}</div>
+    <div>
+      <strong>${f.nome}</strong>
+      <div class="desc">${f.descricao}</div>
+      <div class="meta">Idade: ${f.idade}<br>Local: ${f.local}</div>
+      <button class="btn-small-dark">Saiba mais</button>
+    </div>`;
+}
+
+function renderTimeline(){
+  document.getElementById("timeline").innerHTML = LINHA_DO_TEMPO.map(t => `
+    <div class="timeline-item">
+      <div class="pt"></div>
+      <div class="era">${t.era}</div>
+      <div class="anos">${t.anos}</div>
+    </div>`).join("");
+}
+
+function renderCuriosidade(){
+  const v = VOCE_SABIA;
+  document.getElementById("curiosidade").innerHTML = `
+    <div class="thumb">${AMONITE_SVG}${fotoOuFallback(v.imagem, "Curiosidade")}</div>
+    <p>${v.texto}</p>`;
+}
+
+function renderHeroFoto(){
+  // se existir uma foto real definida no fosseis-data.js (campo opcional heroImagem), usa ela
+  if (typeof FOSSIL_DESTAQUE !== "undefined" && FOSSIL_DESTAQUE.heroImagem){
+    const el = document.getElementById("heroFossil");
+    const img = document.createElement("img");
+    img.alt = "Fóssil de tubarão";
+    img.onload = () => { img.style.display = "block"; el.querySelector("svg").style.display = "none"; };
+    img.onerror = () => { img.remove(); };
+    img.src = "imagens/" + FOSSIL_DESTAQUE.heroImagem;
+    el.prepend(img);
+  }
+}
+
+renderStats();
+renderFamilias();
+renderGeneros();
+renderFossilDestaque();
+renderTimeline();
+renderCuriosidade();
+renderHeroFoto();
+</script>
+</body>
+</html>
