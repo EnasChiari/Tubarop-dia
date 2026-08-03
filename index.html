@@ -799,16 +799,16 @@
     const e = ESPECIES[idx];
     if(!e) return;
     const status = STATUS_LABEL[e.statusIUCN] || e.statusIUCN || '';
-    const curiosidade = (e.curiosidades && e.curiosidades[0]) ? '<br><br><em>Curiosidade:</em> '+e.curiosidades[0] : '';
     modalBox.innerHTML =
       '<button class="modal-close" data-close>✕</button>' +
       '<h3>'+e.nomePopular+'</h3>' +
-      '<em class="article-em">'+e.nomeCientifico+'</em>' +
-      '<p class="article-body">'+e.descricao+
-        '<br><br><strong>Porte:</strong> '+e.comprimento+
-        (status ? ' &nbsp;•&nbsp; <strong>Status de conservação:</strong> '+status : '') +
-        curiosidade +
-      '</p>';
+      '<p class="modal-sub" style="font-style:italic;">'+e.nomeCientifico+'</p>' +
+      '<p class="article-body">Família '+e.familia+'. '+shortDesc(e.descricao, 160)+' A página completa da espécie reúne anatomia, comportamento e distribuição.</p>' +
+      '<div style="display:flex;gap:24px;margin-top:14px;">' +
+        '<div><div style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;">Porte</div><div style="font-family:Georgia,serif;font-weight:700;font-size:0.92rem;">'+e.comprimento+'</div></div>' +
+        (status ? '<div><div style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;">Status</div><div style="font-family:Georgia,serif;font-weight:700;font-size:0.92rem;">'+status+'</div></div>' : '') +
+      '</div>' +
+      '<div class="modal-submit" style="text-align:center;cursor:pointer;" data-action="href:especie.html?especie='+e.slug+'">Abrir página completa →</div>';
     overlay.classList.add('show');
   }
 
