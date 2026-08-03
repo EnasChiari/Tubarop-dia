@@ -63,6 +63,8 @@
     top:50%;
     transform:translateY(-50%);
     width:620px;
+    height:420px;
+    border-radius:20px;
     opacity:0.9;
   }
   .hero-shark svg{width:100%;height:auto;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5));}
@@ -258,7 +260,11 @@
   .thumb-3{background:linear-gradient(135deg,#324a7a,#0a1120);}
   .thumb-4{background:linear-gradient(135deg,#3c342c,#181410);}
 
-  /* ===== IMAGE PLACEHOLDERS ===== */
+  /* ===== IMAGE PLACEHOLDERS =====
+     Basta salvar o arquivo de imagem com o MESMO NOME indicado no
+     atributo src (dentro da pasta /imagens) que ele aparece
+     automaticamente no lugar do espaço reservado — não é preciso
+     mexer em nenhuma linha de código. */
   .img-placeholder{
     display:flex;align-items:center;justify-content:center;
     text-align:center;
@@ -266,10 +272,29 @@
     font-size:0.72rem;
     line-height:1.4;
     padding:6px;
+    border:1.5px dashed rgba(63,93,217,0.35);
+    background:rgba(63,93,217,0.05);
   }
-  .hero-shark.img-placeholder img{
-    width:420px;height:350px;
-
+  .img-placeholder .placeholder-label{
+    color:var(--muted);
+    pointer-events:none;
+    opacity:0.85;
+  }
+  /* Toda imagem começa oculta; o próprio atributo onload do <img>
+     a revela (e esconde o rótulo) assim que o arquivo é encontrado. */
+  .img-placeholder img{
+    display:none;
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+  }
+  /* Espaços "foto" (cartões, capas, miniaturas): a imagem preenche
+     a área toda em vez de só caber dentro dela. */
+  .img-placeholder.fill img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:inherit;
   }
   .fam-thumb.img-placeholder span, .article-thumb.img-placeholder span, .featured-card .img.img-placeholder span{
     pointer-events:none;
@@ -279,8 +304,10 @@
     border-width:1.5px;
   }
 
+  .icon-placeholder{width:16px;height:16px;flex-shrink:0;}
   .menu-ic .icon-placeholder {width:18px;height:18px;}
   .search-box .icon-placeholder {width:14px;height:14px;}
+  .topbar-actions .icon-placeholder{width:16px;height:16px;}
 
   /* footer */
   .footer{
@@ -428,8 +455,9 @@
   <!-- ================= SIDEBAR ================= -->
   <aside class="sidebar">
     <div class="brand">
-      <div class="brand-mark">
-        <img src="icon/Logo.png" alt="">
+      <div class="brand-mark img-placeholder">
+        <span class="placeholder-label">Logo</span>
+        <img src="imagens/logo.png" alt="Logo TubaroPédia" onload="this.style.display='block'; this.previousElementSibling.style.display='none';">
       </div>
       <div>
         <h1>TubaroPédia</h1>
@@ -439,32 +467,33 @@
 
 
     <div class="nav-group">
-      <div class="nav-item active" data-action="scroll-top"><span class="ic img-placeholder"><img src="icon/home.png" alt=""></span>Página principal</div>
-      <div class="nav-item" ><span class="ic img-placeholder"><a href="catalogo.html"><img src="icon/todos.png" alt=""></span>Todas as espécies</a></div>
-      <div class="nav-item" ><span class="ic img-placeholder"><a href="familias.html"><img src="icon/familia.png" alt=""></span>Famílias</a></div>
-      <div class="nav-item" data-action="toast:Seção de Gêneros em construção."><span class="ic img-placeholder"></span>Gêneros</div>
-      <div class="nav-item" data-action="toast:Seção de Anatomia em construção."><span class="ic img-placeholder"><img src="icon/anatomia.png" alt=""></span>Anatomia</div>
-      <div class="nav-item" data-action="toast:Seção de Habitat em construção."><span class="ic img-placeholder"><img src="icon/habitat.png" alt=""></span>Habitat</div>
-      <div class="nav-item" data-action="toast:Seção de Comportamento em construção."><span class="ic img-placeholder"></span>Comportamento</div>
-      <div class="nav-item" data-action="toast:Seção de Conservação em construção."><span class="ic img-placeholder"></span>Conservação</div>
-      <div class="nav-item" data-action="toast:Seção de Fósseis em construção."><span class="ic img-placeholder"></span>Fósseis</div>
-      <div class="nav-item" data-action="toast:Seção de Notícias em construção."><span class="ic img-placeholder"><img src="icon/noticia.png" alt=""></span>Notícias</div>
-      <div class="nav-item" data-action="toast:Seção de Bibliografia em construção."><span class="ic img-placeholder"><img src="icon/bibliografia.png" alt=""></span>Bibliografia</div>
+      <div class="nav-item active" data-action="scroll-top"><span class="ic img-placeholder"><img src="imagens/icone-inicio.png" alt="" onload="this.style.display='block';"></span>Página principal</div>
+      <a href="catalogo.html" class="nav-item"><span class="ic img-placeholder"><img src="imagens/icone-todas-especies.png" alt="" onload="this.style.display='block';"></span>Todas as espécies</a>
+      <a href="familias.html" class="nav-item"><span class="ic img-placeholder"><img src="imagens/icone-familias.png" alt="" onload="this.style.display='block';"></span>Famílias</a>
+      <div class="nav-item" data-action="toast:Seção de Gêneros em construção."><span class="ic img-placeholder"><img src="imagens/icone-generos.png" alt="" onload="this.style.display='block';"></span>Gêneros</div>
+      <div class="nav-item" data-action="toast:Seção de Anatomia em construção."><span class="ic img-placeholder"><img src="imagens/icone-anatomia.png" alt="" onload="this.style.display='block';"></span>Anatomia</div>
+      <div class="nav-item" data-action="toast:Seção de Habitat em construção."><span class="ic img-placeholder"><img src="imagens/icone-habitat.png" alt="" onload="this.style.display='block';"></span>Habitat</div>
+      <div class="nav-item" data-action="toast:Seção de Comportamento em construção."><span class="ic img-placeholder"><img src="imagens/icone-comportamento.png" alt="" onload="this.style.display='block';"></span>Comportamento</div>
+      <div class="nav-item" data-action="toast:Seção de Conservação em construção."><span class="ic img-placeholder"><img src="imagens/icone-conservacao.png" alt="" onload="this.style.display='block';"></span>Conservação</div>
+      <div class="nav-item" data-action="toast:Seção de Fósseis em construção."><span class="ic img-placeholder"><img src="imagens/icone-fosseis.png" alt="" onload="this.style.display='block';"></span>Fósseis</div>
+      <div class="nav-item" data-action="toast:Seção de Notícias em construção."><span class="ic img-placeholder"><img src="imagens/icone-noticias.png" alt="" onload="this.style.display='block';"></span>Notícias</div>
+      <div class="nav-item" data-action="toast:Seção de Bibliografia em construção."><span class="ic img-placeholder"><img src="imagens/icone-bibliografia.png" alt="" onload="this.style.display='block';"></span>Bibliografia</div>
     </div>
 
     <div class="nav-group">
       <div class="nav-label">Ferramentas</div>
-      <div class="nav-item" data-action="random-article"><span class="ic img-placeholder"><img src="icon/aleatório.png" alt=""></span>Páginas aleatórias</div>
-      <div class="nav-item" data-action="toast:Nenhuma mudança recente registrada ainda."><span class="ic img-placeholder"></span>Mudanças recentes</div>
-      <div class="nav-item" data-action="toast:Página de testes em construção."><span class="ic img-placeholder"></span>Página de testes</div>
-      <div class="nav-item" data-action="toast:Central de ajuda em construção."><span class="ic img-placeholder"><img src="icon/ajuda.png" alt=""></span>Ajuda</div>
+      <div class="nav-item" data-action="random-article"><span class="ic img-placeholder"><img src="imagens/icone-aleatorio.png" alt="" onload="this.style.display='block';"></span>Páginas aleatórias</div>
+      <div class="nav-item" data-action="toast:Nenhuma mudança recente registrada ainda."><span class="ic img-placeholder"><img src="imagens/icone-mudancas.png" alt="" onload="this.style.display='block';"></span>Mudanças recentes</div>
+      <div class="nav-item" data-action="toast:Página de testes em construção."><span class="ic img-placeholder"><img src="imagens/icone-testes.png" alt="" onload="this.style.display='block';"></span>Página de testes</div>
+      <div class="nav-item" data-action="toast:Central de ajuda em construção."><span class="ic img-placeholder"><img src="imagens/icone-ajuda.png" alt="" onload="this.style.display='block';"></span>Ajuda</div>
     </div>
 
     <div class="nav-group">
       <div class="nav-label">Em destaque</div>
       <div class="featured-card">
-        <div class="img img-placeholder">
-          <span>Imagem</span>
+        <div class="img img-placeholder fill">
+          <span class="placeholder-label">Imagem</span>
+          <img src="imagens/destaque-nariz-preto.png" alt="" onload="this.style.display='block'; this.previousElementSibling.style.display='none';">
         </div>
         <div class="body">
           <h4>Tubarão-de-nariz-preto</h4>
@@ -475,9 +504,9 @@
     </div>
 
     <div class="social-row">
-      <span class="ic img-placeholder"></span>
-      <span class="ic img-placeholder"></span>
-      <span class="ic img-placeholder"></span>
+      <span class="ic img-placeholder"><img src="imagens/icone-social-1.png" alt="" onload="this.style.display='block';"></span>
+      <span class="ic img-placeholder"><img src="imagens/icone-social-2.png" alt="" onload="this.style.display='block';"></span>
+      <span class="ic img-placeholder"><img src="imagens/icone-social-3.png" alt="" onload="this.style.display='block';"></span>
     </div>
   </aside>
 
@@ -489,13 +518,12 @@
         <p>A enciclopédia dos tubarões</p>
       </div>
       <form class="search-box" id="searchForm">
-        <img src="icon/pesquisa.png" alt="">
-        <span class="icon-placeholder"></span>
+        <span class="icon-placeholder img-placeholder"><img src="imagens/icone-pesquisa.png" alt="" onload="this.style.display='block';"></span>
         <input id="searchInput" type="text" placeholder="Pesquisar na TubaroPédia" autocomplete="off" style="border:none;background:transparent;outline:none;font-family:inherit;font-size:0.86rem;color:var(--ink);flex:1;">
       </form>
       <div class="topbar-actions">
-        <span class="item" data-action="open-modal:contribuir"><span class="icon-placeholder"><img src="opinião.png" alt=""></span>Contribuir</span>
-        <span class="item" data-action="open-modal:entrar"><span class="icon-placeholder"><img src="login.png" alt=""></span>Entrar</span>
+        <span class="item" data-action="open-modal:contribuir"><span class="icon-placeholder img-placeholder"><img src="imagens/icone-contribuir.png" alt="" onload="this.style.display='block';"></span>Contribuir</span>
+        <span class="item" data-action="open-modal:entrar"><span class="icon-placeholder img-placeholder"><img src="imagens/icone-entrar.png" alt="" onload="this.style.display='block';"></span>Entrar</span>
         <label for="menu-toggle" class="menu-ic" aria-label="Abrir menu">
           <span class="bar"></span>
           <span class="bar"></span>
@@ -510,8 +538,9 @@
         <p>Informações completas e confiáveis sobre todas as espécies de tubarões, sua biologia, ecologia, evolução e conservação.</p>
         <a href="catalogo.html" class="btn-primary">Explorar espécies</a>
       </div>
-      <div class="hero-shark img-placeholder">
-        <span><img src="icon/1785433336114.png" alt=""></span>
+      <div class="hero-shark img-placeholder fill">
+        <span class="placeholder-label">Imagem principal<br>(tubarão)</span>
+        <img src="imagens/hero-tubarao.png" alt="" onload="this.style.display='block'; this.previousElementSibling.style.display='none';">
       </div>
     </section>
 
@@ -519,7 +548,7 @@
       <!-- STAT CARDS -->
       <div class="stat-cards">
         <div class="stat-card">
-          <div class="stat-icon blue img-placeholder"></div>
+          <div class="stat-icon blue img-placeholder"><img src="imagens/stat-especies.png" alt="" onload="this.style.display='block';"></div>
           <div>
             <h3>Espécies</h3>
             <p>Mais de 500 espécies catalogadas com fotos, descrições e distribuição.</p>
@@ -527,7 +556,7 @@
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon teal img-placeholder"></div>
+          <div class="stat-icon teal img-placeholder"><img src="imagens/stat-anatomia.png" alt="" onload="this.style.display='block';"></div>
           <div>
             <h3>Anatomia</h3>
             <p>Conheça a incrível biologia dos tubarões: esqueletos, dentes, sentidos e mais.</p>
@@ -535,7 +564,7 @@
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon globe img-placeholder"></div>
+          <div class="stat-icon globe img-placeholder"><img src="imagens/stat-conservacao.png" alt="" onload="this.style.display='block';"></div>
           <div>
             <h3>Conservação</h3>
             <p>Ameaças, status de conservação e projetos que ajudam a proteger os tubarões.</p>
@@ -559,27 +588,27 @@
               <tr>
                 <td class="name">Carcharhinidae</td>
                 <td class="desc">A maior família de tubarões, inclui espécies costeiras e oceânicas.</td>
-                <td><div class="fam-thumb img-placeholder"><span>Imagem</span></div></td>
+                <td><div class="fam-thumb img-placeholder fill"><span class="placeholder-label">Imagem</span><img src="imagens/familia-carcharhinidae.png" alt="" onload="this.style.display='block'; this.previousElementSibling.style.display='none';"></div></td>
               </tr>
               <tr>
                 <td class="name">Sphyrnidae</td>
                 <td class="desc">Os tubarões-martelo, conhecidos pelo formato único da cabeça.</td>
-                <td><div class="fam-thumb img-placeholder"><span>Imagem</span></div></td>
+                <td><div class="fam-thumb img-placeholder fill"><span class="placeholder-label">Imagem</span><img src="imagens/familia-sphyrnidae.png" alt="" onload="this.style.display='block'; this.previousElementSibling.style.display='none';"></div></td>
               </tr>
               <tr>
                 <td class="name">Lamnidae</td>
                 <td class="desc">Tubarões de grande porte, migratórios e de águas frias.</td>
-                <td><div class="fam-thumb img-placeholder"><span>Imagem</span></div></td>
+                <td><div class="fam-thumb img-placeholder fill"><span class="placeholder-label">Imagem</span><img src="imagens/familia-lamnidae.png" alt="" onload="this.style.display='block'; this.previousElementSibling.style.display='none';"></div></td>
               </tr>
               <tr>
                 <td class="name">Orectolobidae</td>
                 <td class="desc">Tubarões-lixa, geralmente de hábitos bentônicos e dóceis.</td>
-                <td><div class="fam-thumb img-placeholder"><span>Imagem</span></div></td>
+                <td><div class="fam-thumb img-placeholder fill"><span class="placeholder-label">Imagem</span><img src="imagens/familia-orectolobidae.png" alt="" onload="this.style.display='block'; this.previousElementSibling.style.display='none';"></div></td>
               </tr>
               <tr>
                 <td class="name">Scyliorhinidae</td>
                 <td class="desc">Inclui os cações e tubarões de pequeno porte.</td>
-                <td><div class="fam-thumb img-placeholder"><span>Imagem</span></div></td>
+                <td><div class="fam-thumb img-placeholder fill"><span class="placeholder-label">Imagem</span><img src="imagens/familia-scyliorhinidae.png" alt="" onload="this.style.display='block'; this.previousElementSibling.style.display='none';"></div></td>
               </tr>
             </tbody>
           </table>
@@ -591,27 +620,27 @@
             <div class="panel-head"><h3 style="font-size:1.05rem;">Classificação taxonômica</h3></div>
             <ul class="tax-list">
               <li>
-                <span class="tax-icon img-placeholder"></span>
+                <span class="tax-icon img-placeholder"><img src="imagens/taxonomia-reino.png" alt="" onload="this.style.display='block';"></span>
                 <div><div class="k">Reino</div><div class="v">Animalia</div></div>
               </li>
               <li>
-                <span class="tax-icon img-placeholder"></span>
+                <span class="tax-icon img-placeholder"><img src="imagens/taxonomia-filo.png" alt="" onload="this.style.display='block';"></span>
                 <div><div class="k">Filo</div><div class="v">Chordata</div></div>
               </li>
               <li>
-                <span class="tax-icon img-placeholder"></span>
+                <span class="tax-icon img-placeholder"><img src="imagens/taxonomia-classe.png" alt="" onload="this.style.display='block';"></span>
                 <div><div class="k">Classe</div><div class="v">Chondrichthyes</div></div>
               </li>
               <li>
-                <span class="tax-icon img-placeholder"></span>
+                <span class="tax-icon img-placeholder"><img src="imagens/taxonomia-ordem.png" alt="" onload="this.style.display='block';"></span>
                 <div><div class="k">Ordem</div><div class="v">Selachimorpha</div></div>
               </li>
               <li>
-                <span class="tax-icon img-placeholder"></span>
+                <span class="tax-icon img-placeholder"><img src="imagens/taxonomia-superordem.png" alt="" onload="this.style.display='block';"></span>
                 <div><div class="k">Superordem</div><div class="v">Galeomorphii</div></div>
               </li>
               <li>
-                <span class="tax-icon img-placeholder"></span>
+                <span class="tax-icon img-placeholder"><img src="imagens/taxonomia-info.png" alt="" onload="this.style.display='block';"></span>
                 <div><div class="k">Informação</div><div class="v"><a href="#" data-action="toast:Artigo sobre classificação em construção.">Saiba mais sobre a classificação</a></div></div>
               </li>
             </ul>
@@ -644,28 +673,28 @@
         </div>
         <div class="articles-grid">
           <div class="article-card">
-            <div class="article-thumb thumb-1 img-placeholder"><span>Imagem do artigo</span></div>
+            <div class="article-thumb thumb-1 img-placeholder fill"><span class="placeholder-label">Imagem do artigo</span><img src="imagens/especie-pontas-prateadas.png" alt="" onload="this.style.display='block'; this.previousElementSibling.style.display='none';"></div>
             <h4>Tubarão-de-pontas-prateadas</h4>
             <em>Carcharhinus albimarginatus</em>
             <p>Grande tubarão oceânico com marcantes pontas brancas nas nadadeiras.</p>
             <div class="link" data-action="open-article:1" style="cursor:pointer;">Ler artigo →</div>
           </div>
           <div class="article-card">
-            <div class="article-thumb thumb-2 img-placeholder"><span>Imagem do artigo</span></div>
+            <div class="article-thumb thumb-2 img-placeholder fill"><span class="placeholder-label">Imagem do artigo</span><img src="imagens/especie-nariz-grande.png" alt="" onload="this.style.display='block'; this.previousElementSibling.style.display='none';"></div>
             <h4>Tubarão-de-nariz-grande</h4>
             <em>Carcharhinus altimus</em>
             <p>Predador de águas profundas com focinho longo, comum na plataforma continental.</p>
             <div class="link" data-action="open-article:2" style="cursor:pointer;">Ler artigo →</div>
           </div>
           <div class="article-card">
-            <div class="article-thumb thumb-3 img-placeholder"><span>Imagem do artigo</span></div>
+            <div class="article-thumb thumb-3 img-placeholder fill"><span class="placeholder-label">Imagem do artigo</span><img src="imagens/especie-gracioso.png" alt="" onload="this.style.display='block'; this.previousElementSibling.style.display='none';"></div>
             <h4>Tubarão-gracioso</h4>
             <em>Carcharhinus amblyrhynchoides</em>
             <p>Tubarão costeiro esguio e ágil das águas tropicais do Indo-Pacífico.</p>
             <div class="link" data-action="open-article:3" style="cursor:pointer;">Ler artigo →</div>
           </div>
           <div class="article-card">
-            <div class="article-thumb thumb-4 img-placeholder"><span>Imagem do artigo</span></div>
+            <div class="article-thumb thumb-4 img-placeholder fill"><span class="placeholder-label">Imagem do artigo</span><img src="imagens/especie-cinzento-recifes.png" alt="" onload="this.style.display='block'; this.previousElementSibling.style.display='none';"></div>
             <h4>Tubarão-cinzento-dos-recifes</h4>
             <em>Carcharhinus amblyrhynchos</em>
             <p>Predador ágil e comum nos recifes de coral do Indo-Pacífico.</p>
@@ -679,7 +708,7 @@
     <footer class="footer">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="mark img-placeholder"></div>
+          <div class="mark img-placeholder"><img src="imagens/logo.png" alt="" onload="this.style.display='block';"></div>
           <div>
             <h5>TubaroPédia</h5>
             <p>A enciclopédia livre sobre tubarões. Conteúdo colaborativo para educação, pesquisa e conservação.</p>
