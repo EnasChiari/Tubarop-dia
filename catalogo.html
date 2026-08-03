@@ -367,7 +367,7 @@
           <select id="filterStatus">
             <option value="">Todos</option>
             <option value="CR">Criticamente ameaçada</option>
-            <option value="AM">Ameaçada</option>
+            <option value="EN">Em perigo</option>
             <option value="VU">Vulnerável</option>
             <option value="NT">Quase ameaçada</option>
             <option value="LC">Pouco preocupante</option>
@@ -553,7 +553,7 @@
   let saved = new Set();
 
   document.getElementById('dataNote').textContent =
-    "Catálogo de demonstração com " + SPECIES.length; + " espécies.";
+    " Catálogo com " + SPECIES.length + " espécie" + (SPECIES.length===1?"":"s") + " cadastrada" + (SPECIES.length===1?"":"s") + ".";
 
   /* ---------- popula selects de família e habitat ---------- */
   const famSelect = document.getElementById('filterFamily');
