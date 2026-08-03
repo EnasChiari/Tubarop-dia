@@ -30,6 +30,187 @@
 
   a{color:inherit;text-decoration:none;}
   ul{list-style:none;}
+  #menu-toggle{ display:none; }
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .35s ease;
+  z-index:800;
+}
+
+.menu-ic{
+  position:relative;
+  z-index:850;
+  width:20px;
+  height:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.menu-ic .bar{
+  position:absolute;
+  width:20px;
+  height:2px;
+  background:var(--ink);
+  border-radius:2px;
+  transition:transform .3s ease, opacity .2s ease, top .3s ease;
+}
+.menu-ic .bar:nth-child(1){ top:2px; }
+.menu-ic .bar:nth-child(2){ top:8px; }
+.menu-ic .bar:nth-child(3){ top:14px; }
+
+#menu-toggle:checked ~ .overlay{
+  opacity:1;
+  pointer-events:auto;
+}
+
+#menu-toggle:checked ~ .shell .sidebar{
+  transform:translateX(0);
+}
+
+#menu-toggle:checked ~ .shell .menu-ic .bar:nth-child(1){
+  top:8px;
+  transform:rotate(45deg);
+}
+#menu-toggle:checked ~ .shell .menu-ic .bar:nth-child(2){
+  opacity:0;
+}
+#menu-toggle:checked ~ .shell .menu-ic .bar:nth-child(3){
+  top:8px;
+  transform:rotate(-45deg);
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  background:var(--navy-950);
+  color:#c7cfe0;
+  padding:28px 22px 24px;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:30px;
+}
+.brand-mark img{
+  width:46px;height:46px;
+  border:2px solid #7d8bb5;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.brand-mark svg{width:26px;height:26px;fill:#e8ebf3;}
+.brand h1{
+  font-family:Georgia,serif;
+  font-size:1.32rem;
+  color:#fff;
+  letter-spacing:0.2px;
+  line-height:1.1;
+}
+.brand p{
+  font-size:0.68rem;
+  color:#8a93ad;
+  margin-top:3px;
+}
+
+.nav-group{margin-bottom:22px;}
+.nav-label{
+  font-size:0.68rem;
+  text-transform:uppercase;
+  letter-spacing:0.09em;
+  color:#5f6784;
+  padding:0 10px 8px;
+}
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:9px 10px;
+  border-radius:8px;
+  font-size:0.88rem;
+  color:#b7bfd6;
+  cursor:pointer;
+  transition:background .15s ease, color .15s ease;
+}
+.nav-item:hover{background:#141d33;color:#fff;}
+.nav-item.active{
+  background:var(--blue-accent);
+  color:#fff;
+  font-weight:600;
+}
+.nav-item .ic{
+  width:17px;height:17px;
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-item .ic svg{width:100%;height:100%;fill:currentColor;}
+
+.featured-card{
+  background:linear-gradient(160deg,#152140,#0e1830);
+  border:1px solid #1f2c4d;
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:18px;
+}
+.featured-card .img{
+  height:110px;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.10), transparent 60%),
+    linear-gradient(135deg,#2b3d6b,#0c1428);
+  display:flex;align-items:center;justify-content:center;
+}
+.featured-card .img svg{width:52px;height:52px;fill:#8fa3d6;opacity:.85;}
+.featured-card .body{padding:12px 14px 14px;}
+.featured-card h4{color:#fff;font-family:Georgia,serif;font-size:0.95rem;margin-bottom:2px;}
+.featured-card em{display:block;color:#8a93ad;font-size:0.76rem;font-style:italic;margin-bottom:8px;}
+.featured-card .link{font-size:0.78rem;color:var(--blue-accent-light);font-weight:600;}
+
+.social-row{display:flex;gap:14px;padding:4px 6px;}
+.social-row .ic{width:18px;height:18px;color:#8a93ad;}
+.social-row .ic svg{width:100%;height:100%;fill:currentColor;}
+
+/* ===== TOP HEADER ===== */
+.topbar{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding:16px 36px;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+.topbar .title h2{font-family:Georgia,serif;font-size:1.4rem;color:var(--ink);}
+.topbar .title p{font-size:0.76rem;color:var(--muted);}
+.search-box{
+  flex:1;
+  max-width:440px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px 16px;
+  color:var(--muted);
+  font-size:0.86rem;
+}
+.search-box svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;flex-shrink:0;}
+.topbar-actions{display:flex;align-items:center;gap:22px;font-size:0.86rem;color:var(--ink);}
+.topbar-actions .item{display:flex;align-items:center;gap:6px;cursor:pointer;}
+.topbar-actions .item svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:1.8;}
+.topbar-actions .menu-ic svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.8;}
 
   /* ===== LAYOUT SHELL ===== */
   .shell{
@@ -325,7 +506,7 @@
   <aside class="sidebar">
     <div class="brand">
       <div class="brand-mark">
-        <img src="Logo.png" alt="">
+        <img src="icon/Logo.png" alt="">
       </div>
       <div>
         <h1>TubaroPédia</h1>
@@ -334,25 +515,25 @@
     </div>
 
     <div class="nav-group">
-      <div class="nav-item active" data-action="scroll-top"><span class="ic img-placeholder"><img src="home.png" alt=""></span>Página principal</div>
-      <div class="nav-item"><a href="catalogo.html"><span class="ic img-placeholder"><img src="todos.png" alt=""></span>Todas as espécies</a></div>
-      <div class="nav-item"><a href="familias.html"><span class="ic img-placeholder"><img src="familia.png" alt=""></span>Famílias</a></div>
+      <div class="nav-item active" data-action="scroll-top"><span class="ic img-placeholder"><img src="icon/home.png" alt=""></span>Página principal</div>
+      <div class="nav-item"><a href="catalogo.html"><span class="ic img-placeholder"><img src="icon/todos.png" alt=""></span>Todas as espécies</a></div>
+      <div class="nav-item"><a href="familias.html"><span class="ic img-placeholder"><img src="icon/familia.png" alt=""></span>Famílias</a></div>
       <div class="nav-item" data-action="toast:Seção de Gêneros em construção."><span class="ic img-placeholder"></span>Gêneros</div>
-      <div class="nav-item" data-action="toast:Seção de Anatomia em construção."><span class="ic img-placeholder"><img src="anatomia.png" alt=""></span>Anatomia</div>
-      <div class="nav-item" data-action="toast:Seção de Habitat em construção."><span class="ic img-placeholder"><img src="habitat.png" alt=""></span>Habitat</div>
+      <div class="nav-item" data-action="toast:Seção de Anatomia em construção."><span class="ic img-placeholder"><img src="icon/anatomia.png" alt=""></span>Anatomia</div>
+      <div class="nav-item" data-action="toast:Seção de Habitat em construção."><span class="ic img-placeholder"><img src="icon/habitat.png" alt=""></span>Habitat</div>
       <div class="nav-item" data-action="toast:Seção de Comportamento em construção."><span class="ic img-placeholder"></span>Comportamento</div>
       <div class="nav-item" data-action="toast:Seção de Conservação em construção."><span class="ic img-placeholder"></span>Conservação</div>
       <div class="nav-item" data-action="toast:Seção de Fósseis em construção."><span class="ic img-placeholder"></span>Fósseis</div>
-      <div class="nav-item" data-action="toast:Seção de Notícias em construção."><span class="ic img-placeholder"><img src="noticia.png" alt=""></span>Notícias</div>
-      <div class="nav-item" data-action="toast:Seção de Bibliografia em construção."><span class="ic img-placeholder"><img src="bibliografia.png" alt=""></span>Bibliografia</div>
+      <div class="nav-item" data-action="toast:Seção de Notícias em construção."><span class="ic img-placeholder"><img src="icon/noticia.png" alt=""></span>Notícias</div>
+      <div class="nav-item" data-action="toast:Seção de Bibliografia em construção."><span class="ic img-placeholder"><img src="icon/bibliografia.png" alt=""></span>Bibliografia</div>
     </div>
 
     <div class="nav-group">
       <div class="nav-label">Ferramentas</div>
-      <div class="nav-item" data-action="random-article"><span class="ic img-placeholder"><img src="aleatório.png" alt=""></span>Páginas aleatórias</div>
+      <div class="nav-item" data-action="random-article"><span class="ic img-placeholder"><img src="icon/aleatório.png" alt=""></span>Páginas aleatórias</div>
       <div class="nav-item" data-action="toast:Nenhuma mudança recente registrada ainda."><span class="ic img-placeholder"></span>Mudanças recentes</div>
       <div class="nav-item" data-action="toast:Página de testes em construção."><span class="ic img-placeholder"></span>Página de testes</div>
-      <div class="nav-item" data-action="toast:Central de ajuda em construção."><span class="ic img-placeholder"><img src="ajuda.png" alt=""></span>Ajuda</div>
+      <div class="nav-item" data-action="toast:Central de ajuda em construção."><span class="ic img-placeholder"><img src="icon/ajuda.png" alt=""></span>Ajuda</div>
     </div>
 
     <div class="nav-group">
@@ -384,12 +565,12 @@
         <p>A enciclopédia dos tubarões</p>
       </div>
       <form class="search-box" id="searchForm">
-        <img src="pesquisa.png" alt="">
+        <img src="icon/pesquisa.png" alt="">
         <input id="searchInput" type="text" placeholder="Pesquisar na TubaroPédia" autocomplete="off" style="border:none;background:transparent;outline:none;font-family:inherit;font-size:0.86rem;color:var(--ink);flex:1;">
       </form>
       <div class="topbar-actions">
-        <span class="item" data-action="open-modal:contribuir"><span class="icon-placeholder"><img src="opinião.png" alt=""></span>Contribuir</span>
-        <span class="item" data-action="open-modal:entrar"><span class="icon-placeholder"><img src="login.png" alt=""></span>Entrar</span>
+        <span class="item" data-action="open-modal:contribuir"><span class="icon-placeholder"><img src="icon/opinião.png" alt=""></span>Contribuir</span>
+        <span class="item" data-action="open-modal:entrar"><span class="icon-placeholder"><img src="icon/login.png" alt=""></span>Entrar</span>
         <label for="menu-toggle" class="menu-ic" aria-label="Abrir menu">
           <span class="bar"></span>
           <span class="bar"></span>
