@@ -54,6 +54,59 @@ const GENEROS = [
       { nome: "Tubarão-de-galápagos", cientifico: "Carcharhinus galapagensis", imagem: "tubarao-de-galapagos.jpg" },
     ],
     generosRelacionados: ["sphyrna", "galeocerdo", "prionace", "negaprion"] },
+   {
+  slug: "carcharodon",
+  nome: "Carcharodon",
+  familia: "Lamnidae",
+  especies: 1,
+  descricao: "Gênero que reúne o icônico tubarão-branco, um dos maiores predadores marinhos da atualidade.",
+  imagem: "carcharodon.jpg",
+  subtitulo: "Gênero do tubarão-branco",
+  descricaoLonga: "Carcharodon é um pequeno gênero da família Lamnidae. Atualmente, apenas uma espécie viva é reconhecida: o tubarão-branco (Carcharodon carcharias). É um dos predadores mais estudados do mundo, conhecido por seu grande porte, velocidade e importante papel ecológico nos oceanos.",
+
+  habitatTexto: "Os representantes do gênero Carcharodon habitam águas costeiras e oceânicas temperadas e subtropicais de todos os grandes oceanos. São frequentemente encontrados próximos a ilhas, plataformas continentais, colônias de pinípedes e áreas ricas em presas.",
+
+  caracteristicas: [
+    "Corpo robusto e hidrodinâmico",
+    "Focinho cônico e relativamente curto",
+    "Grande primeira nadadeira dorsal",
+    "Cauda em formato de meia-lua, adaptada para alta velocidade",
+    "Dentição triangular, larga e fortemente serrilhada",
+    "Ovovivíparo com oofagia durante o desenvolvimento embrionário"
+  ],
+
+  distribuicaoHabitat: [
+    { nome: "Costeiro", pct: 45 },
+    { nome: "Oceânico", pct: 30 },
+    { nome: "Plataforma continental", pct: 20 },
+    { nome: "Ilhas oceânicas", pct: 5 }
+  ],
+
+  conservacaoTexto: "O único representante vivo do gênero está classificado como Vulnerável (VU), sendo ameaçado principalmente pela pesca, captura acidental, degradação dos habitats e baixa taxa reprodutiva.",
+
+  nomesComuns: [
+    "Tubarão-branco",
+    "Grande tubarão-branco",
+    "Grande branco"
+  ],
+
+  importanciaEcologica: "Como predador de topo, Carcharodon exerce um papel essencial na manutenção do equilíbrio dos ecossistemas marinhos, regulando populações de mamíferos marinhos, peixes e outros grandes vertebrados.",
+
+  especiesLista: [
+    {
+      nome: "Tubarão-branco",
+      cientifico: "Carcharodon carcharias",
+      imagem: "tubarao-branco.jpg"
+    }
+  ],
+
+  generosRelacionados: [
+    "isurus",
+    "lamna",
+    "cetorhinus",
+    "alopias"
+  ]
+},
 
   
 ];
