@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gênero — TubaroPédia</title>
+<style>
+  :root{
+    --navy-950:#0a0f1e;
+    --navy-900:#0d1424;
+    --navy-800:#121b32;
+    --blue-accent:#3f5dd9;
+    --blue-accent-light:#5b7ae8;
+    --ink:#0d1424;
+    --paper:#f4f6fa;
+    --line:#e3e7ef;
+    --muted:#5b6478;
+    --amber:#e8a23f;
+    --green-ok:#3fa87a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font:inherit;cursor:pointer;}
+
+  .shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
+
+  /* ---------- SIDEBAR (igual ao resto do site) ---------- */
+  .sidebar{background:var(--navy-950);color:#c7cfe0;padding:24px 20px;position:sticky;top:0;height:100vh;overflow-y:auto;}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:26px;}
+  .brand-mark{width:40px;height:40px;border:2px solid #7d8bb5;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .brand-mark svg{width:22px;height:22px;fill:#e8ebf3;}
+  .brand h1{font-family:Georgia,serif;font-size:1.15rem;color:#fff;}
+  .brand p{font-size:0.64rem;color:#8a93ad;margin-top:2px;}
+  .nav-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.09em;color:#5f6784;padding:0 8px 8px;}
+  .nav-item{display:flex;align-items:center;gap:11px;padding:8px 8px;border-radius:8px;font-size:0.85rem;color:#b7bfd6;}
+  .nav-item:hover{background:#141d33;color:#fff;}
+  .nav-item.active{background:var(--blue-accent);color:#fff;font-weight:600;}
+  .nav-item .ic{width:16px;height:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .nav-item .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-group{margin-bottom:18px;}
+  .feature-box{background:var(--navy-900);border-radius:12px;overflow:hidden;margin-top:6px;}
+  .feature-box .thumb{height:76px;position:relative;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);}
+  .feature-box .thumb svg{position:absolute;right:-6px;bottom:-6px;width:70%;opacity:.9;}
+  .feature-box .txt{padding:10px 12px 12px;}
+  .feature-box .txt strong{display:block;font-size:0.8rem;color:#fff;}
+  .feature-box .txt em{display:block;font-size:0.7rem;color:#8a93ad;margin:2px 0 6px;}
+  .feature-box .txt a{font-size:0.72rem;color:#8fb0ff;font-weight:600;}
+  .social-row{display:flex;gap:12px;padding:16px 6px 0;}
+  .social-row .ic{width:16px;height:16px;color:#8a93ad;}
+  .social-row .ic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;}
+
+  /* ---------- TOPBAR ---------- */
+  .topbar{background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:20px;padding:16px 36px;}
+  .search-box{flex:1;max-width:420px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 16px;color:var(--muted);font-size:0.86rem;}
+  .search-box svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;flex-shrink:0;}
+  .search-box input{border:none;background:none;outline:none;font:inherit;color:var(--ink);width:100%;}
+  .topbar-actions{margin-left:auto;display:flex;align-items:center;gap:22px;}
+  .topbar-link{display:flex;align-items:center;gap:7px;font-size:0.85rem;font-weight:600;color:var(--ink);}
+  .topbar-link svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;}
+  .icon-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;}
+  .icon-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;}
+
+  /* ---------- BREADCRUMB ---------- */
+  .breadcrumb{padding:14px 40px 0;font-size:0.82rem;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .breadcrumb a{color:var(--blue-accent);font-weight:600;}
+  .breadcrumb .sep{color:#aab0c4;}
+  .breadcrumb .current{color:var(--ink);font-weight:600;}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;padding:40px;min-height:220px;margin:14px 40px 0;border-radius:16px;
+    background:radial-gradient(ellipse at 75% 30%, rgba(90,130,210,.4), transparent 55%),
+      linear-gradient(120deg,#0d2247 0%,#081222 75%);
+    display:flex;align-items:center;}
+  .hero .school{position:absolute;inset:0;opacity:.55;}
+  .hero .school svg{position:absolute;filter:drop-shadow(0 8px 16px rgba(0,0,0,.4));}
+  .hero-content{position:relative;max-width:560px;}
+  .hero h1{font-family:Georgia,serif;color:#fff;font-size:2.3rem;line-height:1.15;margin-bottom:6px;font-style:italic;}
+  .hero .subtitulo{color:#9fb1e0;font-size:0.98rem;font-weight:600;margin-bottom:16px;}
+  .hero p{color:#c4cde4;font-size:0.92rem;line-height:1.65;}
+  .hero p em{font-style:italic;color:#dbe2f3;}
+
+  /* ---------- STATS ---------- */
+  .stats-strip{margin:0 40px;transform:translateY(-26px);background:#fff;border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 10px 28px rgba(15,20,40,.08);display:grid;grid-template-columns:repeat(5,1fr);}
+  .stats-strip .item{display:flex;gap:12px;align-items:flex-start;padding:20px 18px;border-right:1px solid var(--line);}
+  .stats-strip .item:last-child{border-right:none;}
+  .stats-strip .ic{width:40px;height:40px;border-radius:50%;background:var(--blue-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .stats-strip .ic svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:1.8;}
+  .stats-strip .lbl-top{font-size:0.76rem;color:var(--muted);margin-bottom:2px;}
+  .stats-strip .lbl-val{font-size:0.9rem;font-weight:700;line-height:1.3;}
+
+  /* ---------- LAYOUT ---------- */
+  .layout-wrap{padding:6px 40px 60px;}
+  .layout{display:grid;grid-template-columns:1fr 320px;gap:26px;align-items:start;}
+
+  .section-head{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+  .section-head h2{font-family:Georgia,serif;font-size:1.25rem;position:relative;padding-bottom:8px;flex:1;}
+  .section-head h2::after{content:"";position:absolute;left:0;bottom:0;width:34px;height:3px;background:var(--blue-accent);border-radius:2px;}
+  .section-head a{font-size:0.82rem;font-weight:700;color:var(--blue-accent);}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:22px;}
+  .card p{font-size:0.88rem;line-height:1.7;color:var(--ink);}
+  .card h3{font-family:Georgia,serif;font-size:1.12rem;margin-bottom:14px;}
+
+  .desc-grid{display:grid;grid-template-columns:1fr 280px;gap:26px;align-items:start;}
+  .check-list{margin-top:6px;}
+  .check-list li{display:flex;gap:9px;align-items:flex-start;font-size:0.87rem;line-height:1.5;margin-bottom:9px;}
+  .check-list li svg{width:16px;height:16px;stroke:var(--green-ok);fill:none;stroke-width:2.4;flex-shrink:0;margin-top:2px;}
+
+  .gallery{border-radius:12px;overflow:hidden;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);position:relative;height:190px;}
+  .gallery svg.silhouette{position:absolute;right:-8px;bottom:-6px;width:65%;opacity:.85;}
+  .gallery img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+  .gallery-caption{font-size:0.78rem;color:var(--muted);margin-top:10px;text-align:center;}
+  .gallery-caption em{font-style:italic;}
+  .gallery-dots{display:flex;justify-content:center;gap:6px;margin-top:8px;}
+  .gallery-dots span{width:6px;height:6px;border-radius:50%;background:var(--line);}
+  .gallery-dots span:first-child{background:var(--blue-accent);}
+
+  .map-wrap{margin-top:16px;}
+  .map-wrap svg{width:100%;height:auto;display:block;}
+  .map-legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:14px;font-size:0.78rem;color:var(--muted);}
+  .map-legend .row{display:flex;align-items:center;gap:7px;}
+  .map-legend .dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+
+  .species-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-top:16px;}
+  .species-card .ph{height:90px;border-radius:10px;position:relative;overflow:hidden;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);margin-bottom:8px;}
+  .species-card .ph svg.silhouette{position:absolute;right:-6px;bottom:-6px;width:60%;opacity:.85;}
+  .species-card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+  .species-card strong{display:block;font-size:0.84rem;font-style:italic;line-height:1.3;}
+  .species-card .comum{font-size:0.76rem;color:var(--muted);margin:2px 0 4px;}
+  .species-card a{font-size:0.76rem;font-weight:700;color:var(--blue-accent);}
+  .empty-note{font-size:0.85rem;color:var(--muted);margin-top:10px;line-height:1.6;}
+
+  .callout{display:flex;gap:14px;align-items:flex-start;background:#eef2fb;border:1px solid #d7e0f7;border-radius:12px;padding:18px 20px;margin-bottom:22px;}
+  .callout .ic{width:34px;height:34px;border-radius:9px;background:var(--blue-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .callout .ic svg{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:2;}
+  .callout h3{font-family:Georgia,serif;font-size:1rem;margin-bottom:4px;}
+  .callout p{font-size:0.85rem;color:var(--ink);line-height:1.6;}
+
+  .related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;}
+  .related-card .ph{height:90px;border-radius:10px;position:relative;overflow:hidden;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);margin-bottom:8px;}
+  .related-card .ph svg.silhouette{position:absolute;right:-6px;bottom:-6px;width:60%;opacity:.85;}
+  .related-card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+  .related-card strong{display:block;font-family:Georgia,serif;font-size:0.94rem;}
+  .related-card span{display:block;font-size:0.76rem;color:var(--muted);line-height:1.4;}
+
+  /* ---------- SIDEBAR (direita) ---------- */
+  .side-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:20px;}
+  .side-card h3{font-family:Georgia,serif;font-size:1.02rem;margin-bottom:14px;}
+
+  .tax-row{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);}
+  .tax-row:last-child{border-bottom:none;}
+  .tax-row .ic{width:28px;height:28px;border-radius:50%;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--blue-accent);}
+  .tax-row .ic svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;}
+  .tax-row .lbl{font-size:0.74rem;color:var(--muted);}
+  .tax-row .val{font-size:0.86rem;font-weight:700;}
+  .tax-row .val.accent{color:var(--blue-accent);font-style:italic;}
+
+  .donut-wrap{display:flex;align-items:center;gap:16px;}
+  .donut-wrap svg{flex-shrink:0;}
+  .donut-legend{flex:1;font-size:0.78rem;}
+  .donut-legend .row{display:flex;align-items:center;gap:8px;padding:4px 0;}
+  .donut-legend .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+  .donut-legend .pct{margin-left:auto;color:var(--muted);font-weight:600;}
+
+  .btn-primary{display:inline-block;background:var(--blue-accent);color:#fff;font-size:0.83rem;font-weight:700;padding:11px 18px;border-radius:9px;border:none;margin-top:12px;width:100%;text-align:center;}
+  .side-list li{font-size:0.85rem;padding:5px 0;}
+  .side-links li{font-size:0.85rem;padding:5px 0;}
+  .side-links a{color:var(--blue-accent);font-weight:600;}
+
+  .not-found{padding:60px 40px;text-align:center;}
+  .not-found h1{font-family:Georgia,serif;font-size:1.6rem;margin-bottom:10px;}
+  .not-found p{color:var(--muted);margin-bottom:18px;}
+  .not-found a{color:var(--blue-accent);font-weight:700;}
+
+  /* ---------- FOOTER ---------- */
+  .footer{background:var(--navy-950);color:#9aa3bd;padding:40px 40px 24px;font-size:0.83rem;}
+  .footer a{color:#9aa3bd;}
+  .footer a:hover{color:#fff;}
+  .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px;max-width:1200px;margin:0 auto 30px;}
+  .footer-brand{display:flex;gap:12px;}
+  .footer-brand .brand-mark{width:34px;height:34px;border:2px solid #4a5578;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .footer-brand .brand-mark svg{width:18px;height:18px;fill:#c7cfe0;}
+  .footer-brand h4{color:#fff;font-family:Georgia,serif;font-size:1rem;margin-bottom:4px;}
+  .footer-brand p{font-size:0.78rem;line-height:1.5;color:#7d87a3;}
+  .footer h5{color:#fff;font-size:0.8rem;margin-bottom:12px;}
+  .footer li{margin-bottom:8px;font-size:0.8rem;}
+  .footer-bottom{max-width:1200px;margin:0 auto;padding-top:20px;border-top:1px solid #1c2540;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:0.76rem;color:#7d87a3;}
+
+  @media (max-width:1080px){
+    .shell{grid-template-columns:1fr;}
+    .sidebar{position:relative;height:auto;}
+    .hero{margin:14px 20px 0;padding:32px 22px;}
+    .breadcrumb{padding:14px 20px 0;}
+    .stats-strip{margin:0 20px;transform:translateY(-20px);grid-template-columns:repeat(2,1fr);}
+    .stats-strip .item{border-right:none;border-bottom:1px solid var(--line);}
+    .layout-wrap{padding:6px 20px 40px;}
+    .layout{grid-template-columns:1fr;}
+    .desc-grid{grid-template-columns:1fr;}
+    .topbar{flex-wrap:wrap;padding:16px 20px;}
+    .footer{padding:32px 20px 20px;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:600px){ .footer-grid{grid-template-columns:1fr;} .stats-strip{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg></div>
+      <div><h1>Tubaropédia</h1><p>A enciclopédia dos tubarões</p></div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Navegação</div>
+      <a class="nav-item" href="index.html"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v9h14v-9"/></svg></span>Página principal</a>
+      <a class="nav-item" href="especie.html"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 15c1.5-4 6.5-4 8 0"/></svg></span>Todas as espécies</a>
+      <a class="nav-item" href="familias.html"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l3.5 5.8-3.5 5.8-3.5-5.8z"/></svg></span>Famílias</a>
+      <a class="nav-item active" href="generos.html"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 21c0-4 3-6 5-6s5 2 5 6M12 21c0-4 3-6 5-6s5 2 5 6"/></svg></span>Gêneros</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/></svg></span>Anatomia</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L3 9l9 13 9-13z"/></svg></span>Habitat</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>Comportamento</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.5 8.5-9 10-5.5-1.5-9-5-9-10V6z"/></svg></span>Conservação</a>
+      <a class="nav-item" href="fosseis.html"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v5l3 3M5 12a7 7 0 1014 0 7 7 0 00-14 0z"/></svg></span>Fósseis</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg></span>Notícias</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg></span>Bibliografia</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Ferramentas</div>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M17 3l4 4-11 11H6v-4z"/></svg></span>Páginas aleatórias</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1015-6.7M3 5v6h6"/></svg></span>Mudanças recentes</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg></span>Página de testes</a>
+      <a class="nav-item" href="#"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.5-2.5 1.5-2.5 3.5M12 17h.01"/></svg></span>Ajuda</a>
+    </div>
+
+    <div class="nav-label">Em destaque</div>
+    <div class="feature-box">
+      <div class="thumb">
+        <svg viewBox="0 0 200 100"><path fill="#8fa3d6" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
+      </div>
+      <div class="txt">
+        <strong>Grande Tubarão Branco</strong>
+        <em>Carcharodon carcharias</em>
+        <a href="especie.html?especie=tubarao-branco">Ver artigo →</a>
+      </div>
+    </div>
+
+    <div class="social-row">
+      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></span>
+      <span class="ic"><svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4z"/><circle cx="12" cy="12" r="9"/></svg></span>
+      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6l9 7 9-7"/></svg></span>
+    </div>
+  </aside>
+
+  <div id="pagina">
+    <header class="topbar">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input type="text" placeholder="Pesquisar na Tubaropédia...">
+      </div>
+      <div class="topbar-actions">
+        <a class="topbar-link" href="#"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Contribuir</a>
+        <a class="topbar-link" href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Entrar</a>
+        <button class="icon-btn" title="Menu" aria-label="Abrir menu">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div id="conteudo"></div>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg></div>
+          <div>
+            <h4>Tubaropédia</h4>
+            <p>A enciclopédia livre sobre tubarões. Conteúdo colaborativo para educação, pesquisa e conservação.</p>
+          </div>
+        </div>
+        <div>
+          <h5>Navegação</h5>
+          <ul>
+            <li><a href="index.html">Página principal</a></li>
+            <li><a href="especie.html">Todas as espécies</a></li>
+            <li><a href="familias.html">Famílias</a></li>
+            <li><a href="generos.html">Gêneros</a></li>
+            <li><a href="#">Artigos aleatórios</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Comunidade</h5>
+          <ul>
+            <li><a href="#">Contribuir</a></li>
+            <li><a href="#">Portal da comunidade</a></li>
+            <li><a href="#">Ajuda</a></li>
+            <li><a href="#">Mudanças recentes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Recursos</h5>
+          <ul>
+            <li><a href="#">Bibliografia</a></li>
+            <li><a href="#">Links externos</a></li>
+            <li><a href="#">Política de privacidade</a></li>
+            <li><a href="#">Sobre o projeto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Tubaropédia · Conteúdo disponível sob licença <a href="#">Creative Commons CC BY-SA 4.0</a></span>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="generos-data.js"></script>
+<script>
+/*
+ * Página de detalhe de um gênero. Lê o parâmetro "genero" da URL
+ * (ex.: genero.html?genero=carcharhinus) e busca os dados correspondentes
+ * em generos-data.js — não é preciso editar este arquivo para adicionar
+ * ou atualizar gêneros, tudo vem do generos-data.js.
+ */
+
+const silhuetaSVG = `<svg class="silhouette" viewBox="0 0 200 100"><path fill="#8fa3d6" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>`;
+
+function fotoTag(caminho, alt){
+  if(!caminho) return "";
+  return `<img src="imagens/generos/${caminho}" alt="${alt}"
+    onload="this.style.display='block';this.previousElementSibling.style.display='none';"
+    onerror="this.style.display='none';">`;
+}
+
+/* mapa-múndi simplificado, reaproveitado em qualquer gênero */
+function mapaSVG(){
+  return `<svg viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="1000" height="460" fill="#eef2fb"/>
+    <g fill="#b9c6e8">
+      <path d="M120 120c40-20 90-15 120 5 20 15 10 35-10 40-30 8-45 30-70 25-25-5-45-30-60-45-10-15 0-20 20-25z"/>
+      <path d="M230 190c30-5 55 10 60 35 5 30-15 70-45 90-25 15-55 5-65-20-15-35 10-95 50-105z"/>
+      <path d="M430 90c60-15 140-10 190 20 35 20 20 45-15 55-45 12-70 45-110 40-45-5-80-45-95-75-10-25 5-35 30-40z"/>
+      <path d="M470 190c45-10 95 5 110 45 20 55-15 130-75 155-45 18-95 0-115-40-25-50 10-145 80-160z"/>
+      <path d="M700 130c50-20 120-10 155 25 20 20 5 40-25 45-35 5-55 30-90 25-35-5-65-35-70-60-3-18 10-27 30-35z"/>
+      <path d="M760 220c40-5 80 15 85 50 8 45-25 90-70 95-40 5-75-20-80-55-5-45 25-85 65-90z"/>
+      <path d="M110 260c25-8 55 0 65 25 15 35-10 75-45 85-30 8-60-10-65-40-5-35 15-62 45-70z"/>
+      <path d="M860 300c25-5 50 8 55 30 8 32-15 62-45 65-27 3-50-15-52-42-2-25 17-48 42-53z"/>
+    </g>
+    <g fill="#5b7ae8" opacity="0.75">
+      <ellipse cx="300" cy="230" rx="60" ry="14"/>
+      <ellipse cx="520" cy="250" rx="70" ry="16"/>
+      <ellipse cx="150" cy="180" rx="45" ry="12"/>
+      <ellipse cx="760" cy="240" rx="55" ry="13"/>
+      <ellipse cx="230" cy="300" rx="40" ry="11"/>
+      <ellipse cx="650" cy="150" rx="50" ry="12"/>
+    </g>
+  </svg>`;
+}
+
+function donutSVG(fatias){
+  const r = 15.9155, cx = 21, cy = 21;
+  const cores = ["#3f5dd9","#5b7ae8","#8fa3d6","#c7cfe0","#a9b3cc"];
+  let acc = 0, circles = "";
+  fatias.forEach((seg,i) => {
+    circles += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${cores[i % cores.length]}" stroke-width="6"
+      stroke-dasharray="${seg.pct} ${100-seg.pct}" stroke-dashoffset="${25 - acc}"></circle>`;
+    acc += seg.pct;
+  });
+  return { svg: `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#eef1f8" stroke-width="6"></circle>${circles}`, cores };
+}
+
+function iconTax(path){
+  return `<span class="ic"><svg viewBox="0 0 24 24">${path}</svg></span>`;
+}
+
+function renderNaoEncontrado(){
+  document.getElementById("conteudo").innerHTML = `
+    <div class="not-found">
+      <h1>Gênero não encontrado</h1>
+      <p>Não localizamos esse gênero na nossa base de dados. Ele pode ter sido removido ou o link está incorreto.</p>
+      <a href="generos.html">← Voltar para todos os gêneros</a>
+    </div>`;
+}
+
+function renderPagina(g){
+  const ordem = g.ordem || ORDEM_POR_FAMILIA[g.familia] || "—";
+  const especiesTxt = `${g.especies} espécie${g.especies === 1 ? "" : "s"} reconhecida${g.especies === 1 ? "" : "s"}`;
+  const habitatCurto = g.habitatTexto ? g.habitatTexto.split(".")[0] + "." : "Costeiro e oceânico";
+  const descricaoTopo = g.descricaoLonga || g.descricao ||
+    (g.representante ? `Gênero monotípico, representado por ${g.representante.nome} (${g.representante.cientifico}).` : "");
+
+  document.title = `${g.nome} — TubaroPédia`;
+
+  // ---- breadcrumb ----
+  document.getElementById("conteudo").innerHTML = `
+    <nav class="breadcrumb">
+      <a href="index.html">Página principal</a><span class="sep">›</span>
+      <a href="generos.html">Gêneros</a><span class="sep">›</span>
+      <span class="current">${g.nome}</span>
+    </nav>
+
+    <section class="hero">
+      <div class="school">
+        <svg viewBox="0 0 200 100" style="top:20px;left:55%;width:260px;opacity:.55;"><path fill="#4d6bad" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
+        <svg viewBox="0 0 200 100" style="top:60px;left:74%;width:150px;opacity:.4;"><path fill="#37538f" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
+      </div>
+      <div class="hero-content">
+        <h1>${g.nome}</h1>
+        <div class="subtitulo">${g.subtitulo || `Gênero da família ${g.familia}`}</div>
+        <p>${descricaoTopo}</p>
+      </div>
+    </section>
+
+    <div class="stats-strip">
+      <div class="item">
+        <div class="ic">${iconTax('<path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/>')}</div>
+        <div><div class="lbl-top">Família</div><div class="lbl-val">${g.familia}</div></div>
+      </div>
+      <div class="item">
+        <div class="ic">${iconTax('<circle cx="12" cy="12" r="9"/><path d="M8 15c1.5-4 6.5-4 8 0"/>')}</div>
+        <div><div class="lbl-top">Espécies</div><div class="lbl-val">${especiesTxt}</div></div>
+      </div>
+      <div class="item">
+        <div class="ic">${iconTax('<path d="M3 11l9-7 9 7M5 10v9h14v-9"/>')}</div>
+        <div><div class="lbl-top">Ordem</div><div class="lbl-val">${ordem}</div></div>
+      </div>
+      <div class="item">
+        <div class="ic">${iconTax('<path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/>')}</div>
+        <div><div class="lbl-top">Habitat</div><div class="lbl-val">${habitatCurto}</div></div>
+      </div>
+      <div class="item">
+        <div class="ic">${iconTax('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>')}</div>
+        <div><div class="lbl-top">Distribuição</div><div class="lbl-val">Global (águas tropicais e subtropicais)</div></div>
+      </div>
+    </div>
+
+    <div class="layout-wrap">
+      <div class="layout">
+
+        <!-- ===== COLUNA PRINCIPAL ===== -->
+        <div>
+
+          <div class="card">
+            <h3>Descrição geral</h3>
+            <div class="desc-grid">
+              <div>
+                <p>${descricaoTopo}</p>
+                ${g.caracteristicas ? `
+                  <h3 style="margin-top:20px;">Características principais</h3>
+                  <ul class="check-list">
+                    ${g.caracteristicas.map(c => `<li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>${c}</li>`).join("")}
+                  </ul>` : ""}
+              </div>
+              <div>
+                <div class="gallery">${silhuetaSVG}${fotoTag(g.imagem, g.nome)}</div>
+                <div class="gallery-caption">${g.representante ? `${g.representante.nome} (<em>${g.representante.cientifico}</em>)` : `<em>${g.nome}</em>`}</div>
+                <div class="gallery-dots"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+
+          ${g.habitatTexto ? `
+          <div class="card">
+            <h3>Habitat e distribuição</h3>
+            <p>${g.habitatTexto}</p>
+            <div class="map-wrap">${mapaSVG()}</div>
+            <div class="map-legend">
+              <div class="row"><span class="dot" style="background:#5b7ae8;"></span>Presença comum</div>
+              <div class="row"><span class="dot" style="background:#8fa3d6;"></span>Presença ocasional</div>
+              <div class="row"><span class="dot" style="background:#b9c6e8;"></span>Registros raros</div>
+            </div>
+          </div>` : ""}
+
+          <div class="card">
+            <div class="section-head" style="margin-bottom:0;"><h3 style="flex:1;">Espécies do gênero</h3>${g.especiesLista ? `<a href="especie.html?genero=${g.slug}">Ver todas →</a>` : ""}</div>
+            ${g.especiesLista ? `
+              <div class="species-grid">
+                ${g.especiesLista.map(e => `
+                  <div class="species-card">
+                    <div class="ph">${silhuetaSVG}</div>
+                    <strong>${e.cientifico}</strong>
+                    <div class="comum">${e.nome}</div>
+                    <a href="especie.html?especie=${e.cientifico.toLowerCase().replace(/\s+/g,'-')}">Ver espécie →</a>
+                  </div>`).join("")}
+              </div>` : `
+              <p class="empty-note">Este artigo ainda não tem a lista detalhada de espécies do gênero ${g.nome}. ${g.representante ? `Até o momento, é reconhecida apenas ${g.representante.nome} (<em>${g.representante.cientifico}</em>).` : "Ajude a expandir este artigo contribuindo com informações."}</p>`}
+          </div>
+
+          ${g.importanciaEcologica ? `
+          <div class="callout">
+            <div class="ic"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a6 6 0 00-4 10c1 1 1 2 1 3h6c0-1 0-2 1-3a6 6 0 00-4-10z"/></svg></div>
+            <div><h3>Importância ecológica</h3><p>${g.importanciaEcologica}</p></div>
+          </div>` : ""}
+
+          ${g.generosRelacionados && g.generosRelacionados.length ? `
+          <div class="section-head"><h2>Gêneros relacionados</h2><a href="generos.html">Ver todos os gêneros →</a></div>
+          <div class="related-grid" style="margin-bottom:22px;">
+            ${g.generosRelacionados.map(slug => {
+              const r = GENEROS.find(x => x.slug === slug);
+              if(!r) return "";
+              return `<a class="related-card" href="genero.html?genero=${r.slug}">
+                <div class="ph">${silhuetaSVG}${fotoTag(r.imagem, r.nome)}</div>
+                <strong>${r.nome}</strong>
+                <span>${r.subtitulo || r.familia}</span>
+              </a>`;
+            }).join("")}
+          </div>` : ""}
+
+        </div>
+
+        <!-- ===== COLUNA LATERAL ===== -->
+        <div>
+          <div class="side-card">
+            <h3>Classificação taxonômica</h3>
+            <div class="tax-row">
+              <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span>
+              <div><div class="lbl">Reino</div><div class="val">Animalia</div></div>
+            </div>
+            <div class="tax-row">
+              <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l9 4v6c0 5-3.5 8.5-9 10-5.5-1.5-9-5-9-10V6z"/></svg></span>
+              <div><div class="lbl">Filo</div><div class="val">Chordata</div></div>
+            </div>
+            <div class="tax-row">
+              <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l2.5 7.5H22l-6 4.5 2.5 7.5L12 17l-6.5 4.5L8 14 2 9.5h7.5z"/></svg></span>
+              <div><div class="lbl">Classe</div><div class="val">Chondrichthyes</div></div>
+            </div>
+            <div class="tax-row">
+              <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+              <div><div class="lbl">Ordem</div><div class="val">${ordem}</div></div>
+            </div>
+            <div class="tax-row">
+              <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg></span>
+              <div><div class="lbl">Família</div><div class="val">${g.familia}</div></div>
+            </div>
+            <div class="tax-row">
+              <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/></svg></span>
+              <div><div class="lbl">Gênero</div><div class="val accent">${g.nome}</div></div>
+            </div>
+          </div>
+
+          ${g.distribuicaoHabitat ? `
+          <div class="side-card">
+            <h3>Distribuição de habitats</h3>
+            <div class="donut-wrap" id="donutWrap"></div>
+          </div>` : ""}
+
+          ${g.conservacaoTexto ? `
+          <div class="side-card">
+            <h3>Conservação</h3>
+            <p style="font-size:0.85rem;line-height:1.6;color:var(--ink);">${g.conservacaoTexto}</p>
+            <a class="btn-primary" href="conservacao.html?genero=${g.slug}">Ver espécies e status</a>
+          </div>` : ""}
+
+          ${g.nomesComuns && g.nomesComuns.length ? `
+          <div class="side-card">
+            <h3>Nomes comuns</h3>
+            <ul class="side-list">${g.nomesComuns.map(n => `<li>${n}</li>`).join("")}</ul>
+          </div>` : ""}
+
+          <div class="side-card">
+            <h3>Saiba mais</h3>
+            <ul class="side-links">
+              <li><a href="#">Artigos relacionados</a></li>
+              <li><a href="especie.html${g.especiesLista ? `?genero=${g.slug}` : ""}">Espécies do gênero</a></li>
+              <li><a href="familias.html?familia=${encodeURIComponent(g.familia)}">Família ${g.familia}</a></li>
+              <li><a href="#">Ordem ${ordem}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  if (g.distribuicaoHabitat){
+    const { svg, cores } = donutSVG(g.distribuicaoHabitat);
+    document.getElementById("donutWrap").innerHTML = `
+      <svg width="110" height="110" viewBox="0 0 42 42">${svg}</svg>
+      <div class="donut-legend">
+        ${g.distribuicaoHabitat.map((seg,i) => `
+          <div class="row"><span class="dot" style="background:${cores[i % cores.length]};"></span>${seg.nome}<span class="pct">${seg.pct}%</span></div>`).join("")}
+      </div>`;
+  }
+}
+
+function iniciar(){
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("genero");
+  const g = GENEROS.find(x => x.slug === slug);
+  if (!g){
+    renderNaoEncontrado();
+    return;
+  }
+  renderPagina(g);
+}
+
+iniciar();
+</script>
+</body>
+</html>
