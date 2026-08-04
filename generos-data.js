@@ -47,11 +47,11 @@ const GENEROS = [
     nomesComuns: ["Tubarões-requiem", "Tubarões-cinzentos", "Cação (em algumas regiões)"],
     importanciaEcologica: "Os tubarões do gênero Carcharhinus desempenham um papel fundamental no equilíbrio dos ecossistemas marinhos, ajudando a controlar populações de peixes e outros organismos.",
     especiesLista: [
-      { nome: "Tubarão-seda", cientifico: "Carcharhinus falciformis" },
-      { nome: "Tubarão-touro", cientifico: "Carcharhinus leucas" },
-      { nome: "Tubarão-de-pontas-pretas", cientifico: "Carcharhinus melanopterus" },
-      { nome: "Tubarão-oceânico", cientifico: "Carcharhinus longimanus" },
-      { nome: "Tubarão-de-galápagos", cientifico: "Carcharhinus galapagensis" },
+      { nome: "Tubarão-seda", cientifico: "Carcharhinus falciformis", imagem: "tubarao-seda.jpg" },
+      { nome: "Tubarão-touro", cientifico: "Carcharhinus leucas", imagem: "tubarao-touro.jpg" },
+      { nome: "Tubarão-de-pontas-pretas", cientifico: "Carcharhinus melanopterus", imagem: "tubarao-de-pontas-pretas.jpg" },
+      { nome: "Tubarão-oceânico", cientifico: "Carcharhinus longimanus", imagem: "tubarao-oceanico.jpg" },
+      { nome: "Tubarão-de-galápagos", cientifico: "Carcharhinus galapagensis", imagem: "tubarao-de-galapagos.jpg" },
     ],
     generosRelacionados: ["sphyrna", "galeocerdo", "prionace", "negaprion"] },
 

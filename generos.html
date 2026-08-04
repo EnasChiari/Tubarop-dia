@@ -41,7 +41,6 @@
   .nav-group{margin-bottom:18px;}
   .feature-box{background:var(--navy-900);border-radius:12px;overflow:hidden;margin-top:6px;}
   .feature-box .thumb{height:76px;position:relative;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);}
-  .feature-box .thumb svg{position:absolute;right:-6px;bottom:-6px;width:70%;opacity:.9;}
   .feature-box .txt{padding:10px 12px 12px;}
   .feature-box .txt strong{display:block;font-size:0.8rem;color:#fff;}
   .feature-box .txt em{display:block;font-size:0.7rem;color:#8a93ad;margin:2px 0 6px;}
@@ -65,9 +64,8 @@
   .hero{position:relative;overflow:hidden;padding:48px 40px;min-height:230px;
     background:radial-gradient(ellipse at 75% 30%, rgba(90,130,210,.4), transparent 55%),
       linear-gradient(120deg,#0d2247 0%,#081222 75%);
+    background-size:cover;background-position:center;
     display:flex;align-items:center;}
-  .hero .school{position:absolute;inset:0;opacity:.55;}
-  .hero .school svg{position:absolute;filter:drop-shadow(0 8px 16px rgba(0,0,0,.4));}
   .hero-content{position:relative;max-width:560px;}
   .hero h1{font-family:Georgia,serif;color:#fff;font-size:2.3rem;line-height:1.15;margin-bottom:12px;}
   .hero p{color:#c4cde4;font-size:0.92rem;line-height:1.65;margin-bottom:22px;}
@@ -106,7 +104,6 @@
   .genus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin-bottom:22px;}
   .genus-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
   .genus-card .ph{height:140px;position:relative;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);}
-  .genus-card .ph svg.silhouette{position:absolute;right:-8px;bottom:-6px;width:65%;opacity:.85;}
   .genus-card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
   .genus-card .body{padding:16px 18px 18px;}
   .genus-card h3{font-family:Georgia,serif;font-size:1.08rem;margin-bottom:3px;}
@@ -136,7 +133,6 @@
   /* ---------- GÊNEROS EM DESTAQUE ---------- */
   .destaque-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;}
   .destaque-card .ph{height:110px;border-radius:12px;position:relative;overflow:hidden;background:linear-gradient(160deg,#1c3f6e 0%,#081428 80%);margin-bottom:10px;}
-  .destaque-card .ph svg.silhouette{position:absolute;right:-6px;bottom:-6px;width:60%;opacity:.85;}
   .destaque-card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
   .destaque-card h4{font-family:Georgia,serif;font-size:0.98rem;margin-bottom:2px;}
   .destaque-card p{font-size:0.78rem;color:var(--muted);margin-bottom:6px;}
@@ -235,9 +231,8 @@
 
     <div class="nav-label">Em destaque</div>
     <div class="feature-box">
-      <div class="thumb">
-        <svg viewBox="0 0 200 100"><path fill="#8fa3d6" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
-      </div>
+      <!-- Espaço para foto: <img src="imagens/....jpg" alt="..."> -->
+      <div class="thumb"></div>
       <div class="txt">
         <strong>Grande Tubarão Branco</strong>
         <em>Carcharodon carcharias</em>
@@ -268,11 +263,8 @@
     </header>
 
     <section class="hero">
-      <div class="school">
-        <svg viewBox="0 0 200 100" style="top:20px;left:55%;width:260px;opacity:.55;"><path fill="#4d6bad" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
-        <svg viewBox="0 0 200 100" style="top:60px;left:74%;width:150px;opacity:.4;"><path fill="#37538f" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
-        <svg viewBox="0 0 200 100" style="top:10px;left:88%;width:110px;opacity:.35;"><path fill="#5b7ae8" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>
-      </div>
+      <!-- Espaço para imagem de fundo do hero: aplique via CSS,
+           ex. background-image: url('imagens/generos/....jpg') na .hero -->
       <div class="hero-content">
         <h1>Gêneros de<br>Tubarões</h1>
         <p>Explore todos os gêneros conhecidos de tubarões. Cada gênero reúne espécies com características evolutivas semelhantes e ajuda a compreender sua diversidade.</p>
@@ -403,15 +395,13 @@
  * em cada gênero. Sem a foto, aparece o ícone de tubarão no lugar.
  */
 
-const silhuetaSVG = `<svg class="silhouette" viewBox="0 0 200 100"><path fill="#8fa3d6" d="M5 55 C 30 35, 60 25, 95 26 C 100 15, 112 8, 122 10 C 118 16, 116 22, 118 28 C 140 30, 158 38, 172 50 L 195 42 L 178 55 L 195 68 L 172 60 C 158 70, 140 76, 118 78 C 110 88, 96 92, 84 90 C 90 84, 93 78, 92 72 C 60 74, 30 66, 5 55 Z"/></svg>`;
-
 const POR_PAGINA = 6;
 let itensVisiveis = POR_PAGINA;
 let familiaAtiva = "";
 
 function fotoTag(caminho, alt){
   return `<img src="imagens/generos/${caminho}" alt="${alt}"
-    onload="this.style.display='block';this.previousElementSibling.style.display='none';"
+    onload="this.style.display='block';"
     onerror="this.style.display='none';">`;
 }
 
@@ -441,7 +431,7 @@ function cardGenero(g){
   }
   return `
     <div class="genus-card">
-      <div class="ph">${silhuetaSVG}${fotoTag(g.imagem, g.nome)}</div>
+      <div class="ph">${fotoTag(g.imagem, g.nome)}</div>
       <div class="body">
         <h3>${g.nome}</h3>
         <div class="fam">Família: <strong>${g.familia}</strong></div>
@@ -514,7 +504,7 @@ function renderChipsFamilia(){
 function renderDestaque(){
   document.getElementById("destaqueGrid").innerHTML = GENEROS_DESTAQUE.map(g => `
     <div class="destaque-card">
-      <div class="ph">${silhuetaSVG}${fotoTag(g.imagem, g.nome)}</div>
+      <div class="ph">${fotoTag(g.imagem, g.nome)}</div>
       <h4>${g.nome}</h4>
       <p>${g.texto}</p>
       <a href="genero.html?genero=${g.slug}">Ver página →</a>
