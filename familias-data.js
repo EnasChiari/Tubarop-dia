@@ -5,6 +5,13 @@ const FAMILIAS = [
   { slug: "carcharhinidae", nome: "Carcharhinidae", especies: 53,
     descricao: "A maior e mais diversa família de tubarões, inclui espécies costeiras e oceânicas.",
     imagem: "carcharhinidae.jpg" },
+ {
+  slug: "lamnidae",
+  nome: "Lamnidae",
+  especies: 5,
+  descricao: "Família de tubarões oceânicos de grande porte, conhecidos pela alta velocidade, corpo hidrodinâmico e capacidade de manter parte da temperatura corporal acima da da água. Inclui o tubarão-branco, os makos e o tubarão-salmão.",
+  imagem: "lamnidae.jpg"
+},
 ];
 
 /* Estatísticas gerais mostradas no painel lateral */
