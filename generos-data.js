@@ -107,6 +107,64 @@ const GENEROS = [
     "alopias"
   ]
 },
+   {
+  slug: "lamna",
+  nome: "Lamna",
+  familia: "Lamnidae",
+  especies: 2,
+  descricao: "Gênero de tubarões oceânicos de grande porte, adaptados às águas frias e temperadas, conhecidos por sua alta capacidade de natação.",
+  imagem: "lamna.jpg",
+  subtitulo: "Gênero dos tubarões-sardo",
+  descricaoLonga: "Lamna é um gênero da família Lamnidae composto por tubarões robustos e velozes encontrados principalmente em águas temperadas e frias. São predadores ativos, capazes de manter parte da temperatura corporal acima da temperatura da água, característica que lhes permite caçar eficientemente em ambientes frios.",
+
+  habitatTexto: "As espécies do gênero Lamna habitam principalmente águas oceânicas e costeiras temperadas e frias, ocorrendo nos oceanos Atlântico, Pacífico e Austral. Frequentemente utilizam plataformas continentais e regiões de mar aberto.",
+
+  caracteristicas: [
+    "Corpo robusto, fusiforme e hidrodinâmico",
+    "Focinho cônico e relativamente curto",
+    "Cauda em forma de meia-lua adaptada para alta velocidade",
+    "Dentes longos, lisos e pontiagudos",
+    "Capacidade de manter parte do corpo mais quente que a água (endotermia regional)",
+    "Ovovivíparos com oofagia durante o desenvolvimento embrionário"
+  ],
+
+  distribuicaoHabitat: [
+    { nome: "Oceânico", pct: 55 },
+    { nome: "Plataforma continental", pct: 25 },
+    { nome: "Costeiro", pct: 15 },
+    { nome: "Mar aberto profundo", pct: 5 }
+  ],
+
+  conservacaoTexto: "As espécies do gênero Lamna sofrem pressão da pesca comercial e esportiva, além da captura incidental. O tubarão-sardo está classificado como Vulnerável, enquanto o salmão-do-Pacífico apresenta menor preocupação em algumas regiões, embora populações locais estejam sob monitoramento.",
+
+  nomesComuns: [
+    "Tubarões-sardo",
+    "Salmões-do-mar",
+    "Porbeagles"
+  ],
+
+  importanciaEcologica: "Os tubarões do gênero Lamna são importantes predadores de topo que controlam populações de peixes ósseos, cefalópodes e outros vertebrados marinhos, contribuindo para o equilíbrio dos ecossistemas oceânicos.",
+
+  especiesLista: [
+    {
+      nome: "Tubarão-sardo",
+      cientifico: "Lamna nasus",
+      imagem: "tubarao-sardo.jpg"
+    },
+    {
+      nome: "Salmão-do-Pacífico",
+      cientifico: "Lamna ditropis",
+      imagem: "salmao-do-pacifico.jpg"
+    }
+  ],
+
+  generosRelacionados: [
+    "carcharodon",
+    "isurus",
+    "cetorhinus",
+    "alopias"
+  ]
+},
    
 {
   slug: "isurus",
