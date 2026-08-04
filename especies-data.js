@@ -579,4 +579,93 @@ const ESPECIES = [
     "tubarao-galha-preta.jpg"
   ],
   },
+  {
+  slug: "grande-tubarao-branco",
+  nomePopular: "Grande tubarão-branco",
+  nomeCientifico: "Carcharodon carcharias",
+  nomeIngles: "Great White Shark",
+  familia: "Lamnidae",
+  ordem: "Lamniformes",
+  classe: "Chondrichthyes",
+
+  descricao: "O Carcharodon carcharias, conhecido como grande tubarão-branco, é a maior espécie de tubarão predador do mundo. Pertence à família Lamnidae e habita oceanos temperados e subtropicais. É famoso por seu porte impressionante, força, inteligência e papel essencial como predador de topo dos ecossistemas marinhos.",
+
+  comprimento: "4–6 m (podendo ultrapassar 7 m)",
+  peso: "680–2.000 kg (podendo exceder 2.500 kg)",
+  profundidade: "0–1.280 m",
+  expectativaVida: "70 anos ou mais",
+
+  denticao: "Possui dentes grandes, triangulares, largos e fortemente serrilhados, organizados em várias fileiras. Os dentes são constantemente substituídos ao longo da vida e são adaptados para cortar carne e ossos de grandes presas.",
+
+  caracteristicasTexto: "Corpo robusto e extremamente hidrodinâmico. Dorso cinza, marrom-acinzentado ou azul-acinzentado e ventre branco, formando uma camuflagem conhecida como contra-sombreamento. Possui focinho cônico, grandes olhos negros, poderosa nadadeira caudal em formato de meia-lua e musculatura altamente desenvolvida que permite explosões de velocidade superiores a 50 km/h.",
+
+  distribuicao: "Encontrado em praticamente todos os oceanos temperados e subtropicais do mundo, incluindo: Costa oeste e leste da América do Norte, África do Sul, Austrália, Nova Zelândia, Japão, Mar Mediterrâneo, Chile, Argentina e sul do Brasil.",
+
+  habitat: "Habita águas costeiras e oceânicas, geralmente próximas a ilhas, recifes, plataformas continentais e áreas ricas em mamíferos marinhos. Pode frequentar desde a superfície até mais de 1.200 metros de profundidade.",
+
+  alimentacao: "É um predador de topo que se alimenta principalmente de:",
+
+  presas: [
+    "Focas",
+    "Leões-marinhos",
+    "Golfinhos",
+    "Peixes ósseos",
+    "Atuns",
+    "Raias",
+    "Outros tubarões",
+    "Carcaças de baleias"
+  ],
+
+  reproducao: "Vivíparo ovófago (aplacentário). Os embriões desenvolvem-se dentro do útero alimentando-se de ovos não fecundados produzidos pela mãe. A gestação dura aproximadamente 12 a 18 meses, e cada ninhada possui normalmente entre 2 e 10 filhotes.",
+
+  comportamento: "Geralmente solitário, embora possa formar agregações temporárias em áreas com grande disponibilidade de alimento. É altamente inteligente, curioso e capaz de realizar migrações de milhares de quilômetros entre áreas de alimentação e reprodução.",
+
+  tracosComportamento: [
+    "Solitário",
+    "Predador de topo",
+    "Migratório",
+    "Curioso"
+  ],
+
+  relacaoHumanos: "Embora seja responsável pelo maior número de ataques fatais registrados entre tubarões, ataques a humanos continuam sendo extremamente raros quando comparados ao enorme número de pessoas que entram no mar. Muitos incidentes ocorrem por confusão durante a identificação da presa.",
+
+  tracosRelacaoHumanos: [
+    "Curioso",
+    "Ataques raros",
+    "Predador poderoso"
+  ],
+
+  statusIUCN: "VU",
+  statusTexto: "Classificado como Vulnerável (VU) pela IUCN devido à pesca, captura acidental, comércio ilegal de mandíbulas e barbatanas e à lenta taxa de reprodução.",
+
+  curiosidades: [
+    "É considerado um dos maiores peixes predadores vivos do planeta.",
+    "Pode detectar uma única gota de sangue diluída em milhões de litros de água.",
+    "É capaz de saltar completamente para fora da água durante ataques às focas.",
+    "Possui sensores elétricos (ampolas de Lorenzini) capazes de detectar os impulsos elétricos emitidos pelas presas.",
+    "Pode percorrer milhares de quilômetros em migrações oceânicas."
+  ],
+
+  especiesRelacionadas: [
+    {
+      slug: "tubarao-mako",
+      nomePopular: "Tubarão-mako",
+      nomeCientifico: "Isurus oxyrinchus"
+    },
+    {
+      slug: "tubarao-salmao",
+      nomePopular: "Tubarão-salmão",
+      nomeCientifico: "Lamna ditropis"
+    }
+  ],
+
+  imagens: [
+    "grande-tubarao-branco.jpg"
+  ],
+
+  imagemDistribuicao: "",
+  imagemAlimentacao: "",
+  imagemComportamento: "",
+  imagemRelacaoHumanos: ""
+},
 ];
