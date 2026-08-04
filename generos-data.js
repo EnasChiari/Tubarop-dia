@@ -107,7 +107,65 @@ const GENEROS = [
     "alopias"
   ]
 },
+   
+{
+  slug: "isurus",
+  nome: "Isurus",
+  familia: "Lamnidae",
+  especies: 2,
+  descricao: "Gênero de tubarões oceânicos extremamente rápidos, conhecidos como tubarões-mako.",
+  imagem: "isurus.jpg",
+  subtitulo: "Gênero dos tubarões-mako",
+  descricaoLonga: "Isurus é um gênero da família Lamnidae que reúne os tubarões-mako, famosos por sua velocidade, agilidade e capacidade de realizar grandes saltos fora da água. São predadores oceânicos altamente especializados, distribuídos em mares temperados e tropicais ao redor do mundo.",
 
+  habitatTexto: "As espécies do gênero Isurus vivem principalmente em águas oceânicas abertas, embora possam se aproximar da plataforma continental e de regiões costeiras. Ocorrem em oceanos tropicais, subtropicais e temperados de todo o planeta.",
+
+  caracteristicas: [
+    "Corpo extremamente hidrodinâmico e fusiforme",
+    "Focinho longo e pontiagudo",
+    "Cauda em forma de meia-lua adaptada para alta velocidade",
+    "Dentes longos, finos e geralmente visíveis mesmo com a boca fechada",
+    "Músculos parcialmente endotérmicos, permitindo maior desempenho na natação",
+    "Ovovivíparos com oofagia durante o desenvolvimento embrionário"
+  ],
+
+  distribuicaoHabitat: [
+    { nome: "Oceânico", pct: 75 },
+    { nome: "Plataforma continental", pct: 15 },
+    { nome: "Costeiro", pct: 8 },
+    { nome: "Mar aberto profundo", pct: 2 }
+  ],
+
+  conservacaoTexto: "As duas espécies do gênero encontram-se ameaçadas devido à pesca comercial e esportiva, captura acidental e ao comércio internacional de barbatanas. Ambas apresentam crescimento lento e baixa taxa reprodutiva.",
+
+  nomesComuns: [
+    "Tubarões-mako",
+    "Mako",
+    "Anequim"
+  ],
+
+  importanciaEcologica: "Os tubarões do gênero Isurus são predadores de topo que ajudam a regular populações de peixes pelágicos e cefalópodes, desempenhando um papel essencial na estabilidade dos ecossistemas oceânicos.",
+
+  especiesLista: [
+    {
+      nome: "Tubarão-mako-de-barbatana-curta",
+      cientifico: "Isurus oxyrinchus",
+      imagem: "tubarao-mako-de-barbatana-curta.jpg"
+    },
+    {
+      nome: "Tubarão-mako-de-barbatana-longa",
+      cientifico: "Isurus paucus",
+      imagem: "tubarao-mako-de-barbatana-longa.jpg"
+    }
+  ],
+
+  generosRelacionados: [
+    "carcharodon",
+    "lamna",
+    "cetorhinus",
+    "alopias"
+  ]
+},
   
 ];
 
