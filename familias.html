@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="slidebar.css">
 <title>Famílias de tubarões — Tubaropédia</title>
 <style>
   :root{
@@ -25,7 +24,128 @@
   ul{list-style:none;}
   button{font:inherit;cursor:pointer;}
 
-  .shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
+  .shell{display:grid;grid-template-columns:260px 1fr;min-height:100vh;}
+
+  /* ===== SIDEBAR (igual ao Index) ===== */
+  #menu-toggle{ display:none; }
+
+  .overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.4);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .35s ease;
+    z-index:800;
+  }
+
+  .menu-ic{
+    position:relative;
+    z-index:850;
+    width:20px;
+    height:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+  }
+  .menu-ic .bar{
+    position:absolute;
+    width:20px;
+    height:2px;
+    background:var(--ink);
+    border-radius:2px;
+    transition:transform .3s ease, opacity .2s ease, top .3s ease;
+  }
+  .menu-ic .bar:nth-child(1){ top:2px; }
+  .menu-ic .bar:nth-child(2){ top:8px; }
+  .menu-ic .bar:nth-child(3){ top:14px; }
+
+  #menu-toggle:checked ~ .overlay{
+    opacity:1;
+    pointer-events:auto;
+  }
+  #menu-toggle:checked ~ .shell .sidebar{
+    transform:translateX(0);
+  }
+  #menu-toggle:checked ~ .shell .menu-ic .bar:nth-child(1){
+    top:8px;
+    transform:rotate(45deg);
+  }
+  #menu-toggle:checked ~ .shell .menu-ic .bar:nth-child(2){
+    opacity:0;
+  }
+  #menu-toggle:checked ~ .shell .menu-ic .bar:nth-child(3){
+    top:8px;
+    transform:rotate(-45deg);
+  }
+
+  .sidebar{
+    background:var(--navy-950);
+    color:#c7cfe0;
+    padding:28px 22px 24px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:30px;}
+  .brand-mark img{width:46px;height:46px;border:2px solid #7d8bb5;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .brand-mark svg{width:26px;height:26px;fill:#e8ebf3;}
+  .brand h1{font-family:Georgia,serif;font-size:1.32rem;color:#fff;letter-spacing:0.2px;line-height:1.1;}
+  .brand p{font-size:0.68rem;color:#8a93ad;margin-top:3px;}
+
+  .nav-group{margin-bottom:22px;}
+  .nav-label{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.09em;color:#5f6784;padding:0 10px 8px;}
+  .nav-item{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:8px;font-size:0.88rem;color:#b7bfd6;cursor:pointer;transition:background .15s ease, color .15s ease;}
+  .nav-item:hover{background:#141d33;color:#fff;}
+  .nav-item.active{background:var(--blue-accent);color:#fff;font-weight:600;}
+  .nav-item .ic{width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .nav-item .ic img{width:100%;height:100%;object-fit:contain;}
+
+  .featured-card{background:linear-gradient(160deg,#152140,#0e1830);border:1px solid #1f2c4d;border-radius:12px;overflow:hidden;margin-bottom:18px;}
+  .featured-card .img{height:110px;background:radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.10), transparent 60%),linear-gradient(135deg,#2b3d6b,#0c1428);display:flex;align-items:center;justify-content:center;}
+  .featured-card .body{padding:12px 14px 14px;}
+  .featured-card h4{color:#fff;font-family:Georgia,serif;font-size:0.95rem;margin-bottom:2px;}
+  .featured-card em{display:block;color:#8a93ad;font-size:0.76rem;font-style:italic;margin-bottom:8px;}
+  .featured-card .link{font-size:0.78rem;color:var(--blue-accent-light);font-weight:600;}
+
+  .social-row{display:flex;gap:14px;padding:4px 6px;}
+  .social-row .ic{width:18px;height:18px;color:#8a93ad;}
+
+  /* ===== TOPBAR (igual ao Index) ===== */
+  .topbar{
+    background:#fff;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 36px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  .topbar .title h2{font-family:Georgia,serif;font-size:1.4rem;color:var(--ink);}
+  .topbar .title p{font-size:0.76rem;color:var(--muted);}
+  .search-box{flex:1;max-width:440px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 16px;color:var(--muted);font-size:0.86rem;}
+  .search-box input{border:none;background:transparent;outline:none;font-family:inherit;font-size:0.86rem;color:var(--ink);flex:1;}
+  .topbar-actions{display:flex;align-items:center;gap:22px;font-size:0.86rem;color:var(--ink);}
+  .topbar-actions .item{display:flex;align-items:center;gap:6px;cursor:pointer;}
+
+  /* ===== IMAGE PLACEHOLDERS (igual ao Index) ===== */
+  .img-placeholder{
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    font-size:0.72rem;
+    line-height:1.4;
+    padding:6px;
+    border:1.5px dashed rgba(63,93,217,0.35);
+    background:rgba(63,93,217,0.05);
+  }
+  .img-placeholder .placeholder-label{color:var(--muted);pointer-events:none;opacity:0.85;}
+  .img-placeholder img{display:none;max-width:100%;max-height:100%;object-fit:contain;}
+  .img-placeholder.fill img{width:100%;height:100%;object-fit:cover;border-radius:inherit;}
+  .ic.img-placeholder, .brand-mark.img-placeholder{border-width:1.5px;}
+  .icon-placeholder{width:26px;height:26px;flex-shrink:0;}
+  .menu-ic .icon-placeholder{width:18px;height:18px;}
+  .search-box .icon-placeholder{width:26px;height:26px;}
+  .topbar-actions .icon-placeholder{width:26px;height:26px;}
 
 
 
@@ -135,7 +255,14 @@
 
   @media (max-width:1080px){
     .shell{grid-template-columns:1fr;}
-    .sidebar{position:relative;height:auto;}
+    .sidebar{
+      position:fixed;top:0;left:0;bottom:0;
+      transform:translateX(-100%);
+      transition:transform .2s ease;
+      z-index:900;
+      box-shadow:0 0 40px rgba(0,0,0,0.4);
+      height:100vh;
+    }
     .layout{grid-template-columns:1fr;padding:22px 20px 40px;}
     .breadcrumb,.hero{padding-left:20px;padding-right:20px;}
     .topbar{flex-wrap:wrap;padding:16px 20px;}
@@ -150,13 +277,18 @@
 </style>
 </head>
 <body>
+
+<input type="checkbox" id="menu-toggle">
+<label for="menu-toggle" class="overlay"></label>
+
 <div class="shell">
 
    <!-- ================= SIDEBAR ================= -->
    <aside class="sidebar">
     <div class="brand">
-      <div class="brand-mark">
-        <svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 12-6 3 0 6 1 8 3l-2 1c1 1 2 2 2 2s-1 1-2 2c-2 2-5 3-8 3-5 0-9-2-12-6-1.3 1.7-1.3 3.3 0 5-2.2-1-3.7-3-4-5 .3-2 1.8-4 4-5z"/></svg>
+      <div class="brand-mark img-placeholder">
+        <span class="placeholder-label">Logo</span>
+        <img src="icon/Logo.png" alt="Logo TubaroPédia" onload="this.style.display='block'; this.previousElementSibling.style.display='none';">
       </div>
       <div>
         <h1>TubaroPédia</h1>
@@ -164,46 +296,47 @@
       </div>
     </div>
 
-
     <div class="nav-group">
-      <div class="nav-item" data-action="scroll-top"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/></svg></span>Página principal</div>
-      <div class="nav-item" ><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 10h16v4H4zM4 16h16v4H4z"/></svg><a href="catalogo.html"></span>Todas as espécies</a></div>
-      <div class="nav-item active" ><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l4 4-4 4-4-4zM4 12l4-4 4 4-4 4zM16 12l4-4 4 4-4 4zM12 22l-4-4 4-4 4 4z"/></svg><a href="familias.html"></span>Famílias</a></div>
-      <div class="nav-item" data-action="toast:Seção de Gêneros em construção."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="3"/><circle cx="6" cy="16" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>Gêneros</div>
-      <div class="nav-item" data-action="toast:Seção de Anatomia em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c-4 3-4 8-4 8s0 5 4 8c4-3 4-8 4-8s0-5-4-8z"/></svg></span>Anatomia</div>
-      <div class="nav-item" data-action="toast:Seção de Habitat em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L3 9l9 13 9-13z"/></svg></span>Habitat</div>
-      <div class="nav-item" data-action="toast:Seção de Comportamento em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 12c2-6 6-9 8-9s6 3 8 9c-2 6-6 9-8 9s-6-3-8-9z"/><circle cx="12" cy="12" r="2"/></svg></span>Comportamento</div>
-      <div class="nav-item" data-action="toast:Seção de Conservação em construção."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18M3 12h18" stroke="#0a0f1e" stroke-width="1"/></svg></span>Conservação</div>
-      <div class="nav-item" data-action="toast:Seção de Fósseis em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/></svg></span>Fósseis</div>
-      <div class="nav-item" data-action="toast:Seção de Notícias em construção."><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/></svg></span>Notícias</div>
-      <div class="nav-item" data-action="toast:Seção de Bibliografia em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/></svg></span>Bibliografia</div>
+      <a href="index.html" class="nav-item"><span class="ic img-placeholder"><img src="icon/home.png" alt="" onload="this.style.display='block';"></span>Página principal</a>
+      <a href="catalogo.html" class="nav-item"><span class="ic img-placeholder"><img src="icon/todos.png" alt="" onload="this.style.display='block';"></span>Todas as espécies</a>
+      <a href="familias.html" class="nav-item active"><span class="ic img-placeholder"><img src="icon/familia.png" alt="" onload="this.style.display='block';"></span>Famílias</a>
+      <a href="generos.html" class="nav-item"><span class="ic img-placeholder"><img src="imagens/icone-generos.png" alt="" onload="this.style.display='block';"></span>Gêneros</a>
+      <div class="nav-item" data-action="toast:Seção de Anatomia em construção."><span class="ic img-placeholder"><img src="imagens/icone-anatomia.png" alt="" onload="this.style.display='block';"></span>Anatomia</div>
+      <div class="nav-item" data-action="toast:Seção de Habitat em construção."><span class="ic img-placeholder"><img src="icon/habitat.png" alt="" onload="this.style.display='block';"></span>Habitat</div>
+      <div class="nav-item" data-action="toast:Seção de Comportamento em construção."><span class="ic img-placeholder"><img src="imagens/icone-comportamento.png" alt="" onload="this.style.display='block';"></span>Comportamento</div>
+      <div class="nav-item" data-action="toast:Seção de Conservação em construção."><span class="ic img-placeholder"><img src="imagens/icone-conservacao.png" alt="" onload="this.style.display='block';"></span>Conservação</div>
+      <div class="nav-item" data-action="toast:Seção de Fósseis em construção."><span class="ic img-placeholder"><img src="imagens/icone-fosseis.png" alt="" onload="this.style.display='block';"></span>Fósseis</div>
+      <div class="nav-item" data-action="toast:Seção de Notícias em construção."><span class="ic img-placeholder"><img src="icon/noticia.png" alt="" onload="this.style.display='block';"></span>Notícias</div>
+      <div class="nav-item" data-action="toast:Seção de Bibliografia em construção."><span class="ic img-placeholder"><img src="icon/bibliografia.png" alt="" onload="this.style.display='block';"></span>Bibliografia</div>
     </div>
 
     <div class="nav-group">
       <div class="nav-label">Ferramentas</div>
-      <div class="nav-item" data-action="random-article"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg></span>Páginas aleatórias</div>
-      <div class="nav-item" data-action="toast:Nenhuma mudança recente registrada ainda."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span>Mudanças recentes</div>
-      <div class="nav-item" data-action="toast:Página de testes em construção."><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg></span>Página de testes</div>
-      <div class="nav-item" data-action="toast:Central de ajuda em construção."><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span>Ajuda</div>
+      <div class="nav-item" data-action="random-article"><span class="ic img-placeholder"><img src="icon/aleatório.png" alt="" onload="this.style.display='block';"></span>Páginas aleatórias</div>
+      <div class="nav-item" data-action="toast:Nenhuma mudança recente registrada ainda."><span class="ic img-placeholder"><img src="imagens/icone-mudancas.png" alt="" onload="this.style.display='block';"></span>Mudanças recentes</div>
+      <div class="nav-item" data-action="toast:Página de testes em construção."><span class="ic img-placeholder"><img src="imagens/icone-testes.png" alt="" onload="this.style.display='block';"></span>Página de testes</div>
+      <div class="nav-item" data-action="toast:Central de ajuda em construção."><span class="ic img-placeholder"><img src="icon/ajuda.png" alt="" onload="this.style.display='block';"></span>Ajuda</div>
     </div>
 
     <div class="nav-group">
       <div class="nav-label">Em destaque</div>
       <div class="featured-card">
-        <!-- Espaço para foto: <img src="imagens/especies/....jpg" alt="..."> -->
-        <div class="img"></div>
+        <div class="img img-placeholder fill">
+          <span class="placeholder-label">Imagem</span>
+          <img src="imagens/destaque-nariz-preto.png" alt="" onload="this.style.display='block'; this.previousElementSibling.style.display='none';">
+        </div>
         <div class="body">
-          <h4>Grande Tubarão Branco</h4>
-          <em>Carcharodon carcharias</em>
-          <div class="link" data-action="open-article:0" style="cursor:pointer;">Ver artigo →</div>
+          <h4>Tubarão-de-nariz-preto</h4>
+          <em>Carcharhinus acronotus</em>
+          <div class="link" data-action="href:especie.html?especie=tubarao-de-nariz-preto" style="cursor:pointer;">Ver artigo →</div>
         </div>
       </div>
     </div>
 
     <div class="social-row">
-      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/></svg></span>
-      <span class="ic"><svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4z"/><circle cx="12" cy="12" r="9"/></svg></span>
-      <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6l9 7 9-7"/></svg></span>
+      <span class="ic img-placeholder"><img src="imagens/icone-social-1.png" alt="" onload="this.style.display='block';"></span>
+      <span class="ic img-placeholder"><img src="imagens/icone-social-2.png" alt="" onload="this.style.display='block';"></span>
+      <span class="ic img-placeholder"><img src="imagens/icone-social-3.png" alt="" onload="this.style.display='block';"></span>
     </div>
   </aside>
 
@@ -215,13 +348,17 @@
         <p>A enciclopédia dos tubarões</p>
       </div>
       <form class="search-box" id="searchForm">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <span class="icon-placeholder img-placeholder"><img src="icon/pesquisa.png" alt="" onload="this.style.display='block';"></span>
         <input id="searchInput" type="text" placeholder="Pesquisar na TubaroPédia" autocomplete="off" style="border:none;background:transparent;outline:none;font-family:inherit;font-size:0.86rem;color:var(--ink);flex:1;">
       </form>
       <div class="topbar-actions">
-        <span class="item" data-action="open-modal:contribuir"><svg viewBox="0 0 24 24"><path d="M3 21l3-9 12-8 3 3-8 12z"/></svg>Contribuir</span>
-        <span class="item" data-action="open-modal:entrar"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Entrar</span>
-        <span class="menu-ic" id="sidebarToggle" style="cursor:pointer;"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+        <span class="item" data-action="open-modal:contribuir"><span class="icon-placeholder img-placeholder"><img src="icon/opinião.png" alt="" onload="this.style.display='block';"></span>Contribuir</span>
+        <span class="item" data-action="open-modal:entrar"><span class="icon-placeholder img-placeholder"><img src="icon/login.png" alt="" onload="this.style.display='block';"></span>Entrar</span>
+        <label for="menu-toggle" class="menu-ic" aria-label="Abrir menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </label>
       </div>
     </header>
 
